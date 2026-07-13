@@ -1,0 +1,953 @@
+[
+
+  {
+    "id": "iron-man-2008",
+    "title": "Iron Man",
+    "type": "movie",
+    "releaseDate": "2008-05-02",
+    "phase": "Phase One",
+    "order": 1,
+    "track": "iron",
+    "dependsOn": []
+  },
+  {
+    "id": "the-incredible-hulk-2008",
+    "title": "The Incredible Hulk",
+    "type": "movie",
+    "releaseDate": "2008-06-13",
+    "phase": "Phase One",
+    "order": 2,
+    "track": "hulk",
+    "dependsOn": []
+  },
+  {
+    "id": "iron-man-2-2010",
+    "title": "Iron Man 2",
+    "type": "movie",
+    "releaseDate": "2010-05-07",
+    "phase": "Phase One",
+    "order": 3,
+    "track": "iron",
+    "dependsOn": [
+      "iron-man-2008"
+    ]
+  },
+  {
+    "id": "thor-2011",
+    "title": "Thor",
+    "type": "movie",
+    "releaseDate": "2011-05-06",
+    "phase": "Phase One",
+    "order": 4,
+    "track": "thor",
+    "dependsOn": []
+  },
+  {
+    "id": "captain-america-the-first-avenger-2011",
+    "title": "Captain America: The First Avenger",
+    "type": "movie",
+    "releaseDate": "2011-07-22",
+    "phase": "Phase One",
+    "order": 5,
+    "track": "cap",
+    "dependsOn": []
+  },
+  {
+    "id": "the-avengers-2012",
+    "title": "The Avengers",
+    "type": "movie",
+    "releaseDate": "2012-05-04",
+    "phase": "Phase One",
+    "order": 6,
+    "track": "merge",
+    "dependsOn": [
+      "iron-man-2-2010",
+      "the-incredible-hulk-2008",
+      "thor-2011",
+      "captain-america-the-first-avenger-2011"
+    ]
+  },
+  {
+    "id": "iron-man-3-2013",
+    "title": "Iron Man 3",
+    "type": "movie",
+    "releaseDate": "2013-05-03",
+    "phase": "Phase Two",
+    "order": 7,
+    "track": "iron",
+    "dependsOn": [
+      "the-avengers-2012"
+    ]
+  },
+  {
+    "id": "thor-the-dark-world-2013",
+    "title": "Thor: The Dark World",
+    "type": "movie",
+    "releaseDate": "2013-11-08",
+    "phase": "Phase Two",
+    "order": 8,
+    "track": "thor",
+    "dependsOn": [
+      "the-avengers-2012"
+    ]
+  },
+  {
+    "id": "captain-america-the-winter-soldier-2014",
+    "title": "Captain America: The Winter Soldier",
+    "type": "movie",
+    "releaseDate": "2014-04-04",
+    "phase": "Phase Two",
+    "order": 9,
+    "track": "cap",
+    "dependsOn": [
+      "the-avengers-2012"
+    ]
+  },
+  {
+    "id": "guardians-of-the-galaxy-2014",
+    "title": "Guardians of the Galaxy",
+    "type": "movie",
+    "releaseDate": "2014-08-01",
+    "phase": "Phase Two",
+    "order": 10,
+    "track": "guardians",
+    "dependsOn": []
+  },
+  {
+    "id": "avengers-age-of-ultron-2015",
+    "title": "Avengers: Age of Ultron",
+    "type": "movie",
+    "releaseDate": "2015-05-01",
+    "phase": "Phase Two",
+    "order": 11,
+    "track": "merge",
+    "dependsOn": [
+      "iron-man-3-2013",
+      "thor-the-dark-world-2013",
+      "captain-america-the-winter-soldier-2014"
+    ]
+  },
+  {
+    "id": "ant-man-2015",
+    "title": "Ant-Man",
+    "type": "movie",
+    "releaseDate": "2015-07-17",
+    "phase": "Phase Two",
+    "order": 12,
+    "track": "antman",
+    "dependsOn": [
+      "avengers-age-of-ultron-2015"
+    ]
+  },
+  {
+    "id": "captain-america-civil-war-2016",
+    "title": "Captain America: Civil War",
+    "type": "movie",
+    "releaseDate": "2016-05-06",
+    "phase": "Phase Three",
+    "order": 13,
+    "track": "cap",
+    "dependsOn": [
+      "avengers-age-of-ultron-2015"
+    ]
+  },
+  {
+    "id": "doctor-strange-2016",
+    "title": "Doctor Strange",
+    "type": "movie",
+    "releaseDate": "2016-11-04",
+    "phase": "Phase Three",
+    "order": 14,
+    "track": "mystic",
+    "dependsOn": []
+  },
+  {
+    "id": "guardians-of-the-galaxy-vol-2-2017",
+    "title": "Guardians of the Galaxy Vol. 2",
+    "type": "movie",
+    "releaseDate": "2017-05-05",
+    "phase": "Phase Three",
+    "order": 15,
+    "track": "guardians",
+    "dependsOn": [
+      "guardians-of-the-galaxy-2014"
+    ]
+  },
+  {
+    "id": "spider-man-homecoming-2017",
+    "title": "Spider-Man: Homecoming",
+    "type": "movie",
+    "releaseDate": "2017-07-07",
+    "phase": "Phase Three",
+    "order": 16,
+    "track": "spidey",
+    "dependsOn": [
+      "captain-america-civil-war-2016"
+    ]
+  },
+  {
+    "id": "thor-ragnarok-2017",
+    "title": "Thor: Ragnarok",
+    "type": "movie",
+    "releaseDate": "2017-11-03",
+    "phase": "Phase Three",
+    "order": 17,
+    "track": "thor",
+    "dependsOn": [
+      "avengers-age-of-ultron-2015"
+    ]
+  },
+  {
+    "id": "black-panther-2018",
+    "title": "Black Panther",
+    "type": "movie",
+    "releaseDate": "2018-02-16",
+    "phase": "Phase Three",
+    "order": 18,
+    "track": "wakanda",
+    "dependsOn": [
+      "captain-america-civil-war-2016"
+    ]
+  },
+  {
+    "id": "avengers-infinity-war-2018",
+    "title": "Avengers: Infinity War",
+    "type": "movie",
+    "releaseDate": "2018-04-27",
+    "phase": "Phase Three",
+    "order": 19,
+    "track": "merge",
+    "dependsOn": [
+      "doctor-strange-2016",
+      "guardians-of-the-galaxy-vol-2-2017",
+      "thor-ragnarok-2017",
+      "black-panther-2018",
+      "spider-man-homecoming-2017"
+    ]
+  },
+  {
+    "id": "ant-man-and-the-wasp-2018",
+    "title": "Ant-Man and the Wasp",
+    "type": "movie",
+    "releaseDate": "2018-07-06",
+    "phase": "Phase Three",
+    "order": 20,
+    "track": "antman",
+    "dependsOn": [
+      "ant-man-2015",
+      "captain-america-civil-war-2016"
+    ]
+  },
+  {
+    "id": "captain-marvel-2019",
+    "title": "Captain Marvel",
+    "type": "movie",
+    "releaseDate": "2019-03-08",
+    "phase": "Phase Three",
+    "order": 21,
+    "track": "cosmic",
+    "dependsOn": []
+  },
+  {
+    "id": "avengers-endgame-2019",
+    "title": "Avengers: Endgame",
+    "type": "movie",
+    "releaseDate": "2019-04-26",
+    "phase": "Phase Three",
+    "order": 22,
+    "track": "merge",
+    "dependsOn": [
+      "avengers-infinity-war-2018"
+    ]
+  },
+  {
+    "id": "spider-man-far-from-home-2019",
+    "title": "Spider-Man: Far From Home",
+    "type": "movie",
+    "releaseDate": "2019-07-02",
+    "phase": "Phase Three",
+    "order": 23,
+    "track": "spidey",
+    "dependsOn": [
+      "avengers-endgame-2019"
+    ]
+  },
+  {
+    "id": "wandavision-2021",
+    "title": "WandaVision",
+    "type": "series",
+    "releaseDate": "2021-01-15",
+    "phase": "Phase Four",
+    "order": 24,
+    "track": "mystic",
+    "dependsOn": [
+      "avengers-endgame-2019"
+    ]
+  },
+  {
+    "id": "falcon-winter-soldier-2021",
+    "title": "The Falcon and the Winter Soldier",
+    "type": "series",
+    "releaseDate": "2021-03-19",
+    "phase": "Phase Four",
+    "order": 25,
+    "track": "cap",
+    "dependsOn": [
+      "avengers-endgame-2019"
+    ]
+  },
+  {
+    "id": "loki-s1-2021",
+    "title": "Loki (Saison 1)",
+    "type": "series",
+    "releaseDate": "2021-06-09",
+    "phase": "Phase Four",
+    "order": 26,
+    "track": "mystic",
+    "dependsOn": [
+      "avengers-endgame-2019"
+    ]
+  },
+  {
+    "id": "black-widow-2021",
+    "title": "Black Widow",
+    "type": "movie",
+    "releaseDate": "2021-07-09",
+    "phase": "Phase Four",
+    "order": 27,
+    "track": "misc",
+    "dependsOn": [
+      "captain-america-civil-war-2016"
+    ]
+  },
+  {
+    "id": "what-if-s1-2021",
+    "title": "What If...? (Saison 1)",
+    "type": "series",
+    "releaseDate": "2021-08-11",
+    "phase": "Phase Four",
+    "order": 28,
+    "track": "mystic",
+    "dependsOn": [
+      "loki-s1-2021"
+    ]
+  },
+  {
+    "id": "shang-chi-2021",
+    "title": "Shang-Chi and the Legend of the Ten Rings",
+    "type": "movie",
+    "releaseDate": "2021-09-03",
+    "phase": "Phase Four",
+    "order": 29,
+    "track": "misc",
+    "dependsOn": [
+      "avengers-endgame-2019"
+    ]
+  },
+  {
+    "id": "eternals-2021",
+    "title": "Eternals",
+    "type": "movie",
+    "releaseDate": "2021-11-05",
+    "phase": "Phase Four",
+    "order": 30,
+    "track": "misc",
+    "dependsOn": [
+      "avengers-endgame-2019"
+    ]
+  },
+  {
+    "id": "hawkeye-2021",
+    "title": "Hawkeye",
+    "type": "series",
+    "releaseDate": "2021-11-24",
+    "phase": "Phase Four",
+    "order": 31,
+    "track": "misc",
+    "dependsOn": [
+      "avengers-endgame-2019"
+    ]
+  },
+  {
+    "id": "spider-man-no-way-home-2021",
+    "title": "Spider-Man: No Way Home",
+    "type": "movie",
+    "releaseDate": "2021-12-17",
+    "phase": "Phase Four",
+    "order": 32,
+    "track": "spidey",
+    "dependsOn": [
+      "spider-man-far-from-home-2019"
+    ]
+  },
+  {
+    "id": "moon-knight-2022",
+    "title": "Moon Knight",
+    "type": "series",
+    "releaseDate": "2022-03-30",
+    "phase": "Phase Four",
+    "order": 33,
+    "track": "mystic",
+    "dependsOn": [
+      "avengers-endgame-2019"
+    ]
+  },
+  {
+    "id": "doctor-strange-mom-2022",
+    "title": "Doctor Strange in the Multiverse of Madness",
+    "type": "movie",
+    "releaseDate": "2022-05-06",
+    "phase": "Phase Four",
+    "order": 34,
+    "track": "mystic",
+    "dependsOn": [
+      "wandavision-2021",
+      "spider-man-no-way-home-2021"
+    ]
+  },
+  {
+    "id": "ms-marvel-2022",
+    "title": "Ms. Marvel",
+    "type": "series",
+    "releaseDate": "2022-06-08",
+    "phase": "Phase Four",
+    "order": 35,
+    "track": "cosmic",
+    "dependsOn": [
+      "captain-marvel-2019",
+      "avengers-endgame-2019"
+    ]
+  },
+  {
+    "id": "thor-love-and-thunder-2022",
+    "title": "Thor: Love and Thunder",
+    "type": "movie",
+    "releaseDate": "2022-07-08",
+    "phase": "Phase Four",
+    "order": 36,
+    "track": "thor",
+    "dependsOn": [
+      "avengers-endgame-2019"
+    ]
+  },
+  {
+    "id": "i-am-groot-2022",
+    "title": "I Am Groot",
+    "type": "series",
+    "releaseDate": "2022-08-10",
+    "phase": "Phase Four",
+    "order": 37,
+    "track": "guardians",
+    "dependsOn": [
+      "guardians-of-the-galaxy-vol-2-2017"
+    ]
+  },
+  {
+    "id": "she-hulk-2022",
+    "title": "She-Hulk: Attorney at Law",
+    "type": "series",
+    "releaseDate": "2022-08-17",
+    "phase": "Phase Four",
+    "order": 38,
+    "track": "misc",
+    "dependsOn": [
+      "spider-man-no-way-home-2021"
+    ]
+  },
+  {
+    "id": "werewolf-by-night-2022",
+    "title": "Werewolf by Night",
+    "type": "special",
+    "releaseDate": "2022-10-07",
+    "phase": "Phase Four",
+    "order": 39,
+    "track": "mystic",
+    "dependsOn": [
+      "thor-love-and-thunder-2022"
+    ]
+  },
+  {
+    "id": "black-panther-wakanda-forever-2022",
+    "title": "Black Panther: Wakanda Forever",
+    "type": "movie",
+    "releaseDate": "2022-11-11",
+    "phase": "Phase Four",
+    "order": 40,
+    "track": "wakanda",
+    "dependsOn": [
+      "avengers-endgame-2019"
+    ]
+  },
+  {
+    "id": "gotg-holiday-special-2022",
+    "title": "The Guardians of the Galaxy Holiday Special",
+    "type": "special",
+    "releaseDate": "2022-11-25",
+    "phase": "Phase Four",
+    "order": 41,
+    "track": "guardians",
+    "dependsOn": [
+      "thor-love-and-thunder-2022"
+    ]
+  },
+  {
+    "id": "ant-man-quantumania-2023",
+    "title": "Ant-Man and the Wasp: Quantumania",
+    "type": "movie",
+    "releaseDate": "2023-02-17",
+    "phase": "Phase Five",
+    "order": 42,
+    "track": "antman",
+    "dependsOn": [
+      "ant-man-and-the-wasp-2018",
+      "avengers-endgame-2019"
+    ]
+  },
+  {
+    "id": "guardians-of-the-galaxy-vol-3-2023",
+    "title": "Guardians of the Galaxy Vol. 3",
+    "type": "movie",
+    "releaseDate": "2023-05-05",
+    "phase": "Phase Five",
+    "order": 43,
+    "track": "guardians",
+    "dependsOn": [
+      "gotg-holiday-special-2022"
+    ]
+  },
+  {
+    "id": "secret-invasion-2023",
+    "title": "Secret Invasion",
+    "type": "series",
+    "releaseDate": "2023-06-21",
+    "phase": "Phase Five",
+    "order": 44,
+    "track": "misc",
+    "dependsOn": [
+      "spider-man-far-from-home-2019"
+    ]
+  },
+  {
+    "id": "loki-s2-2023",
+    "title": "Loki (Saison 2)",
+    "type": "series",
+    "releaseDate": "2023-10-05",
+    "phase": "Phase Five",
+    "order": 45,
+    "track": "mystic",
+    "dependsOn": [
+      "loki-s1-2021",
+      "ant-man-quantumania-2023"
+    ]
+  },
+  {
+    "id": "the-marvels-2023",
+    "title": "The Marvels",
+    "type": "movie",
+    "releaseDate": "2023-11-10",
+    "phase": "Phase Five",
+    "order": 46,
+    "track": "cosmic",
+    "dependsOn": [
+      "ms-marvel-2022"
+    ]
+  },
+  {
+    "id": "what-if-s2-2023",
+    "title": "What If...? (Saison 2)",
+    "type": "series",
+    "releaseDate": "2023-12-22",
+    "phase": "Phase Five",
+    "order": 47,
+    "track": "mystic",
+    "dependsOn": [
+      "what-if-s1-2021"
+    ]
+  },
+  {
+    "id": "echo-2024",
+    "title": "Echo",
+    "type": "series",
+    "releaseDate": "2024-01-09",
+    "phase": "Phase Five",
+    "order": 48,
+    "track": "misc",
+    "dependsOn": [
+      "hawkeye-2021"
+    ]
+  },
+  {
+    "id": "deadpool-wolverine-2024",
+    "title": "Deadpool & Wolverine",
+    "type": "movie",
+    "releaseDate": "2024-07-26",
+    "phase": "Phase Five",
+    "order": 49,
+    "track": "xmen",
+    "dependsOn": [
+      "deadpool-2-2018",
+      "x-men-days-of-future-past-2014",
+      "loki-s2-2023"
+    ]
+  },
+  {
+    "id": "agatha-all-along-2024",
+    "title": "Agatha All Along",
+    "type": "series",
+    "releaseDate": "2024-09-18",
+    "phase": "Phase Five",
+    "order": 50,
+    "track": "mystic",
+    "dependsOn": [
+      "wandavision-2021"
+    ]
+  },
+  {
+    "id": "what-if-s3-2024",
+    "title": "What If...? (Saison 3)",
+    "type": "series",
+    "releaseDate": "2024-12-24",
+    "phase": "Phase Five",
+    "order": 51,
+    "track": "mystic",
+    "dependsOn": [
+      "what-if-s2-2023"
+    ]
+  },
+  {
+    "id": "captain-america-brave-new-world-2025",
+    "title": "Captain America: Brave New World",
+    "type": "movie",
+    "releaseDate": "2025-02-14",
+    "phase": "Phase Five",
+    "order": 52,
+    "track": "cap",
+    "dependsOn": [
+      "falcon-winter-soldier-2021"
+    ]
+  },
+  {
+    "id": "daredevil-born-again-s1-2025",
+    "title": "Daredevil: Born Again (Saison 1)",
+    "type": "series",
+    "releaseDate": "2025-03-04",
+    "phase": "Phase Five",
+    "order": 53,
+    "track": "misc",
+    "dependsOn": [
+      "avengers-endgame-2019"
+    ]
+  },
+  {
+    "id": "thunderbolts-2025",
+    "title": "Thunderbolts*",
+    "type": "movie",
+    "releaseDate": "2025-05-02",
+    "phase": "Phase Five",
+    "order": 54,
+    "track": "misc",
+    "dependsOn": [
+      "black-widow-2021",
+      "captain-america-brave-new-world-2025"
+    ]
+  },
+  {
+    "id": "ironheart-2025",
+    "title": "Ironheart",
+    "type": "series",
+    "releaseDate": "2025-06-24",
+    "phase": "Phase Five",
+    "order": 55,
+    "track": "iron",
+    "dependsOn": [
+      "black-panther-wakanda-forever-2022"
+    ]
+  },
+  {
+    "id": "fantastic-four-first-steps-2025",
+    "title": "The Fantastic Four: First Steps",
+    "type": "movie",
+    "releaseDate": "2025-07-25",
+    "phase": "Phase Six",
+    "order": 56,
+    "track": "misc",
+    "dependsOn": [
+      "avengers-endgame-2019"
+    ]
+  },
+  {
+    "id": "eyes-of-wakanda-2025",
+    "title": "Eyes of Wakanda",
+    "type": "series",
+    "releaseDate": "2025-08-01",
+    "phase": "Phase Six",
+    "order": 57,
+    "track": "wakanda",
+    "dependsOn": [
+      "black-panther-wakanda-forever-2022"
+    ]
+  },
+  {
+    "id": "marvel-zombies-2025",
+    "title": "Marvel Zombies",
+    "type": "series",
+    "releaseDate": "2025-09-24",
+    "phase": "Phase Six",
+    "order": 58,
+    "track": "misc",
+    "dependsOn": [
+      "what-if-s1-2021"
+    ]
+  },
+  {
+    "id": "your-friendly-neighborhood-spiderman-s1-2025",
+    "title": "Your Friendly Neighborhood Spider-Man (Saison 1)",
+    "type": "series",
+    "releaseDate": "2025-10-29",
+    "phase": "Phase Six",
+    "order": 59,
+    "track": "spidey",
+    "dependsOn": [
+      "captain-america-civil-war-2016"
+    ]
+  },
+  {
+    "id": "wonder-man-2026",
+    "title": "Wonder Man",
+    "type": "series",
+    "releaseDate": "2026-01-27",
+    "phase": "Phase Six",
+    "order": 60,
+    "track": "misc",
+    "dependsOn": [
+      "thunderbolts-2025"
+    ]
+  },
+  {
+    "id": "daredevil-born-again-s2-2026",
+    "title": "Daredevil: Born Again (Saison 2)",
+    "type": "series",
+    "releaseDate": "2026-03-24",
+    "phase": "Phase Six",
+    "order": 61,
+    "track": "misc",
+    "dependsOn": [
+      "daredevil-born-again-s1-2025"
+    ]
+  },
+  {
+    "id": "punisher-one-last-kill-2026",
+    "title": "The Punisher: One Last Kill",
+    "type": "special",
+    "releaseDate": "2026-05-12",
+    "phase": "Phase Six",
+    "order": 62,
+    "track": "misc",
+    "dependsOn": [
+      "daredevil-born-again-s1-2025"
+    ]
+  },
+  {
+    "id": "spider-man-brand-new-day-2026",
+    "title": "Spider-Man: Brand New Day",
+    "type": "movie",
+    "releaseDate": "2026-07-31",
+    "phase": "Phase Six",
+    "order": 63,
+    "track": "spidey",
+    "dependsOn": [
+      "spider-man-no-way-home-2021"
+    ]
+  },
+  {
+    "id": "vision-quest-2026",
+    "title": "Vision Quest",
+    "type": "series",
+    "releaseDate": "2026-10-14",
+    "phase": "Phase Six",
+    "order": 64,
+    "track": "misc",
+    "dependsOn": [
+      "agatha-all-along-2024"
+    ]
+  },
+  {
+    "id": "avengers-doomsday-2026",
+    "title": "Avengers: Doomsday",
+    "type": "movie",
+    "releaseDate": "2026-12-18",
+    "phase": "Phase Six",
+    "order": 65,
+    "track": "merge",
+    "dependsOn": [
+      "doctor-strange-mom-2022",
+      "captain-america-brave-new-world-2025",
+      "fantastic-four-first-steps-2025",
+      "deadpool-wolverine-2024"
+    ]
+  },
+  {
+    "id": "avengers-secret-wars-2027",
+    "title": "Avengers: Secret Wars",
+    "type": "movie",
+    "releaseDate": "2027-12-17",
+    "phase": "Phase Six",
+    "order": 66,
+    "track": "merge",
+    "dependsOn": [
+      "avengers-doomsday-2026"
+    ]
+  },
+  {
+    "id": "x-men-2000",
+    "title": "X-Men",
+    "type": "movie",
+    "releaseDate": "2000-07-14",
+    "phase": "X-Men Saga",
+    "order": 67,
+    "track": "xmen",
+    "dependsOn": []
+  },
+  {
+    "id": "x2-2003",
+    "title": "X2",
+    "type": "movie",
+    "releaseDate": "2003-05-02",
+    "phase": "X-Men Saga",
+    "order": 68,
+    "track": "xmen",
+    "dependsOn": [
+      "x-men-2000"
+    ]
+  },
+  {
+    "id": "x-men-last-stand-2006",
+    "title": "X-Men: The Last Stand",
+    "type": "movie",
+    "releaseDate": "2006-05-26",
+    "phase": "X-Men Saga",
+    "order": 69,
+    "track": "xmen",
+    "dependsOn": [
+      "x2-2003"
+    ]
+  },
+  {
+    "id": "x-men-origins-wolverine-2009",
+    "title": "X-Men Origins: Wolverine",
+    "type": "movie",
+    "releaseDate": "2009-05-01",
+    "phase": "X-Men Saga",
+    "order": 70,
+    "track": "xmen",
+    "dependsOn": [
+      "x-men-last-stand-2006"
+    ]
+  },
+  {
+    "id": "x-men-first-class-2011",
+    "title": "X-Men: First Class",
+    "type": "movie",
+    "releaseDate": "2011-06-03",
+    "phase": "X-Men Saga",
+    "order": 71,
+    "track": "xmen",
+    "dependsOn": []
+  },
+  {
+    "id": "the-wolverine-2013",
+    "title": "The Wolverine",
+    "type": "movie",
+    "releaseDate": "2013-07-26",
+    "phase": "X-Men Saga",
+    "order": 72,
+    "track": "xmen",
+    "dependsOn": [
+      "x-men-last-stand-2006"
+    ]
+  },
+  {
+    "id": "x-men-days-of-future-past-2014",
+    "title": "X-Men: Days of Future Past",
+    "type": "movie",
+    "releaseDate": "2014-05-23",
+    "phase": "X-Men Saga",
+    "order": 73,
+    "track": "xmen",
+    "dependsOn": [
+      "x-men-first-class-2011",
+      "x-men-last-stand-2006"
+    ]
+  },
+  {
+    "id": "deadpool-2016",
+    "title": "Deadpool",
+    "type": "movie",
+    "releaseDate": "2016-02-12",
+    "phase": "X-Men Saga",
+    "order": 74,
+    "track": "xmen",
+    "dependsOn": []
+  },
+  {
+    "id": "x-men-apocalypse-2016",
+    "title": "X-Men: Apocalypse",
+    "type": "movie",
+    "releaseDate": "2016-05-27",
+    "phase": "X-Men Saga",
+    "order": 75,
+    "track": "xmen",
+    "dependsOn": [
+      "x-men-days-of-future-past-2014"
+    ]
+  },
+  {
+    "id": "logan-2017",
+    "title": "Logan",
+    "type": "movie",
+    "releaseDate": "2017-03-03",
+    "phase": "X-Men Saga",
+    "order": 76,
+    "track": "xmen",
+    "dependsOn": [
+      "x-men-days-of-future-past-2014"
+    ]
+  },
+  {
+    "id": "deadpool-2-2018",
+    "title": "Deadpool 2",
+    "type": "movie",
+    "releaseDate": "2018-05-18",
+    "phase": "X-Men Saga",
+    "order": 77,
+    "track": "xmen",
+    "dependsOn": [
+      "deadpool-2016"
+    ]
+  },
+  {
+    "id": "x-men-dark-phoenix-2019",
+    "title": "Dark Phoenix",
+    "type": "movie",
+    "releaseDate": "2019-06-07",
+    "phase": "X-Men Saga",
+    "order": 78,
+    "track": "xmen",
+    "dependsOn": [
+      "x-men-apocalypse-2016"
+    ]
+  },
+  {
+    "id": "the-new-mutants-2020",
+    "title": "The New Mutants",
+    "type": "movie",
+    "releaseDate": "2020-08-28",
+    "phase": "X-Men Saga",
+    "order": 79,
+    "track": "xmen",
+    "dependsOn": [
+      "x-men-apocalypse-2016"
+    ]
+  }
+
+]
