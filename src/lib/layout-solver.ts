@@ -3,7 +3,7 @@ import type { McuItem, McuTrack } from "./mcu";
 export type GridPos = { row: number; col: number };
 
 /** Incrémenter quand LAYOUT_OVERRIDES change — force recentrage du graphe */
-export const LAYOUT_REVISION = "2026-07-14-spidey-legacy-groot";
+export const LAYOUT_REVISION = "2026-07-14-mom-nwh-bnd";
 
 /** Premier film de chaque franchise Phase 1 — ordre vertical dans les colonnes de gauche */
 const PREMIER_FILM_TRACKS: McuTrack[] = [
@@ -39,7 +39,7 @@ export const TRACK_ROWS: Record<McuTrack, number> = {
 export const ID_ROW_OVERRIDES: Record<string, number> = {
   "your-friendly-neighborhood-spiderman-s1-2025": 0,
   "doctor-strange-2016": 14,
-  "doctor-strange-mom-2022": 8,
+  "doctor-strange-mom-2022": 17,
   "wandavision-2021": 10,
   "agatha-all-along-2024": 10,
   "loki-s1-2021": 14,
@@ -112,7 +112,7 @@ export const LAYOUT_OVERRIDES: Record<string, GridPos> = {
   "deadpool-2016": { row: 23, col: 6 },
   "deadpool-wolverine-2024": { row: 23, col: 13 },
   "doctor-strange-2016": { row: 13, col: 6 },
-  "doctor-strange-mom-2022": { row: 10, col: 13 },
+  "doctor-strange-mom-2022": { row: 17, col: 13 },
   "echo-2024": { row: 6, col: 15 },
   "eternals-2021": { row: 5, col: 14 },
   "eyes-of-wakanda-2025": { row: 10, col: 8 },
@@ -145,7 +145,7 @@ export const LAYOUT_OVERRIDES: Record<string, GridPos> = {
   "spider-man-2-2004": { row: 17, col: 9 },
   "spider-man-2002": { row: 17, col: 8 },
   "spider-man-3-2007": { row: 17, col: 10 },
-  "spider-man-brand-new-day-2026": { row: 7, col: 13 },
+  "spider-man-brand-new-day-2026": { row: 18, col: 13 },
   "spider-man-far-from-home-2019": { row: 14, col: 10 },
   "spider-man-homecoming-2017": { row: 11, col: 7 },
   "spider-man-no-way-home-2021": { row: 17, col: 12 },
