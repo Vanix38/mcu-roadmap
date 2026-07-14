@@ -257,7 +257,8 @@
     "order": 22,
     "track": "merge",
     "dependsOn": [
-      "avengers-infinity-war-2018"
+      "avengers-infinity-war-2018",
+      "captain-marvel-2019"
     ]
   },
   {
@@ -329,7 +330,7 @@
     "order": 28,
     "track": "mystic",
     "dependsOn": [
-      "loki-s1-2021"
+      "avengers-endgame-2019"
     ]
   },
   {
@@ -377,7 +378,9 @@
     "order": 32,
     "track": "spidey",
     "dependsOn": [
-      "spider-man-far-from-home-2019"
+      "spider-man-far-from-home-2019",
+      "spider-man-3-2007",
+      "the-amazing-spider-man-2-2014"
     ]
   },
   {
@@ -432,7 +435,7 @@
   },
   {
     "id": "i-am-groot-2022",
-    "title": "I Am Groot",
+    "title": "I Am Groot (Saison 1)",
     "type": "series",
     "releaseDate": "2022-08-10",
     "phase": "Phase Four",
@@ -451,7 +454,7 @@
     "order": 38,
     "track": "misc",
     "dependsOn": [
-      "spider-man-no-way-home-2021"
+      "avengers-endgame-2019"
     ]
   },
   {
@@ -462,9 +465,7 @@
     "phase": "Phase Four",
     "order": 39,
     "track": "mystic",
-    "dependsOn": [
-      "thor-love-and-thunder-2022"
-    ]
+    "dependsOn": []
   },
   {
     "id": "black-panther-wakanda-forever-2022",
@@ -536,8 +537,7 @@
     "order": 45,
     "track": "mystic",
     "dependsOn": [
-      "loki-s1-2021",
-      "ant-man-quantumania-2023"
+      "loki-s1-2021"
     ]
   },
   {
@@ -586,7 +586,8 @@
     "track": "xmen",
     "dependsOn": [
       "deadpool-2-2018",
-      "x-men-days-of-future-past-2014",
+      "x-men-origins-wolverine-2009",
+      "logan-2017",
       "loki-s2-2023"
     ]
   },
@@ -684,7 +685,7 @@
     "order": 57,
     "track": "wakanda",
     "dependsOn": [
-      "black-panther-wakanda-forever-2022"
+      "black-panther-2018"
     ]
   },
   {
@@ -696,7 +697,8 @@
     "order": 58,
     "track": "misc",
     "dependsOn": [
-      "what-if-s1-2021"
+      "what-if-s1-2021",
+      "ant-man-and-the-wasp-2018"
     ]
   },
   {
@@ -707,9 +709,7 @@
     "phase": "Phase Six",
     "order": 59,
     "track": "spidey",
-    "dependsOn": [
-      "captain-america-civil-war-2016"
-    ]
+    "dependsOn": []
   },
   {
     "id": "wonder-man-2026",
@@ -720,7 +720,8 @@
     "order": 60,
     "track": "misc",
     "dependsOn": [
-      "thunderbolts-2025"
+      "shang-chi-2021",
+      "secret-invasion-2023"
     ]
   },
   {
@@ -781,7 +782,7 @@
     "track": "merge",
     "dependsOn": [
       "doctor-strange-mom-2022",
-      "captain-america-brave-new-world-2025",
+      "thunderbolts-2025",
       "fantastic-four-first-steps-2025",
       "deadpool-wolverine-2024"
     ]
@@ -840,9 +841,7 @@
     "phase": "X-Men Saga",
     "order": 70,
     "track": "xmen",
-    "dependsOn": [
-      "x-men-last-stand-2006"
-    ]
+    "dependsOn": []
   },
   {
     "id": "x-men-first-class-2011",
@@ -876,7 +875,7 @@
     "track": "xmen",
     "dependsOn": [
       "x-men-first-class-2011",
-      "x-men-last-stand-2006"
+      "the-wolverine-2013"
     ]
   },
   {
@@ -945,9 +944,24 @@
     "phase": "X-Men Saga",
     "order": 79,
     "track": "xmen",
-    "dependsOn": [
-      "x-men-apocalypse-2016"
-    ]
-  }
+    "dependsOn": []
+  },
+
+  { "id": "spider-man-2002", "title": "Spider-Man", "type": "movie", "releaseDate": "2002-05-03", "phase": "Spider-Man Legacy", "order": 80, "track": "spidey", "dependsOn": [] },
+  { "id": "spider-man-2-2004", "title": "Spider-Man 2", "type": "movie", "releaseDate": "2004-06-30", "phase": "Spider-Man Legacy", "order": 81, "track": "spidey", "dependsOn": ["spider-man-2002"] },
+  { "id": "spider-man-3-2007", "title": "Spider-Man 3", "type": "movie", "releaseDate": "2007-05-04", "phase": "Spider-Man Legacy", "order": 82, "track": "spidey", "dependsOn": ["spider-man-2-2004"] },
+  { "id": "the-amazing-spider-man-2012", "title": "The Amazing Spider-Man", "type": "movie", "releaseDate": "2012-07-03", "phase": "Spider-Man Legacy", "order": 83, "track": "spidey", "dependsOn": [] },
+  { "id": "the-amazing-spider-man-2-2014", "title": "The Amazing Spider-Man 2", "type": "movie", "releaseDate": "2014-05-02", "phase": "Spider-Man Legacy", "order": 84, "track": "spidey", "dependsOn": ["the-amazing-spider-man-2012"] },
+
+  { "id": "i-am-groot-s2-2023", "title": "I Am Groot (Saison 2)", "type": "series", "releaseDate": "2023-09-06", "phase": "Phase Five", "order": 85, "track": "guardians", "dependsOn": ["i-am-groot-2022"] },
+  { "id": "x-men-97-s1-2024", "title": "X-Men '97 (Saison 1)", "type": "series", "releaseDate": "2024-03-20", "phase": "X-Men Saga", "order": 86, "track": "xmen", "dependsOn": [] },
+  { "id": "x-men-97-s2-2026", "title": "X-Men '97 (Saison 2)", "type": "series", "releaseDate": "2026-07-01", "phase": "X-Men Saga", "order": 87, "track": "xmen", "dependsOn": ["x-men-97-s1-2024"] },
+
+  { "id": "venom-2018", "title": "Venom", "type": "movie", "releaseDate": "2018-10-05", "phase": "SSU", "order": 88, "track": "spidey", "dependsOn": [] },
+  { "id": "venom-let-there-be-carnage-2021", "title": "Venom: Let There Be Carnage", "type": "movie", "releaseDate": "2021-10-01", "phase": "SSU", "order": 89, "track": "spidey", "dependsOn": ["venom-2018"] },
+  { "id": "morbius-2022", "title": "Morbius", "type": "movie", "releaseDate": "2022-04-01", "phase": "SSU", "order": 90, "track": "spidey", "dependsOn": [] },
+  { "id": "madame-web-2024", "title": "Madame Web", "type": "movie", "releaseDate": "2024-02-14", "phase": "SSU", "order": 91, "track": "spidey", "dependsOn": [] },
+  { "id": "venom-the-last-dance-2024", "title": "Venom: The Last Dance", "type": "movie", "releaseDate": "2024-10-25", "phase": "SSU", "order": 92, "track": "spidey", "dependsOn": ["venom-let-there-be-carnage-2021"] },
+  { "id": "kraven-the-hunter-2024", "title": "Kraven the Hunter", "type": "movie", "releaseDate": "2024-12-13", "phase": "SSU", "order": 93, "track": "spidey", "dependsOn": [] }
 
 ]

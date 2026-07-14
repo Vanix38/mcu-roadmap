@@ -12,63 +12,99 @@ import type { McuItem } from "@/lib/mcu";
 import {
   buildDependencyLayout,
   canCheckItem,
-  edgePathBetween,
   getHighlightIds,
-  getNodeDimensions,
-  type DependencyLayout,
+  LAYOUT_REVISION,
+  pathMidpoint,
+  type RoutedEdge,
 } from "@/lib/dependencies";
+import { EdgeTooltip } from "./EdgeTooltip";
 import { GraphControls } from "./GraphControls";
 import { GraphMinimap } from "./GraphMinimap";
 import { RoadmapItem } from "./RoadmapItem";
 
 const MIN_SCALE = 0.25;
 const MAX_SCALE = 2;
-const DEFAULT_SCALE = 0.55;
+const DEFAULT_SCALE = 0.2;
 
 type GraphView = { scale: number; tx: number; ty: number };
 
 type Props = {
-  items: McuItem[];
+  allItems: McuItem[];
+  visibleItems: McuItem[];
   checked: Set<string>;
   focusId: string | null;
   onToggle: (item: McuItem) => void;
 };
 
-function edgePath(layout: DependencyLayout, fromId: string, toId: string) {
-  const from = layout.nodes.find((node) => node.item.id === fromId);
-  const to = layout.nodes.find((node) => node.item.id === toId);
-  if (!from || !to) return "";
-
-  const fromSize = getNodeDimensions(from.item);
-  const toSize = getNodeDimensions(to.item);
-
-  return edgePathBetween(from.x, from.y, fromSize.height, to.x, to.y, toSize.height);
-}
-
 function edgeClassName(
-  edge: { from: string; to: string },
+  edge: RoutedEdge,
   checked: Set<string>,
   highlightIds: Set<string> | null,
+  hoveredEdgeId: string | null,
+  hoveredNodeId: string | null,
 ) {
+  const classes = ["graph-line", `graph-line--${edge.zLayer}`];
+
+  if (hoveredEdgeId && !hoveredNodeId) {
+    if (edge.id === hoveredEdgeId) classes.push("graph-line--edge-hover");
+    else classes.push("graph-line--dimmed");
+    return classes.join(" ");
+  }
+
   const inHighlight =
     highlightIds &&
     highlightIds.has(edge.from) &&
     highlightIds.has(edge.to);
 
   if (highlightIds) {
-    if (inHighlight) return "graph-line graph-line--highlight";
-    return "graph-line graph-line--dimmed";
+    if (inHighlight) classes.push("graph-line--highlight");
+    else classes.push("graph-line--dimmed");
+    return classes.join(" ");
   }
 
   if (checked.has(edge.from) && checked.has(edge.to)) {
-    return "graph-line graph-line--done";
+    classes.push("graph-line--done");
+    return classes.join(" ");
   }
 
-  return "graph-line";
+  classes.push(`graph-line--track-${edge.track}`);
+  return classes.join(" ");
 }
 
-export function RoadmapTree({ items, checked, focusId, onToggle }: Props) {
-  const layout = useMemo(() => buildDependencyLayout(items), [items]);
+function renderEdge(edge: RoutedEdge, className: string) {
+  return (
+    <path
+      key={edge.id}
+      d={edge.pathD}
+      className={className}
+      pointerEvents="none"
+    />
+  );
+}
+
+export function RoadmapTree({
+  allItems,
+  visibleItems,
+  checked,
+  focusId,
+  onToggle,
+}: Props) {
+  const layout = useMemo(() => buildDependencyLayout(allItems), [allItems]);
+  const layoutKey = useMemo(
+    () =>
+      `${LAYOUT_REVISION}:${layout.nodes
+        .map((n) => `${n.item.id}:${n.x},${n.y}`)
+        .join("|")}`,
+    [layout],
+  );
+  const visibleIds = useMemo(
+    () => new Set(visibleItems.map((item) => item.id)),
+    [visibleItems],
+  );
+  const titleById = useMemo(
+    () => new Map(allItems.map((item) => [item.id, item.title])),
+    [allItems],
+  );
   const viewportRef = useRef<HTMLDivElement>(null);
   const [view, setView] = useState<GraphView>({
     scale: DEFAULT_SCALE,
@@ -77,29 +113,67 @@ export function RoadmapTree({ items, checked, focusId, onToggle }: Props) {
   });
   const [dragging, setDragging] = useState(false);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [hoveredEdgeId, setHoveredEdgeId] = useState<string | null>(null);
   const [containerSize, setContainerSize] = useState({ w: 800, h: 600 });
   const dragStart = useRef({ x: 0, y: 0, tx: 0, ty: 0 });
   const lastPinchDist = useRef<number | null>(null);
 
   const highlightIds = useMemo(
-    () => getHighlightIds(items, hoveredId),
-    [items, hoveredId],
+    () => getHighlightIds(allItems, hoveredId),
+    [allItems, hoveredId],
   );
+
+  const visibleEdges = useMemo(
+    () =>
+      layout.edges.filter(
+        (edge) => visibleIds.has(edge.from) && visibleIds.has(edge.to),
+      ),
+    [layout.edges, visibleIds],
+  );
+
+  const underEdges = useMemo(
+    () => visibleEdges.filter((e) => e.zLayer === "under"),
+    [visibleEdges],
+  );
+  const overEdges = useMemo(
+    () => visibleEdges.filter((e) => e.zLayer === "over"),
+    [visibleEdges],
+  );
+
+  const hoveredEdge = useMemo(
+    () => visibleEdges.find((e) => e.id === hoveredEdgeId) ?? null,
+    [visibleEdges, hoveredEdgeId],
+  );
+
+  const tooltip = useMemo(() => {
+    if (!hoveredEdge || hoveredId) return null;
+    const fromTitle = titleById.get(hoveredEdge.from);
+    const toTitle = titleById.get(hoveredEdge.to);
+    if (!fromTitle || !toTitle) return null;
+    const point = pathMidpoint(hoveredEdge.pathD);
+    if (!point) return null;
+    return { label: `${fromTitle} → ${toTitle}`, ...point };
+  }, [hoveredEdge, hoveredId, titleById]);
 
   const resetView = useCallback(() => {
     const el = viewportRef.current;
     if (!el) return;
-    const scale = DEFAULT_SCALE;
+    const fitScale = Math.min(
+      (el.clientWidth / layout.width) * 0.95,
+      (el.clientHeight / layout.height) * 0.95,
+      DEFAULT_SCALE,
+    );
+    const scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, fitScale));
     setView({
       scale,
       tx: (el.clientWidth - layout.width * scale) / 2,
-      ty: 40,
+      ty: (el.clientHeight - layout.height * scale) / 2,
     });
-  }, [layout.width]);
+  }, [layout.width, layout.height]);
 
   useEffect(() => {
     resetView();
-  }, [layout.width, layout.height, resetView]);
+  }, [layoutKey, resetView]);
 
   useEffect(() => {
     const el = viewportRef.current;
@@ -243,7 +317,7 @@ export function RoadmapTree({ items, checked, focusId, onToggle }: Props) {
     [view, containerSize],
   );
 
-  if (items.length === 0) {
+  if (visibleItems.length === 0) {
     return (
       <div className="flex min-h-full items-center justify-center px-6 text-sm text-[var(--muted)]">
         Aucun film ne correspond aux filtres.
@@ -276,18 +350,57 @@ export function RoadmapTree({ items, checked, focusId, onToggle }: Props) {
             className="graph-lines"
             width={layout.width}
             height={layout.height}
-            aria-hidden="true"
+            aria-hidden={!hoveredEdgeId}
           >
-            {layout.edges.map((edge) => (
-              <path
-                key={`${edge.from}-${edge.to}`}
-                d={edgePath(layout, edge.from, edge.to)}
-                className={edgeClassName(edge, checked, highlightIds)}
-              />
-            ))}
+            <g className="graph-lines-under">
+              {underEdges.map((edge) =>
+                renderEdge(
+                  edge,
+                  edgeClassName(
+                    edge,
+                    checked,
+                    highlightIds,
+                    hoveredEdgeId,
+                    hoveredId,
+                  ),
+                ),
+              )}
+            </g>
+            <g className="graph-lines-over">
+              {overEdges.map((edge) =>
+                renderEdge(
+                  edge,
+                  edgeClassName(
+                    edge,
+                    checked,
+                    highlightIds,
+                    hoveredEdgeId,
+                    hoveredId,
+                  ),
+                ),
+              )}
+            </g>
+            <g className="graph-lines-hitbox">
+              {visibleEdges.map((edge) => (
+                <path
+                  key={`hit-${edge.id}`}
+                  d={edge.pathD}
+                  className="graph-line graph-line--hitbox"
+                  onMouseEnter={() => setHoveredEdgeId(edge.id)}
+                  onMouseLeave={() => setHoveredEdgeId(null)}
+                  aria-label={`${titleById.get(edge.from) ?? edge.from} vers ${titleById.get(edge.to) ?? edge.to}`}
+                />
+              ))}
+            </g>
           </svg>
 
+          {tooltip && (
+            <EdgeTooltip label={tooltip.label} x={tooltip.x} y={tooltip.y} />
+          )}
+
           {layout.nodes.map((node) => {
+            if (!visibleIds.has(node.item.id)) return null;
+
             const isChecked = checked.has(node.item.id);
             const disabled = !canCheckItem(node.item, checked);
             const isDimmed = highlightIds !== null && !highlightIds.has(node.item.id);
@@ -311,7 +424,10 @@ export function RoadmapTree({ items, checked, focusId, onToggle }: Props) {
                   disabled={disabled}
                   highlighted={isHighlighted || isFocused}
                   onToggle={() => onToggle(node.item)}
-                  onHover={setHoveredId}
+                  onHover={(id) => {
+                    setHoveredId(id);
+                    if (id) setHoveredEdgeId(null);
+                  }}
                   variant="tree"
                 />
               </div>
@@ -331,6 +447,7 @@ export function RoadmapTree({ items, checked, focusId, onToggle }: Props) {
         layout={layout}
         viewport={viewportRect}
         onNavigate={navigateTo}
+        hoveredEdgeId={hoveredEdgeId}
       />
     </div>
   );

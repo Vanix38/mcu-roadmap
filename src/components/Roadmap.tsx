@@ -103,8 +103,14 @@ export function Roadmap({ items }: Props) {
       <header className="app-header px-4 py-3 sm:px-6">
         <div className="flex items-center justify-between gap-3">
           <div>
-            <h1 className="text-xl font-bold tracking-tight sm:text-2xl">
-              <span className="text-[var(--accent)]">MCU</span> Roadmap
+            <h1 className="flex items-center gap-2.5 text-xl font-bold tracking-tight sm:text-2xl">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/marvel-studios-logo.png"
+                alt="Marvel Studios"
+                className="header-logo"
+              />
+              Roadmap
             </h1>
             <p className="text-xs text-[var(--muted)]">
               {progress.done}/{progress.total} films · {progress.pct}%
@@ -180,7 +186,8 @@ export function Roadmap({ items }: Props) {
       </header>
 
       <RoadmapTree
-        items={filtered}
+        allItems={items}
+        visibleItems={filtered}
         checked={checked}
         focusId={focusId}
         onToggle={toggle}

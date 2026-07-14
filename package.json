@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "images:prune": "node scripts/prune-mcu-images.mjs",
+    "images:prune:delete": "node scripts/prune-mcu-images.mjs --delete",
+    "images:rename": "node scripts/rename-mcu-images.mjs",
+    "images:rename:apply": "node scripts/rename-mcu-images.mjs --apply",
+    "layout:generate": "npx tsx scripts/generate-grid-layout.ts",
+    "layout:validate": "npx tsx scripts/validate-layout.ts"
   },
   "dependencies": {
     "next": "16.2.10",

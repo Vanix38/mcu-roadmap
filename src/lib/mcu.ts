@@ -18,9 +18,41 @@ export const MCU_TRACKS = [
 
 export type McuTrack = (typeof MCU_TRACKS)[number];
 
+/** Couleurs des arêtes par piste (CSS var) */
+export const TRACK_EDGE_COLORS: Record<McuTrack, string> = {
+  iron: "var(--track-iron)",
+  hulk: "var(--track-hulk)",
+  thor: "var(--track-thor)",
+  cap: "var(--track-cap)",
+  guardians: "var(--track-guardians)",
+  mystic: "var(--track-mystic)",
+  antman: "var(--track-antman)",
+  spidey: "var(--track-spidey)",
+  wakanda: "var(--track-wakanda)",
+  cosmic: "var(--track-cosmic)",
+  xmen: "var(--track-xmen)",
+  misc: "var(--track-misc)",
+  merge: "var(--track-merge)",
+};
+
+export const TRACK_LABELS: Record<McuTrack, string> = {
+  iron: "Iron Man",
+  hulk: "Hulk",
+  thor: "Thor",
+  cap: "Captain America",
+  guardians: "Gardiens",
+  mystic: "Mystique",
+  antman: "Ant-Man",
+  spidey: "Spider-Man",
+  wakanda: "Wakanda",
+  cosmic: "Cosmique",
+  xmen: "X-Men",
+  misc: "Divers",
+  merge: "Convergence",
+};
+
 /** Films pivots — affichés plus grands dans le graphe */
 export const MCU_MILESTONE_IDS = new Set([
-  "iron-man-2008",
   "the-avengers-2012",
   "avengers-age-of-ultron-2015",
   "captain-america-civil-war-2016",
@@ -38,7 +70,7 @@ export function isMilestone(id: string) {
   return MCU_MILESTONE_IDS.has(id);
 }
 
-/** Axe vertical central du graphe (Iron Man → Avengers → Civil War → …) */
+/** Axe horizontal central du graphe (Iron Man → Avengers → Civil War → …) */
 export const MCU_SPINE_IDS = new Set([
   "iron-man-2008",
   "the-avengers-2012",
