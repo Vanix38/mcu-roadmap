@@ -8,6 +8,7 @@ import {
   readRoadmapSession,
   writeRoadmapSession,
 } from "@/lib/storage";
+import { withBasePath } from "@/lib/media";
 import { Filters } from "./Filters";
 import { Legend } from "./Legend";
 import { RoadmapTree } from "./RoadmapTree";
@@ -106,7 +107,7 @@ export function Roadmap({ items }: Props) {
             <h1 className="flex items-center gap-2.5 text-xl font-bold tracking-tight sm:text-2xl">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/marvel-studios-logo.png"
+                src={withBasePath("/images/marvel-studios-logo.png")}
                 alt="Marvel Studios"
                 className="header-logo"
               />

@@ -1,7 +1,14 @@
+/** Préfixe GitHub Pages (ex. /mcu-roadmap) — vide en local */
+export function withBasePath(path: string): string {
+  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  if (!path.startsWith("/")) return `${base}/${path}`;
+  return `${base}${path}`;
+}
+
 export const MCU_POSTER_EXTENSIONS = ["webp", "jpg", "jpeg", "png"] as const;
 
 export function getMcuPosterSrc(id: string, extension: (typeof MCU_POSTER_EXTENSIONS)[number]) {
-  return `/images/mcu/${id}.${extension}`;
+  return withBasePath(`/images/mcu/${id}.${extension}`);
 }
 
 /** Logos studio — déposer dans `public/images/studios/{studio}.(svg|webp|png)` */
@@ -11,5 +18,5 @@ export function getStudioLogoSrc(
   studio: string,
   extension: (typeof STUDIO_LOGO_EXTENSIONS)[number],
 ) {
-  return `/images/studios/${studio}.${extension}`;
+  return withBasePath(`/images/studios/${studio}.${extension}`);
 }
