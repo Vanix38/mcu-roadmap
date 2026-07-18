@@ -1,10 +1,10 @@
 import data from "../src/data/mcu.json" assert { type: "json" };
 import { McuDataSchema } from "../src/lib/mcu";
 import { buildDependencyLayout } from "../src/lib/dependencies";
-import { solveGridPositions } from "../src/lib/layout-solver";
+import { getGridPositions } from "../src/lib/layout-solver";
 
 const items = McuDataSchema.parse(data);
-const gridPositions = solveGridPositions(items);
+const gridPositions = getGridPositions(items);
 const byId = new Map(items.map((item) => [item.id, item]));
 const errors: string[] = [];
 const warnings: string[] = [];

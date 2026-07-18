@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { McuDataSchema } from "../src/lib/mcu";
-import { TRACK_ROWS, LAYOUT_OVERRIDES } from "../src/lib/layout-solver";
+import { LAYOUT_OVERRIDES } from "../src/lib/layout-solver";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const data = JSON.parse(
@@ -13,10 +13,9 @@ const tracks = ["iron", "cap", "thor", "antman", "guardians", "hulk", "spidey"] 
 
 for (const track of tracks) {
   const list = items.filter((i) => i.track === track).sort((a, b) => a.order - b.order);
-  const base = TRACK_ROWS[track];
-  console.log("---", track, "base", base);
+  console.log("---", track);
   list.forEach((item, i) => {
     const o = LAYOUT_OVERRIDES[item.id];
-    console.log(i, item.order, item.id, "row", base + i, "col", o?.col);
+    console.log(i, item.order, item.id, "row", o?.row, "col", o?.col);
   });
 }

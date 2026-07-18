@@ -51,6 +51,55 @@ export const TRACK_LABELS: Record<McuTrack, string> = {
   merge: "Convergence",
 };
 
+export const MCU_STUDIOS = [
+  "marvel",
+  "fox",
+  "sony",
+  "sony-animation",
+  "netflix",
+  "abc",
+  "freeform",
+] as const;
+
+export type McuStudio = (typeof MCU_STUDIOS)[number];
+
+/** Abréviation pastille */
+export const STUDIO_BADGE: Record<McuStudio, string> = {
+  marvel: "MS",
+  fox: "FOX",
+  sony: "SNY",
+  "sony-animation": "ANI",
+  netflix: "NFX",
+  abc: "ABC",
+  freeform: "FRM",
+};
+
+export const STUDIO_LABELS: Record<McuStudio, string> = {
+  marvel: "Marvel Studios",
+  fox: "20th Century Fox",
+  sony: "Sony Pictures",
+  "sony-animation": "Sony Animation",
+  netflix: "Netflix",
+  abc: "ABC",
+  freeform: "Freeform",
+};
+
+export const STUDIO_COLORS: Record<McuStudio, string> = {
+  marvel: "var(--studio-marvel)",
+  fox: "var(--studio-fox)",
+  sony: "var(--studio-sony)",
+  "sony-animation": "var(--studio-sony-animation)",
+  netflix: "var(--studio-netflix)",
+  abc: "var(--studio-abc)",
+  freeform: "var(--studio-freeform)",
+};
+
+export const MCU_FORMATS = ["live", "animated"] as const;
+
+export type McuFormat = (typeof MCU_FORMATS)[number];
+
+export type ContainerKind = "film" | "tv" | "anim";
+
 /** Films pivots — affichés plus grands dans le graphe */
 export const MCU_MILESTONE_IDS = new Set([
   "the-avengers-2012",
@@ -94,6 +143,8 @@ export const McuItemSchema = z.object({
   phase: z.string().min(1),
   order: z.number().int().positive(),
   track: z.enum(MCU_TRACKS),
+  studio: z.enum(MCU_STUDIOS),
+  format: z.enum(MCU_FORMATS),
   dependsOn: z.array(z.string()).default([]),
   runtimeMin: z.number().int().positive().optional(),
 });
@@ -141,3 +192,21 @@ export const McuDataSchema = z
   });
 
 export type McuItem = z.infer<typeof McuItemSchema>;
+
+/** Ex. "Daredevil (Saison 2)" → "S2" */
+export function getSeasonLabel(item: Pick<McuItem, "title" | "id" | "type">): string | null {
+  if (item.type !== "series") return null;
+  const fromTitle = item.title.match(/\(Saison\s+(\d+)\)/i);
+  if (fromTitle) return `S${fromTitle[1]}`;
+  const fromId = item.id.match(/-s(\d+)(?:-|$)/i);
+  if (fromId) return `S${fromId[1]}`;
+  return null;
+}
+
+/** Forme du conteneur : film / série TV / série animée */
+export function getContainerKind(item: Pick<McuItem, "type" | "format">): ContainerKind {
+  if (item.type === "series") {
+    return item.format === "animated" ? "anim" : "tv";
+  }
+  return "film";
+}

@@ -1,6 +1,5 @@
 /**
- * Exporte les positions du solver (debug / snapshot).
- * Le runtime utilise solveGridPositions() directement — pas besoin de ce script pour l'app.
+ * Exporte les positions depuis LAYOUT_OVERRIDES (snapshot debug).
  *
  * Usage: npm run layout:generate
  */
@@ -10,13 +9,13 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { McuDataSchema } from "../src/lib/mcu";
-import { formatGridPositions, solveGridPositions } from "../src/lib/layout-solver";
+import { formatGridPositions, getGridPositions } from "../src/lib/layout-solver";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
 
 const items = McuDataSchema.parse(data);
-const positions = solveGridPositions(items);
+const positions = getGridPositions(items);
 
 const outPath = path.join(ROOT, "grid-positions.snapshot.json");
 fs.writeFileSync(outPath, JSON.stringify(positions, null, 2));

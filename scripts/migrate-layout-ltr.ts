@@ -1,46 +1,27 @@
 /**
- * Génère les overrides LTR (swap row↔col) depuis layout-solver actuel.
+ * Génère les overrides LTR (swap row↔col) depuis LAYOUT_OVERRIDES actuel.
  * Usage: npx tsx scripts/migrate-layout-ltr.ts
  */
 
-import {
-  ID_ROW_OVERRIDES,
-  LAYOUT_OVERRIDES,
-  TRACK_ROWS,
-  type GridPos,
-} from "../src/lib/layout-solver";
+import { LAYOUT_OVERRIDES } from "../src/lib/layout-solver";
 
-function swapPos(pos: GridPos): GridPos {
-  return { row: pos.col, col: pos.row };
-}
-
-function formatRecord(
-  name: string,
-  entries: Record<string, number | GridPos>,
-  isPos = false,
-) {
-  const lines = Object.entries(entries)
+function formatRecord(name: string, record: Record<string, unknown>, nested = false) {
+  const lines = Object.entries(record)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([id, val]) => {
-      if (isPos) {
-        const p = val as GridPos;
-        return `  "${id}": { row: ${p.row}, col: ${p.col} },`;
+      if (nested && val && typeof val === "object" && "row" in val && "col" in val) {
+        const p = val as { row: number; col: number };
+        return `  "${id}": { row: ${p.col}, col: ${p.row} },`;
       }
-      return `  ${id}: ${val},`;
+      return `  "${id}": ${JSON.stringify(val)},`;
     });
   return `export const ${name} = {\n${lines.join("\n")}\n};`;
 }
 
-const TRACK_ROWS_OUT = TRACK_ROWS;
-const ID_ROW_OVERRIDES_OUT = ID_ROW_OVERRIDES;
-const LAYOUT_LTR: Record<string, GridPos> = {};
+const LAYOUT_LTR: Record<string, { row: number; col: number }> = {};
 for (const [id, pos] of Object.entries(LAYOUT_OVERRIDES)) {
-  LAYOUT_LTR[id] = swapPos(pos);
+  LAYOUT_LTR[id] = { row: pos.col, col: pos.row };
 }
 
-console.log("// TRACK_ROWS");
-console.log(formatRecord("TRACK_ROWS", TRACK_ROWS_OUT));
-console.log("\n// ID_ROW_OVERRIDES");
-console.log(formatRecord("ID_ROW_OVERRIDES", ID_ROW_OVERRIDES_OUT));
-console.log("\n// LAYOUT_OVERRIDES (LTR)");
+console.log("// LAYOUT_OVERRIDES (LTR)");
 console.log(formatRecord("LAYOUT_OVERRIDES", LAYOUT_LTR, true));

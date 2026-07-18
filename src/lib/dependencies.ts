@@ -9,7 +9,7 @@ import {
   gridY,
   orderToGridCol,
 } from "./grid-layout";
-import { solveGridPositions, LAYOUT_REVISION } from "./layout-solver";
+import { getGridPositions, LAYOUT_REVISION } from "./layout-solver";
 import { getNodeDimensions } from "./node-dimensions";
 import {
   routeEdges,
@@ -163,7 +163,7 @@ export { LAYOUT_REVISION } from "./layout-solver";
 export function buildDependencyLayout(items: readonly McuItem[]): DependencyLayout {
   const layers = computeLayers(items);
   const byId = new Map(items.map((item) => [item.id, item]));
-  const gridPositions = solveGridPositions(items);
+  const gridPositions = getGridPositions(items);
   const positioned = new Map<string, PositionedNode>();
   const overflowColSlots = new Map<number, number>();
 

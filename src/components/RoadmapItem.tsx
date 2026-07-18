@@ -1,6 +1,7 @@
 import type { McuItem } from "@/lib/mcu";
-import { isMilestone, isSpine } from "@/lib/mcu";
+import { getContainerKind, getSeasonLabel, isMilestone, isSpine } from "@/lib/mcu";
 import { McuPoster } from "./McuPoster";
+import { StudioBadge } from "./StudioBadge";
 
 type Props = {
   item: McuItem;
@@ -26,11 +27,14 @@ export function RoadmapItem({
     const isAvailable = !checked && !disabled;
     const milestone = isMilestone(item.id);
     const spine = isSpine(item.id) || item.track === "merge";
+    const season = getSeasonLabel(item);
+    const kind = getContainerKind(item);
 
     return (
       <div
         className={[
           "node-card",
+          `node-card--${kind}`,
           milestone ? "node-card--milestone" : "",
           spine ? "node-card--spine" : "",
           checked ? "node-card--checked" : "",
@@ -57,6 +61,12 @@ export function RoadmapItem({
           <div className="relative">
             <McuPoster item={item} milestone={milestone} />
             <span className="node-order">{item.order}</span>
+            <StudioBadge studio={item.studio} />
+            {season ? (
+              <span className="node-season" aria-label={`Saison ${season.slice(1)}`}>
+                {season}
+              </span>
+            ) : null}
             {isLocked ? (
               <span className="node-lock" aria-hidden="true">
                 🔒
