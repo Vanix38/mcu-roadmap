@@ -18,7 +18,8 @@ type Props = { items: McuItem[] };
 export function Roadmap({ items }: Props) {
   const [type, setType] = useState<string>("All");
   const [query, setQuery] = useState<string>("");
-  const [headerOpen, setHeaderOpen] = useState(true);
+  /** Fermé par défaut sur mobile — toujours visible dès sm via CSS */
+  const [headerOpen, setHeaderOpen] = useState(false);
 
   const [checked, setChecked] = useState<Set<string>>(() => {
     const session = readRoadmapSession();
@@ -128,17 +129,25 @@ export function Roadmap({ items }: Props) {
             <button
               type="button"
               onClick={() => setHeaderOpen((v) => !v)}
-              className="graph-btn sm:hidden"
+              className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-[var(--edge)] bg-[var(--surface)] px-3 text-xs font-medium text-[var(--foreground)] sm:hidden"
               aria-expanded={headerOpen}
-              aria-label={headerOpen ? "Réduire le panneau" : "Ouvrir le panneau"}
+              aria-controls="app-header-panel"
+              aria-label={headerOpen ? "Réduire le panneau" : "Afficher filtres et légende"}
             >
-              {headerOpen ? "▲" : "▼"}
+              {headerOpen ? "Réduire" : "Filtres"}
+              <span aria-hidden="true">{headerOpen ? "▲" : "▼"}</span>
             </button>
           </div>
         </div>
 
-        {headerOpen ? (
-          <div className="mt-3 flex flex-col gap-3">
+        <div
+          id="app-header-panel"
+          className={[
+            "mt-3 flex-col gap-3",
+            headerOpen ? "flex" : "hidden",
+            "sm:flex",
+          ].join(" ")}
+        >
             <div className="progress-bar">
               <div
                 className="progress-fill"
@@ -182,8 +191,7 @@ export function Roadmap({ items }: Props) {
             >
               Tout décocher
             </button>
-          </div>
-        ) : null}
+        </div>
       </header>
 
       <RoadmapTree
