@@ -2,10 +2,17 @@ type Props = {
   scale: number;
   onZoomIn: () => void;
   onZoomOut: () => void;
-  onReset: () => void;
+  onProgress?: () => void;
+  onOverview: () => void;
 };
 
-export function GraphControls({ scale, onZoomIn, onZoomOut, onReset }: Props) {
+export function GraphControls({
+  scale,
+  onZoomIn,
+  onZoomOut,
+  onProgress,
+  onOverview,
+}: Props) {
   return (
     <div className="graph-controls" role="toolbar" aria-label="Contrôles du graphe">
       <button
@@ -26,12 +33,24 @@ export function GraphControls({ scale, onZoomIn, onZoomOut, onReset }: Props) {
       >
         −
       </button>
+      {onProgress ? (
+        <button
+          type="button"
+          className="graph-btn"
+          onClick={onProgress}
+          aria-label="Ma progression"
+          title="Ma progression"
+          style={{ fontSize: "0.85rem" }}
+        >
+          ▶
+        </button>
+      ) : null}
       <button
         type="button"
         className="graph-btn"
-        onClick={onReset}
-        aria-label="Recentrer"
-        title="Recentrer"
+        onClick={onOverview}
+        aria-label="Vue d'ensemble"
+        title="Vue d'ensemble"
         style={{ fontSize: "0.85rem" }}
       >
         ⊙
