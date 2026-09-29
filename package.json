@@ -11,6 +11,8 @@
     "images:prune:delete": "node scripts/prune-mcu-images.mjs --delete",
     "images:rename": "node scripts/rename-mcu-images.mjs",
     "images:rename:apply": "node scripts/rename-mcu-images.mjs --apply",
+    "images:fetch": "node scripts/fetch-mcu-posters.mjs",
+    "images:fetch:apply": "node scripts/fetch-mcu-posters.mjs --apply",
     "layout:generate": "npx tsx scripts/generate-grid-layout.ts",
     "layout:validate": "npx tsx scripts/validate-layout.ts"
   },
