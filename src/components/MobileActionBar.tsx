@@ -1,19 +1,14 @@
 "use client";
 
 type SheetKind = "search" | "filters" | "legend" | null;
-type ViewMode = "list" | "graph";
 
 type Props = {
-  viewMode: ViewMode;
-  onViewMode: (mode: ViewMode) => void;
   openSheet: SheetKind;
   onOpenSheet: (sheet: SheetKind) => void;
   filterCount: number;
 };
 
 export function MobileActionBar({
-  viewMode,
-  onViewMode,
   openSheet,
   onOpenSheet,
   filterCount,
@@ -75,20 +70,6 @@ export function MobileActionBar({
           ⓘ
         </span>
         Légende
-      </button>
-
-      <button
-        type="button"
-        className="action-bar-btn"
-        onClick={() => onViewMode(viewMode === "list" ? "graph" : "list")}
-        aria-label={
-          viewMode === "list" ? "Passer au graphe" : "Passer à la liste"
-        }
-      >
-        <span className="action-bar-icon" aria-hidden="true">
-          {viewMode === "list" ? "⧉" : "☰"}
-        </span>
-        {viewMode === "list" ? "Graphe" : "Liste"}
       </button>
     </nav>
   );

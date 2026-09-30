@@ -5,10 +5,10 @@ export function withBasePath(path: string): string {
   return `${base}${path}`;
 }
 
-export const MCU_POSTER_EXTENSIONS = ["webp", "jpg", "jpeg", "png"] as const;
+export const MCU_POSTER_EXTENSIONS = ["webp", "jpg", "jpeg", "png", "avif"] as const;
 
 export function getMcuPosterSrc(id: string, extension: (typeof MCU_POSTER_EXTENSIONS)[number]) {
-  return withBasePath(`/images/mcu/${id}.${extension}`);
+  return withBasePath(`/images/mcu-wiki/${id}.${extension}`);
 }
 
 /** Logos studio — déposer dans `public/images/studios/{studio}.(svg|webp|png)` */

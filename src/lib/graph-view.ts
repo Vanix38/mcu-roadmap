@@ -5,9 +5,8 @@ export type Size = { w: number; h: number };
 export const MIN_SCALE = 0.12;
 export const MAX_SCALE = 2;
 export const DEFAULT_SCALE = 0.2;
-export const READABLE_NODE_WIDTH = 224;
+export const READABLE_NODE_WIDTH = 128;
 export const NODE_VISIBLE_COUNT = 2.6;
-export const CLAMP_MARGIN = 0.4;
 
 export function clampScale(scale: number) {
   return Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale));
@@ -63,9 +62,23 @@ export function fitOverview(
   };
 }
 
+function clampAxis(
+  translation: number,
+  scaledSize: number,
+  containerSize: number,
+) {
+  if (scaledSize <= containerSize) {
+    // Contenu plus petit que le viewport : rester centré
+    return (containerSize - scaledSize) / 2;
+  }
+  // Ne pas montrer de vide hors canvas
+  const minT = containerSize - scaledSize;
+  const maxT = 0;
+  return Math.min(maxT, Math.max(minT, translation));
+}
+
 /**
- * Keep at least CLAMP_MARGIN of the viewport overlapping the canvas
- * so the graph can never be panned completely off-screen.
+ * Empêche de pan/zoom hors du canvas (films + bandes de pistes).
  */
 export function clampView(
   view: GraphView,
@@ -74,17 +87,10 @@ export function clampView(
 ): GraphView {
   const scaledW = canvas.w * view.scale;
   const scaledH = canvas.h * view.scale;
-  const marginX = container.w * CLAMP_MARGIN;
-  const marginY = container.h * CLAMP_MARGIN;
-
-  const minTx = marginX - scaledW;
-  const maxTx = container.w - marginX;
-  const minTy = marginY - scaledH;
-  const maxTy = container.h - marginY;
 
   return {
     scale: view.scale,
-    tx: Math.min(maxTx, Math.max(minTx, view.tx)),
-    ty: Math.min(maxTy, Math.max(minTy, view.ty)),
+    tx: clampAxis(view.tx, scaledW, container.w),
+    ty: clampAxis(view.ty, scaledH, container.h),
   };
 }

@@ -183,7 +183,7 @@
     "releaseDate": "2016-11-04",
     "phase": "Phase Three",
     "order": 14,
-    "track": "mystic",
+    "track": "magic",
     "studio": "marvel",
     "format": "live",
     "dependsOn": []
@@ -326,7 +326,7 @@
     "releaseDate": "2021-01-15",
     "phase": "Phase Four",
     "order": 24,
-    "track": "mystic",
+    "track": "magic",
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
@@ -340,7 +340,7 @@
     "releaseDate": "2021-03-19",
     "phase": "Phase Four",
     "order": 25,
-    "track": "cap",
+    "track": "falcon",
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
@@ -354,7 +354,7 @@
     "releaseDate": "2021-06-09",
     "phase": "Phase Four",
     "order": 26,
-    "track": "mystic",
+    "track": "loki",
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
@@ -382,7 +382,7 @@
     "releaseDate": "2021-08-11",
     "phase": "Phase Four",
     "order": 28,
-    "track": "mystic",
+    "track": "animation",
     "studio": "marvel",
     "format": "animated",
     "dependsOn": [
@@ -424,7 +424,7 @@
     "releaseDate": "2021-11-24",
     "phase": "Phase Four",
     "order": 31,
-    "track": "misc",
+    "track": "street",
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
@@ -468,7 +468,7 @@
     "releaseDate": "2022-05-06",
     "phase": "Phase Four",
     "order": 34,
-    "track": "mystic",
+    "track": "magic",
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
@@ -525,7 +525,7 @@
     "releaseDate": "2022-08-17",
     "phase": "Phase Four",
     "order": 38,
-    "track": "misc",
+    "track": "series-misc",
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
@@ -607,7 +607,7 @@
     "releaseDate": "2023-06-21",
     "phase": "Phase Five",
     "order": 44,
-    "track": "misc",
+    "track": "series-misc",
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
@@ -621,7 +621,7 @@
     "releaseDate": "2023-10-05",
     "phase": "Phase Five",
     "order": 45,
-    "track": "mystic",
+    "track": "loki",
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
@@ -649,7 +649,7 @@
     "releaseDate": "2023-12-22",
     "phase": "Phase Five",
     "order": 47,
-    "track": "mystic",
+    "track": "animation",
     "studio": "marvel",
     "format": "animated",
     "dependsOn": [
@@ -663,7 +663,7 @@
     "releaseDate": "2024-01-09",
     "phase": "Phase Five",
     "order": 48,
-    "track": "misc",
+    "track": "street",
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
@@ -677,7 +677,7 @@
     "releaseDate": "2024-07-26",
     "phase": "Phase Five",
     "order": 49,
-    "track": "xmen",
+    "track": "deadpool",
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
@@ -695,7 +695,7 @@
     "releaseDate": "2024-09-18",
     "phase": "Phase Five",
     "order": 50,
-    "track": "mystic",
+    "track": "magic",
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
@@ -709,7 +709,7 @@
     "releaseDate": "2024-12-24",
     "phase": "Phase Five",
     "order": 51,
-    "track": "mystic",
+    "track": "animation",
     "studio": "marvel",
     "format": "animated",
     "dependsOn": [
@@ -723,7 +723,7 @@
     "releaseDate": "2025-02-14",
     "phase": "Phase Five",
     "order": 52,
-    "track": "cap",
+    "track": "falcon",
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
@@ -737,7 +737,7 @@
     "releaseDate": "2025-03-04",
     "phase": "Phase Five",
     "order": 53,
-    "track": "misc",
+    "track": "street",
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
@@ -768,7 +768,7 @@
     "releaseDate": "2025-06-24",
     "phase": "Phase Five",
     "order": 55,
-    "track": "iron",
+    "track": "series-misc",
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
@@ -782,7 +782,7 @@
     "releaseDate": "2025-07-25",
     "phase": "Phase Six",
     "order": 56,
-    "track": "misc",
+    "track": "fantastic",
     "studio": "marvel",
     "format": "live",
     "dependsOn": []
@@ -794,7 +794,7 @@
     "releaseDate": "2025-08-01",
     "phase": "Phase Six",
     "order": 57,
-    "track": "wakanda",
+    "track": "animation",
     "studio": "marvel",
     "format": "animated",
     "dependsOn": [
@@ -808,7 +808,7 @@
     "releaseDate": "2025-09-24",
     "phase": "Phase Six",
     "order": 58,
-    "track": "misc",
+    "track": "animation",
     "studio": "marvel",
     "format": "animated",
     "dependsOn": [
@@ -823,7 +823,7 @@
     "releaseDate": "2025-10-29",
     "phase": "Phase Six",
     "order": 59,
-    "track": "spidey",
+    "track": "animation",
     "studio": "marvel",
     "format": "animated",
     "dependsOn": []
@@ -835,7 +835,7 @@
     "releaseDate": "2026-01-27",
     "phase": "Phase Six",
     "order": 60,
-    "track": "misc",
+    "track": "series-misc",
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
@@ -849,7 +849,7 @@
     "releaseDate": "2026-03-24",
     "phase": "Phase Six",
     "order": 61,
-    "track": "misc",
+    "track": "street",
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
@@ -863,7 +863,7 @@
     "releaseDate": "2026-05-12",
     "phase": "Phase Six",
     "order": 62,
-    "track": "misc",
+    "track": "street",
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
@@ -892,7 +892,7 @@
     "releaseDate": "2026-10-14",
     "phase": "Phase Six",
     "order": 64,
-    "track": "misc",
+    "track": "magic",
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
@@ -978,7 +978,7 @@
     "releaseDate": "2009-05-01",
     "phase": "X-Men Saga",
     "order": 70,
-    "track": "xmen",
+    "track": "wolverine",
     "studio": "fox",
     "format": "live",
     "dependsOn": []
@@ -1002,7 +1002,7 @@
     "releaseDate": "2013-07-26",
     "phase": "X-Men Saga",
     "order": 72,
-    "track": "xmen",
+    "track": "wolverine",
     "studio": "fox",
     "format": "live",
     "dependsOn": [
@@ -1031,7 +1031,7 @@
     "releaseDate": "2016-02-12",
     "phase": "X-Men Saga",
     "order": 74,
-    "track": "xmen",
+    "track": "deadpool",
     "studio": "fox",
     "format": "live",
     "dependsOn": []
@@ -1057,7 +1057,7 @@
     "releaseDate": "2017-03-03",
     "phase": "X-Men Saga",
     "order": 76,
-    "track": "xmen",
+    "track": "wolverine",
     "studio": "fox",
     "format": "live",
     "dependsOn": [
@@ -1071,7 +1071,7 @@
     "releaseDate": "2018-05-18",
     "phase": "X-Men Saga",
     "order": 77,
-    "track": "xmen",
+    "track": "deadpool",
     "studio": "fox",
     "format": "live",
     "dependsOn": [
@@ -1111,7 +1111,7 @@
     "releaseDate": "2002-05-03",
     "phase": "Spider-Man Legacy",
     "order": 80,
-    "track": "spidey",
+    "track": "raimi",
     "studio": "sony",
     "format": "live",
     "dependsOn": []
@@ -1123,7 +1123,7 @@
     "releaseDate": "2004-06-30",
     "phase": "Spider-Man Legacy",
     "order": 81,
-    "track": "spidey",
+    "track": "raimi",
     "studio": "sony",
     "format": "live",
     "dependsOn": [
@@ -1137,7 +1137,7 @@
     "releaseDate": "2007-05-04",
     "phase": "Spider-Man Legacy",
     "order": 82,
-    "track": "spidey",
+    "track": "raimi",
     "studio": "sony",
     "format": "live",
     "dependsOn": [
@@ -1151,7 +1151,7 @@
     "releaseDate": "2012-07-03",
     "phase": "Spider-Man Legacy",
     "order": 83,
-    "track": "spidey",
+    "track": "amazing",
     "studio": "sony",
     "format": "live",
     "dependsOn": []
@@ -1163,7 +1163,7 @@
     "releaseDate": "2014-05-02",
     "phase": "Spider-Man Legacy",
     "order": 84,
-    "track": "spidey",
+    "track": "amazing",
     "studio": "sony",
     "format": "live",
     "dependsOn": [
@@ -1191,7 +1191,7 @@
     "releaseDate": "2024-03-20",
     "phase": "X-Men Saga",
     "order": 86,
-    "track": "xmen",
+    "track": "animation",
     "studio": "fox",
     "format": "animated",
     "dependsOn": []
@@ -1203,7 +1203,7 @@
     "releaseDate": "2026-07-01",
     "phase": "X-Men Saga",
     "order": 87,
-    "track": "xmen",
+    "track": "animation",
     "studio": "fox",
     "format": "animated",
     "dependsOn": [
@@ -1217,7 +1217,7 @@
     "releaseDate": "2018-10-05",
     "phase": "SSU",
     "order": 88,
-    "track": "spidey",
+    "track": "venom",
     "studio": "sony",
     "format": "live",
     "dependsOn": []
@@ -1229,7 +1229,7 @@
     "releaseDate": "2021-10-01",
     "phase": "SSU",
     "order": 89,
-    "track": "spidey",
+    "track": "venom",
     "studio": "sony",
     "format": "live",
     "dependsOn": [
@@ -1243,7 +1243,7 @@
     "releaseDate": "2022-04-01",
     "phase": "SSU",
     "order": 90,
-    "track": "spidey",
+    "track": "spider-misc",
     "studio": "sony",
     "format": "live",
     "dependsOn": []
@@ -1255,7 +1255,7 @@
     "releaseDate": "2024-02-14",
     "phase": "SSU",
     "order": 91,
-    "track": "spidey",
+    "track": "spider-misc",
     "studio": "sony",
     "format": "live",
     "dependsOn": []
@@ -1267,7 +1267,7 @@
     "releaseDate": "2024-10-25",
     "phase": "SSU",
     "order": 92,
-    "track": "spidey",
+    "track": "venom",
     "studio": "sony",
     "format": "live",
     "dependsOn": [
@@ -1281,7 +1281,19 @@
     "releaseDate": "2024-12-13",
     "phase": "SSU",
     "order": 93,
-    "track": "spidey",
+    "track": "spider-misc",
+    "studio": "sony",
+    "format": "live",
+    "dependsOn": []
+  },
+  {
+    "id": "spider-noir-2026",
+    "title": "Spider-Noir",
+    "type": "series",
+    "releaseDate": "2026-05-27",
+    "phase": "SSU",
+    "order": 128,
+    "track": "spider-misc",
     "studio": "sony",
     "format": "live",
     "dependsOn": []
@@ -1293,7 +1305,7 @@
     "releaseDate": "2015-04-10",
     "phase": "Marvel Netflix",
     "order": 94,
-    "track": "misc",
+    "track": "street",
     "studio": "netflix",
     "format": "live",
     "dependsOn": []
@@ -1305,7 +1317,7 @@
     "releaseDate": "2015-11-20",
     "phase": "Marvel Netflix",
     "order": 95,
-    "track": "misc",
+    "track": "street",
     "studio": "netflix",
     "format": "live",
     "dependsOn": []
@@ -1317,7 +1329,7 @@
     "releaseDate": "2016-03-18",
     "phase": "Marvel Netflix",
     "order": 96,
-    "track": "misc",
+    "track": "street",
     "studio": "netflix",
     "format": "live",
     "dependsOn": [
@@ -1331,7 +1343,7 @@
     "releaseDate": "2016-09-30",
     "phase": "Marvel Netflix",
     "order": 97,
-    "track": "misc",
+    "track": "street",
     "studio": "netflix",
     "format": "live",
     "dependsOn": [
@@ -1345,7 +1357,7 @@
     "releaseDate": "2017-03-17",
     "phase": "Marvel Netflix",
     "order": 98,
-    "track": "misc",
+    "track": "street",
     "studio": "netflix",
     "format": "live",
     "dependsOn": []
@@ -1357,7 +1369,7 @@
     "releaseDate": "2017-08-18",
     "phase": "Marvel Netflix",
     "order": 99,
-    "track": "misc",
+    "track": "street",
     "studio": "netflix",
     "format": "live",
     "dependsOn": [
@@ -1374,7 +1386,7 @@
     "releaseDate": "2017-11-17",
     "phase": "Marvel Netflix",
     "order": 100,
-    "track": "misc",
+    "track": "street",
     "studio": "netflix",
     "format": "live",
     "dependsOn": [
@@ -1388,7 +1400,7 @@
     "releaseDate": "2018-03-08",
     "phase": "Marvel Netflix",
     "order": 101,
-    "track": "misc",
+    "track": "street",
     "studio": "netflix",
     "format": "live",
     "dependsOn": [
@@ -1402,7 +1414,7 @@
     "releaseDate": "2018-06-22",
     "phase": "Marvel Netflix",
     "order": 102,
-    "track": "misc",
+    "track": "street",
     "studio": "netflix",
     "format": "live",
     "dependsOn": [
@@ -1416,7 +1428,7 @@
     "releaseDate": "2018-09-07",
     "phase": "Marvel Netflix",
     "order": 103,
-    "track": "misc",
+    "track": "street",
     "studio": "netflix",
     "format": "live",
     "dependsOn": [
@@ -1430,7 +1442,7 @@
     "releaseDate": "2018-10-19",
     "phase": "Marvel Netflix",
     "order": 104,
-    "track": "misc",
+    "track": "street",
     "studio": "netflix",
     "format": "live",
     "dependsOn": [
@@ -1444,7 +1456,7 @@
     "releaseDate": "2019-01-18",
     "phase": "Marvel Netflix",
     "order": 105,
-    "track": "misc",
+    "track": "street",
     "studio": "netflix",
     "format": "live",
     "dependsOn": [
@@ -1458,7 +1470,7 @@
     "releaseDate": "2019-06-14",
     "phase": "Marvel Netflix",
     "order": 106,
-    "track": "misc",
+    "track": "street",
     "studio": "netflix",
     "format": "live",
     "dependsOn": [
@@ -1472,7 +1484,7 @@
     "releaseDate": "2018-12-14",
     "phase": "Spider-Verse",
     "order": 107,
-    "track": "spidey",
+    "track": "spiderverse",
     "studio": "sony-animation",
     "format": "animated",
     "dependsOn": []
@@ -1484,7 +1496,7 @@
     "releaseDate": "2023-06-02",
     "phase": "Spider-Verse",
     "order": 108,
-    "track": "spidey",
+    "track": "spiderverse",
     "studio": "sony-animation",
     "format": "animated",
     "dependsOn": [
@@ -1498,7 +1510,7 @@
     "releaseDate": "2027-06-18",
     "phase": "Spider-Verse",
     "order": 109,
-    "track": "spidey",
+    "track": "spiderverse",
     "studio": "sony-animation",
     "format": "animated",
     "dependsOn": [
@@ -1512,7 +1524,7 @@
     "releaseDate": "2005-07-08",
     "phase": "Fantastic Four Legacy",
     "order": 110,
-    "track": "misc",
+    "track": "fantastic",
     "studio": "fox",
     "format": "live",
     "dependsOn": []
@@ -1524,7 +1536,7 @@
     "releaseDate": "2007-06-15",
     "phase": "Fantastic Four Legacy",
     "order": 111,
-    "track": "misc",
+    "track": "fantastic",
     "studio": "fox",
     "format": "live",
     "dependsOn": [
@@ -1538,7 +1550,7 @@
     "releaseDate": "2015-08-07",
     "phase": "Fantastic Four Legacy",
     "order": 112,
-    "track": "misc",
+    "track": "fantastic",
     "studio": "fox",
     "format": "live",
     "dependsOn": []
@@ -1550,7 +1562,7 @@
     "releaseDate": "2013-09-24",
     "phase": "ABC / Freeform",
     "order": 113,
-    "track": "misc",
+    "track": "shield",
     "studio": "abc",
     "format": "live",
     "dependsOn": [
@@ -1564,11 +1576,39 @@
     "releaseDate": "2014-09-23",
     "phase": "ABC / Freeform",
     "order": 114,
-    "track": "misc",
+    "track": "shield",
     "studio": "abc",
     "format": "live",
     "dependsOn": [
       "agents-of-shield-s1-2013"
+    ]
+  },
+  {
+    "id": "agent-carter-s1-2015",
+    "title": "Agent Carter (Saison 1)",
+    "type": "series",
+    "releaseDate": "2015-01-06",
+    "phase": "ABC / Freeform",
+    "order": 123,
+    "track": "agent-carter",
+    "studio": "abc",
+    "format": "live",
+    "dependsOn": [
+      "captain-america-the-first-avenger-2011"
+    ]
+  },
+  {
+    "id": "agent-carter-s2-2016",
+    "title": "Agent Carter (Saison 2)",
+    "type": "series",
+    "releaseDate": "2016-01-19",
+    "phase": "ABC / Freeform",
+    "order": 124,
+    "track": "agent-carter",
+    "studio": "abc",
+    "format": "live",
+    "dependsOn": [
+      "agent-carter-s1-2015"
     ]
   },
   {
@@ -1578,7 +1618,7 @@
     "releaseDate": "2015-09-29",
     "phase": "ABC / Freeform",
     "order": 115,
-    "track": "misc",
+    "track": "shield",
     "studio": "abc",
     "format": "live",
     "dependsOn": [
@@ -1592,7 +1632,7 @@
     "releaseDate": "2016-09-20",
     "phase": "ABC / Freeform",
     "order": 116,
-    "track": "misc",
+    "track": "shield",
     "studio": "abc",
     "format": "live",
     "dependsOn": [
@@ -1606,7 +1646,7 @@
     "releaseDate": "2017-12-01",
     "phase": "ABC / Freeform",
     "order": 117,
-    "track": "misc",
+    "track": "shield",
     "studio": "abc",
     "format": "live",
     "dependsOn": [
@@ -1620,7 +1660,7 @@
     "releaseDate": "2019-05-10",
     "phase": "ABC / Freeform",
     "order": 118,
-    "track": "misc",
+    "track": "shield",
     "studio": "abc",
     "format": "live",
     "dependsOn": [
@@ -1634,7 +1674,7 @@
     "releaseDate": "2020-05-27",
     "phase": "ABC / Freeform",
     "order": 119,
-    "track": "misc",
+    "track": "shield",
     "studio": "abc",
     "format": "live",
     "dependsOn": [
@@ -1648,7 +1688,7 @@
     "releaseDate": "2017-09-29",
     "phase": "ABC / Freeform",
     "order": 120,
-    "track": "misc",
+    "track": "shield",
     "studio": "abc",
     "format": "live",
     "dependsOn": [
@@ -1662,7 +1702,7 @@
     "releaseDate": "2018-06-07",
     "phase": "ABC / Freeform",
     "order": 121,
-    "track": "misc",
+    "track": "young-heroes",
     "studio": "freeform",
     "format": "live",
     "dependsOn": []
@@ -1674,11 +1714,52 @@
     "releaseDate": "2019-04-04",
     "phase": "ABC / Freeform",
     "order": 122,
-    "track": "misc",
+    "track": "young-heroes",
     "studio": "freeform",
     "format": "live",
     "dependsOn": [
       "cloak-and-dagger-s1-2018"
+    ]
+  },
+  {
+    "id": "runaways-s1-2017",
+    "title": "Runaways (Saison 1)",
+    "type": "series",
+    "releaseDate": "2017-11-21",
+    "phase": "Hulu",
+    "order": 125,
+    "track": "young-heroes",
+    "studio": "hulu",
+    "format": "live",
+    "dependsOn": []
+  },
+  {
+    "id": "runaways-s2-2018",
+    "title": "Runaways (Saison 2)",
+    "type": "series",
+    "releaseDate": "2018-12-21",
+    "phase": "Hulu",
+    "order": 126,
+    "track": "young-heroes",
+    "studio": "hulu",
+    "format": "live",
+    "dependsOn": [
+      "runaways-s1-2017"
+    ]
+  },
+  {
+    "id": "runaways-s3-2019",
+    "title": "Runaways (Saison 3)",
+    "type": "series",
+    "releaseDate": "2019-12-13",
+    "phase": "Hulu",
+    "order": 127,
+    "track": "young-heroes",
+    "studio": "hulu",
+    "format": "live",
+    "dependsOn": [
+      "runaways-s2-2018",
+      "cloak-and-dagger-s2-2019"
     ]
   }
 ]

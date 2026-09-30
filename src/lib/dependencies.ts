@@ -1,7 +1,6 @@
 import type { McuItem } from "./mcu";
 import {
   GRID_COL_WIDTH,
-  GRID_OVERFLOW_ROW,
   GRID_PADDING_X,
   GRID_PADDING_Y,
   GRID_ROW_HEIGHT,
@@ -41,6 +40,18 @@ const OVERFLOW_STAGGER = 72;
 
 export function canCheckItem(item: McuItem, checked: Set<string>) {
   return item.dependsOn.every((dependencyId) => checked.has(dependencyId));
+}
+
+/** Premier item non vu dont les prérequis sont tous cochés, trié par `order`. */
+export function getNextAvailable(
+  items: readonly McuItem[],
+  checked: Set<string>,
+): McuItem | null {
+  const sorted = [...items].sort((a, b) => a.order - b.order);
+  return (
+    sorted.find((item) => !checked.has(item.id) && canCheckItem(item, checked)) ??
+    null
+  );
 }
 
 export function getAncestorIds(items: readonly McuItem[], id: string) {
@@ -160,10 +171,25 @@ function resolveRowCollision(
 
 export { LAYOUT_REVISION } from "./layout-solver";
 
-export function buildDependencyLayout(items: readonly McuItem[]): DependencyLayout {
+export function buildDependencyLayout(
+  items: readonly McuItem[],
+  options?: {
+    compact?: boolean;
+    extraOverrides?: Record<string, import("./layout-solver").GridPos>;
+    trackOrder?: readonly import("./mcu").McuTrack[];
+    exclusiveLanes?: Partial<
+      Record<import("./mcu").McuTrack, readonly string[]>
+    >;
+  },
+): DependencyLayout {
   const layers = computeLayers(items);
   const byId = new Map(items.map((item) => [item.id, item]));
-  const gridPositions = getGridPositions(items);
+  const gridPositions = getGridPositions(items, {
+    compact: options?.compact,
+    extraOverrides: options?.extraOverrides,
+    trackOrder: options?.trackOrder,
+    exclusiveLanes: options?.exclusiveLanes,
+  });
   const positioned = new Map<string, PositionedNode>();
   const overflowColSlots = new Map<number, number>();
 
@@ -184,12 +210,15 @@ export function buildDependencyLayout(items: readonly McuItem[]): DependencyLayo
     .filter((item) => !gridPositions[item.id])
     .sort((a, b) => a.order - b.order);
 
+  const positionedRows = Object.values(gridPositions).map((p) => p.row);
+  const overflowRow = Math.max(1, ...positionedRows) + 1;
+
   for (const item of overflow) {
     const col = orderToGridCol(item.order);
     const slot = overflowColSlots.get(col) ?? 0;
     overflowColSlots.set(col, slot + 1);
 
-    const y = gridY(GRID_OVERFLOW_ROW);
+    const y = gridY(overflowRow);
     let x = gridX(col) + slot * OVERFLOW_STAGGER;
     x = resolveRowCollision(x, y, item, positioned);
 
@@ -221,12 +250,14 @@ export function buildDependencyLayout(items: readonly McuItem[]): DependencyLayo
     .filter((node): node is PositionedNode => Boolean(node));
 
   const maxCol = Math.max(
+    1,
     ...nodes.map((node) => node.column),
     ...Object.values(gridPositions).map((p) => p.col),
   );
   const maxRow = Math.max(
-    ...Object.values(gridPositions).map((p) => p.row),
-    GRID_OVERFLOW_ROW,
+    1,
+    ...positionedRows,
+    overflow.length > 0 ? overflowRow : 1,
   );
 
   return {

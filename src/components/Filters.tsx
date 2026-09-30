@@ -10,6 +10,7 @@ type Props = {
   onQuery?: (value: string) => void;
   showSearch?: boolean;
   compact?: boolean;
+  hideStatus?: boolean;
 };
 
 const TYPE_OPTIONS: { value: FilterType; label: string }[] = [
@@ -34,6 +35,7 @@ export function Filters({
   onQuery,
   showSearch = true,
   compact = false,
+  hideStatus = false,
 }: Props) {
   const togglePhase = (phase: string) => {
     const next = new Set(filters.phases);
@@ -81,25 +83,27 @@ export function Filters({
 
       {compact ? (
         <>
-          <div className="filter-group">
-            <span className="filter-group-label">Statut</span>
-            <div className="filter-chips" role="group" aria-label="Filtrer par statut">
-              {STATUS_OPTIONS.map((opt) => (
-                <button
-                  key={opt.value}
-                  type="button"
-                  className={[
-                    "filter-chip",
-                    filters.status === opt.value ? "filter-chip--active" : "",
-                  ].join(" ")}
-                  onClick={() => onChange({ ...filters, status: opt.value })}
-                  aria-pressed={filters.status === opt.value}
-                >
-                  {opt.label}
-                </button>
-              ))}
+          {!hideStatus ? (
+            <div className="filter-group">
+              <span className="filter-group-label">Statut</span>
+              <div className="filter-chips" role="group" aria-label="Filtrer par statut">
+                {STATUS_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    className={[
+                      "filter-chip",
+                      filters.status === opt.value ? "filter-chip--active" : "",
+                    ].join(" ")}
+                    onClick={() => onChange({ ...filters, status: opt.value })}
+                    aria-pressed={filters.status === opt.value}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          ) : null}
 
           <div className="filter-group">
             <span className="filter-group-label">Phase</span>

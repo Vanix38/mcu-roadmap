@@ -1,14 +1,11 @@
 /** Constantes de grille LTR — col = temps (gauche→droite), row = piste (haut→bas) */
 
 /** Espacement horizontal (axe temps) */
-export const GRID_COL_WIDTH = 320;
+export const GRID_COL_WIDTH = 220;
 /** Espacement vertical (axe piste) */
-export const GRID_ROW_HEIGHT = 230;
-export const GRID_PADDING_X = 64;
-export const GRID_PADDING_Y = 56;
-
-/** Ligne tout en bas pour les entrées hors grille */
-export const GRID_OVERFLOW_ROW = 22;
+export const GRID_ROW_HEIGHT = 280;
+export const GRID_PADDING_X = 96;
+export const GRID_PADDING_Y = 72;
 
 const GRID_MAX_COL = 16;
 const GRID_MAX_ORDER = 65;

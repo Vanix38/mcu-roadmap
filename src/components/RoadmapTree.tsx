@@ -10,13 +10,19 @@ import {
 } from "react";
 import type { McuItem } from "@/lib/mcu";
 import {
-  buildDependencyLayout,
   canCheckItem,
   getHighlightIds,
+  getNextAvailable,
   LAYOUT_REVISION,
   pathMidpoint,
   type RoutedEdge,
 } from "@/lib/dependencies";
+import { buildCollapsedLayout } from "@/lib/collapsed-layout";
+import {
+  withChainChecked,
+  type CollapsedChain,
+} from "@/lib/chains";
+import { getGraphLod } from "@/lib/graph-lod";
 import {
   centerOn,
   clampView,
@@ -26,25 +32,39 @@ import {
   type GraphView,
   zoomAt,
 } from "@/lib/graph-view";
+import { GRID_ROW_HEIGHT } from "@/lib/grid-layout";
+import {
+  getUniversePortals,
+  type UniverseId,
+  type UniversePortal,
+} from "@/lib/universe";
 import { useIsTouch } from "@/lib/use-media-query";
 import { EdgeTooltip } from "./EdgeTooltip";
 import { GraphControls } from "./GraphControls";
 import { GraphMinimap } from "./GraphMinimap";
 import { PhaseJumpBar } from "./PhaseJumpBar";
 import { RoadmapItem } from "./RoadmapItem";
+import { TimelineAxis } from "./TimelineAxis";
+import { TrackBands, TrackLabels } from "./TrackLabels";
 
 const TAP_MAX_DIST = 8;
 const TAP_MAX_MS = 300;
 
 type Props = {
   allItems: McuItem[];
+  catalogItems: McuItem[];
   visibleItems: McuItem[];
   checked: Set<string>;
   focusId: string | null;
+  focusNonce?: number;
   selectedId?: string | null;
   isMobile?: boolean;
+  compactLayout?: boolean;
+  universe?: UniverseId;
   onToggle: (item: McuItem) => void;
   onSelect?: (item: McuItem) => void;
+  onSelectChain?: (chain: CollapsedChain) => void;
+  onPortalNavigate?: (universe: UniverseId, focusId: string) => void;
 };
 
 function edgeClassName(
@@ -95,16 +115,32 @@ function renderEdge(edge: RoutedEdge, className: string) {
 
 export function RoadmapTree({
   allItems,
+  catalogItems,
   visibleItems,
   checked,
   focusId,
+  focusNonce = 0,
   selectedId = null,
   isMobile = false,
+  compactLayout = false,
+  universe = "all",
   onToggle,
   onSelect,
+  onSelectChain,
+  onPortalNavigate,
 }: Props) {
   const isTouch = useIsTouch();
-  const layout = useMemo(() => buildDependencyLayout(allItems), [allItems]);
+  const collapseMovies = universe !== "fox" && universe !== "sony";
+  const collapseSeries = universe !== "tv";
+  const layout = useMemo(
+    () =>
+      buildCollapsedLayout(allItems, {
+        compact: compactLayout,
+        collapseMovies,
+        collapseSeries,
+      }),
+    [allItems, compactLayout, collapseMovies, collapseSeries],
+  );
   const layoutKey = useMemo(
     () =>
       `${LAYOUT_REVISION}:${layout.nodes
@@ -112,13 +148,28 @@ export function RoadmapTree({
         .join("|")}`,
     [layout],
   );
-  const visibleIds = useMemo(
-    () => new Set(visibleItems.map((item) => item.id)),
-    [visibleItems],
-  );
-  const titleById = useMemo(
-    () => new Map(allItems.map((item) => [item.id, item.title])),
-    [allItems],
+  const visibleIds = useMemo(() => {
+    const ids = new Set(visibleItems.map((item) => item.id));
+    for (const item of visibleItems) {
+      const chainId = layout.collapse.memberToChain.get(item.id);
+      if (chainId) ids.add(chainId);
+    }
+    return ids;
+  }, [visibleItems, layout.collapse.memberToChain]);
+  const titleById = useMemo(() => {
+    const map = new Map(allItems.map((item) => [item.id, item.title]));
+    for (const chain of layout.collapse.chainsById.values()) {
+      map.set(chain.id, chain.title);
+    }
+    return map;
+  }, [allItems, layout.collapse.chainsById]);
+  const focusNodeId = useMemo(() => {
+    if (!focusId) return null;
+    return layout.collapse.memberToChain.get(focusId) ?? focusId;
+  }, [focusId, layout.collapse.memberToChain]);
+  const layoutChecked = useMemo(
+    () => withChainChecked(checked, layout.collapse.chainsById),
+    [checked, layout.collapse.chainsById],
   );
   const viewportRef = useRef<HTMLDivElement>(null);
   const [view, setView] = useState<GraphView>({
@@ -156,8 +207,8 @@ export function RoadmapTree({
 
   const highlightSource = hoveredId ?? selectedId;
   const highlightIds = useMemo(
-    () => getHighlightIds(allItems, highlightSource),
-    [allItems, highlightSource],
+    () => getHighlightIds(layout.collapse.layoutItems, highlightSource),
+    [layout.collapse.layoutItems, highlightSource],
   );
 
   const visibleEdges = useMemo(
@@ -217,14 +268,14 @@ export function RoadmapTree({
   );
 
   const findProgressNode = useCallback(() => {
-    const available = allItems.find(
-      (item) => !checked.has(item.id) && canCheckItem(item, checked),
-    );
-    if (available) {
-      return layout.nodes.find((n) => n.item.id === available.id) ?? null;
+    const next = getNextAvailable(layout.collapse.layoutItems, layoutChecked);
+    if (next) {
+      return layout.nodes.find((n) => n.item.id === next.id) ?? null;
     }
-    return layout.nodes.find((n) => n.item.id === "iron-man-2008") ?? layout.nodes[0] ?? null;
-  }, [allItems, checked, layout.nodes]);
+    const iron =
+      layout.nodes.find((n) => n.item.id === "iron-man-2008") ?? null;
+    return iron ?? layout.nodes[0] ?? null;
+  }, [layoutChecked, layout.collapse.layoutItems, layout.nodes]);
 
   const resetOverview = useCallback(() => {
     const el = viewportRef.current;
@@ -297,15 +348,17 @@ export function RoadmapTree({
   }, []);
 
   useEffect(() => {
-    if (!focusId || !viewportRef.current) return;
-    const node = layout.nodes.find((n) => n.item.id === focusId);
+    if (!focusNodeId || !viewportRef.current) return;
+    const node = layout.nodes.find((n) => n.item.id === focusNodeId);
     if (!node) return;
 
     const el = viewportRef.current;
     const scale = Math.max(view.scale, isMobile ? fitScaleForReadableNode(el.clientWidth) : 0.6);
     applyView(centerOn({ w: el.clientWidth, h: el.clientHeight }, node, scale));
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- only re-center when focusId changes
-  }, [focusId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only re-center when focus changes
+  }, [focusNodeId, focusNonce]);
+
+  const lod = getGraphLod(view.scale);
 
   const zoomBy = useCallback(
     (factor: number) => {
@@ -353,7 +406,7 @@ export function RoadmapTree({
   const onPointerDown = (e: PointerEvent<HTMLDivElement>) => {
     if (
       (e.target as HTMLElement).closest(
-        "button, input, label, .graph-minimap, .minimap-wrap, .phase-jump, .graph-controls",
+        "button, input, label, .graph-minimap, .minimap-wrap, .phase-jump, .graph-controls, .node-portal, .timeline-axis, .track-labels",
       )
     ) {
       return;
@@ -448,15 +501,19 @@ export function RoadmapTree({
       panStart.current = null;
       pinchStart.current = null;
 
-      if (wasTap && onSelect) {
+      if (wasTap && (onSelect || onSelectChain)) {
         const dist = Math.hypot(
           e.clientX - wasTap.x,
           e.clientY - wasTap.y,
         );
         const dt = Date.now() - wasTap.t;
         if (dist < TAP_MAX_DIST && dt < TAP_MAX_MS && wasTap.nodeId) {
-          const item = allItems.find((i) => i.id === wasTap.nodeId);
-          if (item) onSelect(item);
+          const chain = layout.collapse.chainsById.get(wasTap.nodeId);
+          if (chain) onSelectChain?.(chain);
+          else {
+            const item = allItems.find((i) => i.id === wasTap.nodeId);
+            if (item) onSelect?.(item);
+          }
         }
       }
     }
@@ -527,6 +584,7 @@ export function RoadmapTree({
         isTouch ? "graph-viewport--touch" : "",
         isMobile ? "has-action-bar" : "",
       ].join(" ")}
+      data-lod={lod}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
@@ -550,13 +608,18 @@ export function RoadmapTree({
             height={layout.height}
             aria-hidden={!hoveredEdgeId}
           >
+            <TrackBands
+              nodes={layout.nodes}
+              width={layout.width}
+              rowHeight={GRID_ROW_HEIGHT}
+            />
             <g className="graph-lines-under">
               {underEdges.map((edge) =>
                 renderEdge(
                   edge,
                   edgeClassName(
                     edge,
-                    checked,
+                    layoutChecked,
                     highlightIds,
                     hoveredEdgeId,
                     hoveredId,
@@ -570,7 +633,7 @@ export function RoadmapTree({
                   edge,
                   edgeClassName(
                     edge,
-                    checked,
+                    layoutChecked,
                     highlightIds,
                     hoveredEdgeId,
                     hoveredId,
@@ -601,13 +664,41 @@ export function RoadmapTree({
           {layout.nodes.map((node) => {
             if (!visibleIds.has(node.item.id)) return null;
 
-            const isChecked = checked.has(node.item.id);
-            const disabled = !canCheckItem(node.item, checked);
+            const chain = layout.collapse.chainsById.get(node.item.id) ?? null;
+            const isChecked = chain
+              ? chain.members.every((m) => checked.has(m.id))
+              : checked.has(node.item.id);
+            const disabled = chain
+              ? !chain.members.some(
+                  (m) => !checked.has(m.id) && canCheckItem(m, checked),
+                ) && !isChecked
+              : !canCheckItem(node.item, layoutChecked);
             const isDimmed =
               highlightIds !== null && !highlightIds.has(node.item.id);
             const isHighlighted =
               highlightIds !== null && highlightIds.has(node.item.id);
-            const isFocused = focusId === node.item.id;
+            const isFocused = focusNodeId === node.item.id;
+
+            const portals: UniversePortal[] = (() => {
+              const sourceIds = chain
+                ? chain.members.map((m) => m.id)
+                : [node.item.id];
+              const seen = new Set<string>();
+              const list: UniversePortal[] = [];
+              for (const id of sourceIds) {
+                for (const portal of getUniversePortals(
+                  id,
+                  universe,
+                  catalogItems,
+                )) {
+                  const key = `${portal.targetUniverse}:${portal.targetId}`;
+                  if (seen.has(key)) continue;
+                  seen.add(key);
+                  list.push(portal);
+                }
+              }
+              return list;
+            })();
 
             return (
               <div
@@ -625,13 +716,27 @@ export function RoadmapTree({
                   checked={isChecked}
                   disabled={disabled}
                   highlighted={isHighlighted || isFocused}
-                  onToggle={() => onToggle(node.item)}
+                  chain={chain}
+                  chainChecked={checked}
+                  portals={portals}
+                  lod={lod}
+                  onToggle={() => {
+                    if (chain) {
+                      onSelectChain?.(chain);
+                      return;
+                    }
+                    onToggle(node.item);
+                  }}
                   onHover={(id) => {
                     if (isTouch) return;
                     setHoveredId(id);
                     if (id) setHoveredEdgeId(null);
                   }}
-                  onSelect={() => onSelect?.(node.item)}
+                  onSelect={() => {
+                    if (chain) onSelectChain?.(chain);
+                    else onSelect?.(node.item);
+                  }}
+                  onPortalNavigate={onPortalNavigate}
                   variant="tree"
                 />
               </div>
@@ -639,6 +744,18 @@ export function RoadmapTree({
           })}
         </div>
       </div>
+
+      <TimelineAxis
+        nodes={layout.nodes.filter((n) => visibleIds.has(n.item.id))}
+        view={view}
+        containerW={containerSize.w}
+      />
+      <TrackLabels
+        nodes={layout.nodes.filter((n) => visibleIds.has(n.item.id))}
+        view={view}
+        containerH={containerSize.h}
+        rowHeight={GRID_ROW_HEIGHT}
+      />
 
       {isMobile ? (
         <PhaseJumpBar

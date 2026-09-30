@@ -5,13 +5,30 @@ export const MCU_TRACKS = [
   "hulk",
   "thor",
   "cap",
+  "falcon",
   "guardians",
+  "magic",
   "mystic",
+  "loki",
+  "animation",
   "antman",
   "spidey",
+  "raimi",
+  "amazing",
+  "venom",
+  "spider-misc",
+  "spiderverse",
   "wakanda",
   "cosmic",
   "xmen",
+  "wolverine",
+  "deadpool",
+  "fantastic",
+  "shield",
+  "agent-carter",
+  "street",
+  "young-heroes",
+  "series-misc",
   "misc",
   "merge",
 ] as const;
@@ -24,13 +41,30 @@ export const TRACK_EDGE_COLORS: Record<McuTrack, string> = {
   hulk: "var(--track-hulk)",
   thor: "var(--track-thor)",
   cap: "var(--track-cap)",
+  falcon: "var(--track-falcon)",
   guardians: "var(--track-guardians)",
+  magic: "var(--track-magic)",
   mystic: "var(--track-mystic)",
+  loki: "var(--track-loki)",
+  animation: "var(--track-animation)",
   antman: "var(--track-antman)",
   spidey: "var(--track-spidey)",
+  raimi: "var(--track-raimi)",
+  amazing: "var(--track-amazing)",
+  venom: "var(--track-venom)",
+  "spider-misc": "var(--track-spider-misc)",
+  spiderverse: "var(--track-spiderverse)",
   wakanda: "var(--track-wakanda)",
   cosmic: "var(--track-cosmic)",
   xmen: "var(--track-xmen)",
+  wolverine: "var(--track-wolverine)",
+  deadpool: "var(--track-deadpool)",
+  fantastic: "var(--track-fantastic)",
+  shield: "var(--track-shield)",
+  "agent-carter": "var(--track-agent-carter)",
+  street: "var(--track-street)",
+  "young-heroes": "var(--track-young-heroes)",
+  "series-misc": "var(--track-series-misc)",
   misc: "var(--track-misc)",
   merge: "var(--track-merge)",
 };
@@ -40,13 +74,30 @@ export const TRACK_LABELS: Record<McuTrack, string> = {
   hulk: "Hulk",
   thor: "Thor",
   cap: "Captain America",
+  falcon: "Falcon",
   guardians: "Gardiens",
+  magic: "Magie",
   mystic: "Mystique",
+  loki: "Loki",
+  animation: "Animation",
   antman: "Ant-Man",
   spidey: "Spider-Man",
+  raimi: "Spider-Man",
+  amazing: "The Amazing",
+  venom: "Venom",
+  "spider-misc": "Spider divers",
+  spiderverse: "Spider-Verse",
   wakanda: "Wakanda",
   cosmic: "Cosmique",
   xmen: "X-Men",
+  wolverine: "Wolverine",
+  deadpool: "Deadpool",
+  fantastic: "4 Fantastiques",
+  shield: "S.H.I.E.L.D.",
+  "agent-carter": "Agent Carter",
+  street: "Street level",
+  "young-heroes": "Jeunes héros",
+  "series-misc": "Séries divers",
   misc: "Divers",
   merge: "Convergence",
 };
@@ -59,6 +110,7 @@ export const MCU_STUDIOS = [
   "netflix",
   "abc",
   "freeform",
+  "hulu",
 ] as const;
 
 export type McuStudio = (typeof MCU_STUDIOS)[number];
@@ -72,6 +124,7 @@ export const STUDIO_BADGE: Record<McuStudio, string> = {
   netflix: "NFX",
   abc: "ABC",
   freeform: "FRM",
+  hulu: "HLU",
 };
 
 export const STUDIO_LABELS: Record<McuStudio, string> = {
@@ -82,6 +135,7 @@ export const STUDIO_LABELS: Record<McuStudio, string> = {
   netflix: "Netflix",
   abc: "ABC",
   freeform: "Freeform",
+  hulu: "Hulu",
 };
 
 export const STUDIO_COLORS: Record<McuStudio, string> = {
@@ -92,6 +146,7 @@ export const STUDIO_COLORS: Record<McuStudio, string> = {
   netflix: "var(--studio-netflix)",
   abc: "var(--studio-abc)",
   freeform: "var(--studio-freeform)",
+  hulu: "var(--studio-hulu)",
 };
 
 export const MCU_FORMATS = ["live", "animated"] as const;
@@ -99,6 +154,23 @@ export const MCU_FORMATS = ["live", "animated"] as const;
 export type McuFormat = (typeof MCU_FORMATS)[number];
 
 export type ContainerKind = "film" | "tv" | "anim";
+
+/** Franchises films à empiler dans le graphe (jamais le spine MCU). */
+export const MOVIE_CHAIN_WHITELIST: readonly (readonly string[])[] = [
+  ["spider-man-2002", "spider-man-2-2004", "spider-man-3-2007"],
+  ["the-amazing-spider-man-2012", "the-amazing-spider-man-2-2014"],
+  ["venom-2018", "venom-let-there-be-carnage-2021", "venom-the-last-dance-2024"],
+  [
+    "fantastic-four-2005",
+    "fantastic-four-rise-of-the-silver-surfer-2007",
+  ],
+  [
+    "spider-man-into-the-spider-verse-2018",
+    "spider-man-across-the-spider-verse-2023",
+    "spider-man-beyond-the-spider-verse-2027",
+  ],
+  ["x-men-2000", "x2-2003", "x-men-last-stand-2006"],
+];
 
 /** Films pivots — affichés plus grands dans le graphe */
 export const MCU_MILESTONE_IDS = new Set([

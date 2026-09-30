@@ -4,7 +4,7 @@ Site Next.js (sans BDD). Checklist MCU (ordre de sortie). Stockage: `sessionStor
 
 ## Affiches
 
-Dépose les images dans `public/images/mcu/` avec le nom `{id}.webp` (ou `.jpg`, `.png`).
+Dépose les affiches dans `public/images/mcu-wiki/` avec le nom `{id}.webp` (ou `.jpg`, `.png`, `.avif`).
 Les `id` sont dans `src/data/mcu.json` (ex: `iron-man-2008.webp`).
 
 ## Dev

@@ -33,25 +33,15 @@ for (const item of items) {
     const from = gridPositions[depId];
     const to = gridPositions[item.id];
     if (!from || !to) continue;
-    if (to.col <= from.col) {
+    if (to.col < from.col) {
       errors.push(
-        `${item.id}: col ${to.col} <= prérequis ${depId} col ${from.col}`,
+        `${item.id}: col ${to.col} < prérequis ${depId} col ${from.col}`,
       );
     }
+    // Grille année × piste : les spans verticaux sont structurels (piste source ≠ piste cible)
     const span = Math.abs(to.row - from.row);
     const fromItem = byId.get(depId);
-    const isXmenEdge = fromItem?.track === "xmen";
-    const isConvergenceTarget =
-      item.id === "deadpool-wolverine-2024" ||
-      item.id === "avengers-doomsday-2026";
-    const isMergeSpineSource =
-      depId === "avengers-endgame-2019" ||
-      depId === "avengers-infinity-war-2018";
-    if (span > 8 && !isXmenEdge && !isConvergenceTarget && !isMergeSpineSource) {
-      errors.push(`Span ${span}: ${depId} -> ${item.id}`);
-    } else if (span > 8) {
-      warnings.push(`Span ${span}: ${depId} -> ${item.id}`);
-    } else if (span > 4) {
+    if (span > 8 && fromItem?.track !== item.track) {
       warnings.push(`Span ${span}: ${depId} -> ${item.id}`);
     }
   }

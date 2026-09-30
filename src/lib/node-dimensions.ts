@@ -1,7 +1,8 @@
 import type { McuItem } from "./mcu";
 
-const NODE_WIDTH = 224;
-const NODE_HEIGHT = 110;
+/** Affiche portrait 2:3 (128×192) */
+const NODE_WIDTH = 128;
+const NODE_HEIGHT = 192;
 
 export function getNodeDimensions(_item: McuItem) {
   return { width: NODE_WIDTH, height: NODE_HEIGHT };

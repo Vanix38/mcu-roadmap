@@ -4,10 +4,9 @@ import { useMemo } from "react";
 import type { McuItem } from "@/lib/mcu";
 import { STUDIO_LABELS, TRACK_LABELS } from "@/lib/mcu";
 import { canCheckItem, getDescendantIds } from "@/lib/dependencies";
+import type { ViewMode } from "@/lib/view-mode";
 import { BottomSheet } from "./BottomSheet";
 import { McuPoster } from "./McuPoster";
-
-type ViewMode = "list" | "graph";
 
 type Props = {
   item: McuItem | null;
@@ -148,17 +147,29 @@ export function ItemDetailSheet({
           </p>
         ) : null}
 
-        {isMobile ? (
+        {viewMode !== "graph" ? (
           <button
             type="button"
             className="detail-btn"
             onClick={() => {
-              const next = viewMode === "list" ? "graph" : "list";
-              onSwitchView(next, item.id);
+              onSwitchView("graph", item.id);
               onClose();
             }}
           >
-            {viewMode === "list" ? "Voir dans le graphe" : "Voir dans la liste"}
+            Voir dans le graphe
+          </button>
+        ) : null}
+
+        {isMobile && viewMode !== "list" ? (
+          <button
+            type="button"
+            className="detail-btn"
+            onClick={() => {
+              onSwitchView("list", item.id);
+              onClose();
+            }}
+          >
+            Voir dans la liste
           </button>
         ) : null}
       </div>
