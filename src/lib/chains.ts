@@ -1,6 +1,6 @@
 import type { McuItem } from "./mcu";
-import { getSeasonLabel, MOVIE_CHAIN_WHITELIST } from "./mcu";
-import { canCheckItem } from "./dependencies";
+import { getSeasonLabel, MOVIE_CHAIN_WHITELIST, seriesBaseTitle } from "./mcu";
+import { canCheckItem } from "./dependency-graph";
 
 export { MOVIE_CHAIN_WHITELIST };
 
@@ -14,10 +14,6 @@ export type CollapsedChain = {
 export type GraphNodeItem =
   | { type: "item"; item: McuItem }
   | { type: "chain"; chain: CollapsedChain };
-
-function seriesBaseTitle(title: string) {
-  return title.replace(/\s*\(Saison\s+\d+\)\s*$/i, "").trim();
-}
 
 function seasonNumber(item: McuItem): number | null {
   const label = getSeasonLabel(item);

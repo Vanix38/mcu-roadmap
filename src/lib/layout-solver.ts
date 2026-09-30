@@ -1,5 +1,5 @@
 import type { McuItem, McuStudio, McuTrack } from "./mcu";
-import { MOVIE_CHAIN_WHITELIST } from "./mcu";
+import { MOVIE_CHAIN_WHITELIST, seriesBaseTitle } from "./mcu";
 
 export type GridPos = { row: number; col: number };
 
@@ -120,10 +120,6 @@ export function yearOf(item: Pick<McuItem, "releaseDate">) {
 /** Colonne temps : 2000 → 1, 2001 → 2, … */
 export function yearToCol(year: number) {
   return year - GRID_BASE_YEAR + 1;
-}
-
-function seriesBaseTitle(title: string) {
-  return title.replace(/\s*\(Saison\s+\d+\)\s*$/i, "").trim();
 }
 
 const MOVIE_FAMILY_BY_ID = new Map<string, string>();

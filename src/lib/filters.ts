@@ -1,5 +1,5 @@
 import type { McuItem } from "./mcu";
-import { canCheckItem } from "./dependencies";
+import { canCheckItem } from "./dependency-graph";
 
 export type FilterType = "All" | "movie" | "series" | "special";
 export type FilterStatus = "all" | "available" | "done" | "locked";

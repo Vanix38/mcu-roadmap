@@ -13,6 +13,8 @@ import {
   canCheckItem,
   getHighlightIds,
   getNextAvailable,
+} from "@/lib/dependency-graph";
+import {
   LAYOUT_REVISION,
   pathMidpoint,
   type RoutedEdge,

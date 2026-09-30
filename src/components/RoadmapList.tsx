@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import type { McuItem } from "@/lib/mcu";
 import { getContainerKind, getSeasonLabel } from "@/lib/mcu";
-import { canCheckItem } from "@/lib/dependencies";
+import { canCheckItem } from "@/lib/dependency-graph";
 import { McuPoster } from "./McuPoster";
 import { StudioBadge } from "./StudioBadge";
 

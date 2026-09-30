@@ -1,7 +1,4 @@
 import type { McuItem, McuStudio } from "./mcu";
-import { compactGridPositions } from "./layout-solver";
-
-export { compactGridPositions };
 
 export const UNIVERSES = ["mcu", "fox", "sony", "tv", "all"] as const;
 

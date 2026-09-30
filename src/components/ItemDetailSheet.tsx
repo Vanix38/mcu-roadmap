@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import type { McuItem } from "@/lib/mcu";
 import { STUDIO_LABELS, TRACK_LABELS } from "@/lib/mcu";
-import { canCheckItem, getDescendantIds } from "@/lib/dependencies";
+import { canCheckItem, getDescendantIds } from "@/lib/dependency-graph";
 import type { ViewMode } from "@/lib/view-mode";
 import { BottomSheet } from "./BottomSheet";
 import { McuPoster } from "./McuPoster";

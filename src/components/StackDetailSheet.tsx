@@ -6,7 +6,7 @@ import {
   getChainRangeLabel,
   type CollapsedChain,
 } from "@/lib/chains";
-import { canCheckItem } from "@/lib/dependencies";
+import { canCheckItem } from "@/lib/dependency-graph";
 import { getSeasonLabel } from "@/lib/mcu";
 import { BottomSheet } from "./BottomSheet";
 import { McuPoster } from "./McuPoster";

@@ -1,5 +1,5 @@
 import type { McuItem } from "./mcu";
-import { canCheckItem, getNextAvailable } from "./dependencies";
+import { canCheckItem, getNextAvailable } from "./dependency-graph";
 
 export interface JourneySoonEntry {
   item: McuItem;

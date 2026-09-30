@@ -8,7 +8,7 @@ import {
   gridY,
   orderToGridCol,
 } from "./grid-layout";
-import { getGridPositions, LAYOUT_REVISION } from "./layout-solver";
+import { getGridPositions } from "./layout-solver";
 import { getNodeDimensions } from "./node-dimensions";
 import {
   routeEdges,
@@ -20,6 +20,7 @@ export type { RoutedEdge } from "./edge-routing";
 export { edgeId, pathMidpoint, scaleRoutedEdgePath } from "./edge-routing";
 
 export { getNodeDimensions } from "./node-dimensions";
+export { LAYOUT_REVISION } from "./layout-solver";
 
 export type PositionedNode = {
   item: McuItem;
@@ -37,77 +38,6 @@ export type DependencyLayout = {
 };
 
 const OVERFLOW_STAGGER = 72;
-
-export function canCheckItem(item: McuItem, checked: Set<string>) {
-  return item.dependsOn.every((dependencyId) => checked.has(dependencyId));
-}
-
-/** Premier item non vu dont les prérequis sont tous cochés, trié par `order`. */
-export function getNextAvailable(
-  items: readonly McuItem[],
-  checked: Set<string>,
-): McuItem | null {
-  const sorted = [...items].sort((a, b) => a.order - b.order);
-  return (
-    sorted.find((item) => !checked.has(item.id) && canCheckItem(item, checked)) ??
-    null
-  );
-}
-
-export function getAncestorIds(items: readonly McuItem[], id: string) {
-  const byId = new Map(items.map((item) => [item.id, item]));
-  const ancestors = new Set<string>();
-  const queue = [id];
-
-  while (queue.length > 0) {
-    const current = queue.pop();
-    if (!current) continue;
-    const item = byId.get(current);
-    if (!item) continue;
-
-    for (const dependencyId of item.dependsOn) {
-      if (!ancestors.has(dependencyId)) {
-        ancestors.add(dependencyId);
-        queue.push(dependencyId);
-      }
-    }
-  }
-
-  ancestors.delete(id);
-  return ancestors;
-}
-
-export function getHighlightIds(
-  items: readonly McuItem[],
-  hoveredId: string | null,
-) {
-  if (!hoveredId) return null;
-
-  const related = new Set<string>([hoveredId]);
-  for (const id of getAncestorIds(items, hoveredId)) related.add(id);
-  for (const id of getDescendantIds(items, hoveredId)) related.add(id);
-
-  return related;
-}
-
-export function getDescendantIds(items: readonly McuItem[], id: string) {
-  const descendants = new Set<string>();
-  const queue = [id];
-
-  while (queue.length > 0) {
-    const current = queue.pop();
-    if (!current) continue;
-
-    for (const item of items) {
-      if (item.dependsOn.includes(current) && !descendants.has(item.id)) {
-        descendants.add(item.id);
-        queue.push(item.id);
-      }
-    }
-  }
-
-  return descendants;
-}
 
 function computeLayers(items: readonly McuItem[]) {
   const byId = new Map(items.map((item) => [item.id, item]));
@@ -168,8 +98,6 @@ function resolveRowCollision(
 
   return resolvedX;
 }
-
-export { LAYOUT_REVISION } from "./layout-solver";
 
 export function buildDependencyLayout(
   items: readonly McuItem[],
@@ -266,33 +194,4 @@ export function buildDependencyLayout(
     width: GRID_PADDING_X + (maxCol + 2) * GRID_COL_WIDTH,
     height: GRID_PADDING_Y + (maxRow + 2) * GRID_ROW_HEIGHT,
   };
-}
-
-export function computeProgress(items: readonly McuItem[], checked: Set<string>) {
-  const total = items.length;
-  const done = items.reduce((acc, item) => acc + (checked.has(item.id) ? 1 : 0), 0);
-  const pct = total === 0 ? 0 : Math.round((done / total) * 100);
-  return { done, total, pct };
-}
-
-/** Arête orthogonale LTR entre deux nœuds */
-export function edgePathBetween(
-  fromX: number,
-  fromY: number,
-  fromWidth: number,
-  toX: number,
-  toY: number,
-  toWidth: number,
-) {
-  const startX = fromX + fromWidth / 2;
-  const startY = fromY;
-  const endX = toX - toWidth / 2;
-  const endY = toY;
-
-  if (Math.abs(startY - endY) < 8) {
-    return `M ${startX} ${startY} L ${endX} ${endY}`;
-  }
-
-  const routeX = startX + (endX - startX) * 0.55;
-  return `M ${startX} ${startY} L ${routeX} ${startY} L ${routeX} ${endY} L ${endX} ${endY}`;
 }

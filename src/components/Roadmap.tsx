@@ -1,8 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import type { McuItem } from "@/lib/mcu";
-import { computeProgress, getDescendantIds, canCheckItem } from "@/lib/dependencies";
+import { canCheckItem, computeProgress } from "@/lib/dependency-graph";
 import {
   applyFilters,
   countActiveFilters,
@@ -10,17 +10,8 @@ import {
   resetFilters,
   type RoadmapFilters,
 } from "@/lib/filters";
-import {
-  clearRoadmapSession,
-  DEFAULT_UNIVERSE,
-  DEFAULT_VIEW_MODE,
-  readRoadmapSession,
-  readUniverse,
-  readViewMode,
-  writeRoadmapSession,
-  writeUniverse,
-  writeViewMode,
-} from "@/lib/storage";
+import { useCheckedSession } from "@/lib/use-checked-session";
+import { usePersistedPrefs } from "@/lib/use-persisted-prefs";
 import type { ViewMode } from "@/lib/view-mode";
 import {
   filterByUniverse,
@@ -48,64 +39,14 @@ export function Roadmap({ items }: Props) {
   const isMobile = useIsMobile();
   const [filters, setFilters] = useState<RoadmapFilters>(DEFAULT_FILTERS);
   const [query, setQuery] = useState("");
-  const [viewMode, setViewMode] = useState<ViewMode>(DEFAULT_VIEW_MODE);
-  const [universe, setUniverse] = useState<UniverseId>(DEFAULT_UNIVERSE);
+  const { viewMode, setViewMode, universe, setUniverse } = usePersistedPrefs();
+  const { checked, loadedAt, toggle, resetAll } = useCheckedSession(items);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [selectedChain, setSelectedChain] = useState<CollapsedChain | null>(null);
   const [focusId, setFocusId] = useState<string | null>(null);
   const [focusNonce, setFocusNonce] = useState(0);
   const [openSheet, setOpenSheet] = useState<SheetKind>(null);
   const [headerCollapsed, setHeaderCollapsed] = useState(false);
-
-  const [checked, setChecked] = useState<Set<string>>(() => {
-    const session = readRoadmapSession();
-    return session ? new Set(session.checkedIds) : new Set();
-  });
-  const [loadedAt, setLoadedAt] = useState<string | null>(() => {
-    const session = readRoadmapSession();
-    return session?.updatedAt ?? null;
-  });
-  const firstSaveSkipRef = useRef(true);
-  const saveTimerRef = useRef<number | null>(null);
-  const viewModeReadyRef = useRef(false);
-  const universeReadyRef = useRef(false);
-
-  useEffect(() => {
-    const stored = readViewMode();
-    if (stored) setViewMode(stored);
-    viewModeReadyRef.current = true;
-  }, []);
-
-  useEffect(() => {
-    const stored = readUniverse();
-    if (stored) setUniverse(stored);
-    universeReadyRef.current = true;
-  }, []);
-
-  useEffect(() => {
-    if (firstSaveSkipRef.current) {
-      firstSaveSkipRef.current = false;
-      return;
-    }
-    if (saveTimerRef.current) window.clearTimeout(saveTimerRef.current);
-    saveTimerRef.current = window.setTimeout(() => {
-      writeRoadmapSession(Array.from(checked));
-      setLoadedAt(new Date().toISOString());
-    }, 350);
-    return () => {
-      if (saveTimerRef.current) window.clearTimeout(saveTimerRef.current);
-    };
-  }, [checked]);
-
-  useEffect(() => {
-    if (!viewModeReadyRef.current) return;
-    writeViewMode(viewMode);
-  }, [viewMode]);
-
-  useEffect(() => {
-    if (!universeReadyRef.current) return;
-    writeUniverse(universe);
-  }, [universe]);
 
   const universeItems = useMemo(
     () => filterByUniverse(items, universe),
@@ -169,38 +110,13 @@ export function Roadmap({ items }: Props) {
     viewMode === "journey" ? { ...filters, status: "all" } : filters,
   );
 
-  function toggle(item: McuItem) {
-    setChecked((prev) => {
-      const next = new Set(prev);
-
-      if (next.has(item.id)) {
-        next.delete(item.id);
-        for (const descendantId of getDescendantIds(items, item.id)) {
-          next.delete(descendantId);
-        }
-        return next;
-      }
-
-      if (!canCheckItem(item, next)) return next;
-      next.add(item.id);
-      return next;
-    });
-  }
-
-  function resetAll() {
-    if (!window.confirm("Tout décocher et effacer la session ?")) return;
-    setChecked(new Set());
-    clearRoadmapSession();
-    setLoadedAt(null);
-  }
-
   const handleViewMode = useCallback((mode: ViewMode) => {
     setViewMode(mode);
-  }, []);
+  }, [setViewMode]);
 
   const handleUniverse = useCallback((next: UniverseId) => {
     setUniverse(next);
-  }, []);
+  }, [setUniverse]);
 
   const handlePortalNavigate = useCallback(
     (nextUniverse: UniverseId, id: string) => {
@@ -208,13 +124,13 @@ export function Roadmap({ items }: Props) {
       setFocusId(id);
       setSelectedId(id);
     },
-    [],
+    [setUniverse],
   );
 
   const handleSwitchView = useCallback((mode: ViewMode, id: string) => {
     setViewMode(mode);
     setFocusId(id);
-  }, []);
+  }, [setViewMode]);
 
   const handleSelect = useCallback((item: McuItem) => {
     setSelectedChain(null);

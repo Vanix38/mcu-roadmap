@@ -265,6 +265,11 @@ export const McuDataSchema = z
 
 export type McuItem = z.infer<typeof McuItemSchema>;
 
+/** Ex. "Daredevil (Saison 2)" → "Daredevil" */
+export function seriesBaseTitle(title: string) {
+  return title.replace(/\s*\(Saison\s+\d+\)\s*$/i, "").trim();
+}
+
 /** Ex. "Daredevil (Saison 2)" → "S2" */
 export function getSeasonLabel(item: Pick<McuItem, "title" | "id" | "type">): string | null {
   if (item.type !== "series") return null;
