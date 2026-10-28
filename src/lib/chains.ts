@@ -174,8 +174,10 @@ function remapDep(
 export function chainToLayoutItem(chain: CollapsedChain): McuItem {
   const first = chain.members[0];
   const last = chain.members[chain.members.length - 1];
-  const externalDeps = first.dependsOn.filter(
-    (id) => !chain.members.some((m) => m.id === id),
+  const memberIds = new Set(chain.members.map((m) => m.id));
+  const externalDeps = first.dependsOn.filter((id) => !memberIds.has(id));
+  const externalOptional = first.dependsOnOptional.filter(
+    (id) => !memberIds.has(id),
   );
 
   return {
@@ -185,6 +187,8 @@ export function chainToLayoutItem(chain: CollapsedChain): McuItem {
     releaseDate: first.releaseDate,
     order: first.order,
     dependsOn: externalDeps,
+    dependsOnOptional: externalOptional,
+    optional: false,
     // Keep last release for timeline median bias toward span end when needed
     runtimeMin: first.runtimeMin,
   };
@@ -214,11 +218,20 @@ export function collapseItems(
     nodes.push({ type: "chain", chain });
     const synthetic = chainToLayoutItem(chain);
     // Remap entry deps that point into other chains
-    synthetic.dependsOn = synthetic.dependsOn
-      .map((id) => remapDep(id, memberToChain, chain.id))
-      .filter((id): id is string => Boolean(id));
-    // Dedupe
-    synthetic.dependsOn = [...new Set(synthetic.dependsOn)];
+    synthetic.dependsOn = [
+      ...new Set(
+        synthetic.dependsOn
+          .map((id) => remapDep(id, memberToChain, chain.id))
+          .filter((id): id is string => Boolean(id)),
+      ),
+    ];
+    synthetic.dependsOnOptional = [
+      ...new Set(
+        synthetic.dependsOnOptional
+          .map((id) => remapDep(id, memberToChain, chain.id))
+          .filter((id): id is string => Boolean(id)),
+      ),
+    ];
     layoutItems.push(synthetic);
   }
 
@@ -228,9 +241,13 @@ export function collapseItems(
     const remapped = item.dependsOn
       .map((id) => remapDep(id, memberToChain, undefined))
       .filter((id): id is string => Boolean(id));
+    const remappedOptional = item.dependsOnOptional
+      .map((id) => remapDep(id, memberToChain, undefined))
+      .filter((id): id is string => Boolean(id));
     layoutItems.push({
       ...item,
       dependsOn: [...new Set(remapped)],
+      dependsOnOptional: [...new Set(remappedOptional)],
     });
   }
 

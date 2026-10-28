@@ -50,6 +50,9 @@ export const TRACK_ROW_ORDER: readonly McuTrack[] = [
   "fantastic",
   "wolverine",
   "xmen",
+  // Legacy cinéma
+  "blade",
+  "ghost-rider",
   // Street / jeunes
   "young-heroes",
   "street",
@@ -65,6 +68,9 @@ const STUDIO_RANK: Record<McuStudio, number> = {
   fox: 5,
   sony: 6,
   "sony-animation": 7,
+  "new-line": 8,
+  universal: 9,
+  lionsgate: 10,
 };
 
 /** Ajustements manuels optionnels (sous-ligne forcée au sein de la piste) */

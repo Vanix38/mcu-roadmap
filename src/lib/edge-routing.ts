@@ -5,6 +5,7 @@ import { getNodeDimensions } from "./node-dimensions";
 export type DependencyEdge = {
   from: string;
   to: string;
+  optional?: boolean;
 };
 
 export type PositionedNodeInput = {
@@ -44,6 +45,7 @@ export type RoutedEdge = DependencyEdge & {
   crossings: { x: number; y: number }[];
   zLayer: "under" | "over";
   pathD: string;
+  optional: boolean;
 };
 
 type RouteStyle = "hvh" | "channel" | "direct" | "same-col";
@@ -64,6 +66,7 @@ type EdgeDraft = {
   toLayer: number;
   toOrder: number;
   track: McuTrack;
+  optional: boolean;
 };
 
 type NodeRect = {
@@ -75,7 +78,8 @@ type NodeRect = {
 };
 
 export function edgeId(edge: DependencyEdge) {
-  return `${edge.from}->${edge.to}`;
+  const base = `${edge.from}->${edge.to}`;
+  return edge.optional ? `${base}:opt` : base;
 }
 
 function nodeRect(node: PositionedNodeInput): NodeRect {
@@ -446,6 +450,7 @@ function planDraft(
       toLayer: to.layer,
       toOrder: to.item.order,
       track: to.item.track,
+      optional: Boolean(edge.optional),
     };
 
   // Même colonne : sortir et entrer par la gauche
@@ -568,6 +573,7 @@ export function routeEdges(
       crossings: [],
       zLayer: "under" as const,
       pathD: buildPathFromSegments(segments, [], false),
+      optional: draft.optional,
     };
   });
 

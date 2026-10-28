@@ -141,6 +141,11 @@ export function RoadmapItem({
       {lod !== "low" ? (
         <PortalBadge portals={portals} onPortalNavigate={onPortalNavigate} />
       ) : null}
+      {displayItem.optional && lod !== "low" ? (
+        <span className="node-optional" aria-label="Contenu optionnel">
+          Opt.
+        </span>
+      ) : null}
       {isLocked && lod !== "low" ? (
         <span className="node-lock" aria-hidden="true">
           🔒

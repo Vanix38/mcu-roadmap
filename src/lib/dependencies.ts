@@ -166,6 +166,11 @@ export function buildDependencyLayout(
         rawEdges.push({ from: dependencyId, to: item.id });
       }
     }
+    for (const dependencyId of item.dependsOnOptional) {
+      if (byId.has(dependencyId)) {
+        rawEdges.push({ from: dependencyId, to: item.id, optional: true });
+      }
+    }
   }
 
   const nodeById = new Map(

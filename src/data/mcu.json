@@ -76,6 +76,9 @@
       "the-incredible-hulk-2008",
       "thor-2011",
       "captain-america-the-first-avenger-2011"
+    ],
+    "dependsOnOptional": [
+      "the-consultant-2011"
     ]
   },
   {
@@ -317,6 +320,9 @@
     "format": "live",
     "dependsOn": [
       "avengers-endgame-2019"
+    ],
+    "dependsOnOptional": [
+      "spider-man-homecoming-2017"
     ]
   },
   {
@@ -387,7 +393,8 @@
     "format": "animated",
     "dependsOn": [
       "avengers-endgame-2019"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "shang-chi-2021",
@@ -401,6 +408,13 @@
     "format": "live",
     "dependsOn": [
       "avengers-endgame-2019"
+    ],
+    "dependsOnOptional": [
+      "iron-man-3-2013",
+      "the-incredible-hulk-2008",
+      "doctor-strange-2016",
+      "black-widow-2021",
+      "all-hail-the-king-2014"
     ]
   },
   {
@@ -415,7 +429,8 @@
     "format": "live",
     "dependsOn": [
       "avengers-endgame-2019"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "hawkeye-2021",
@@ -429,6 +444,9 @@
     "format": "live",
     "dependsOn": [
       "avengers-endgame-2019"
+    ],
+    "dependsOnOptional": [
+      "black-widow-2021"
     ]
   },
   {
@@ -445,6 +463,10 @@
       "spider-man-far-from-home-2019",
       "spider-man-3-2007",
       "the-amazing-spider-man-2-2014"
+    ],
+    "dependsOnOptional": [
+      "doctor-strange-2016",
+      "venom-let-there-be-carnage-2021"
     ]
   },
   {
@@ -459,7 +481,8 @@
     "format": "live",
     "dependsOn": [
       "avengers-endgame-2019"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "doctor-strange-mom-2022",
@@ -474,6 +497,9 @@
     "dependsOn": [
       "wandavision-2021",
       "spider-man-no-way-home-2021"
+    ],
+    "dependsOnOptional": [
+      "x-men-2000"
     ]
   },
   {
@@ -488,6 +514,9 @@
     "format": "live",
     "dependsOn": [
       "avengers-endgame-2019"
+    ],
+    "dependsOnOptional": [
+      "captain-marvel-2019"
     ]
   },
   {
@@ -502,6 +531,10 @@
     "format": "live",
     "dependsOn": [
       "avengers-endgame-2019"
+    ],
+    "dependsOnOptional": [
+      "guardians-of-the-galaxy-vol-2-2017",
+      "thor-ragnarok-2017"
     ]
   },
   {
@@ -516,7 +549,8 @@
     "format": "animated",
     "dependsOn": [
       "guardians-of-the-galaxy-vol-2-2017"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "she-hulk-2022",
@@ -530,6 +564,12 @@
     "format": "live",
     "dependsOn": [
       "avengers-endgame-2019"
+    ],
+    "optional": true,
+    "dependsOnOptional": [
+      "the-incredible-hulk-2008",
+      "daredevil-s1-2015",
+      "spider-man-no-way-home-2021"
     ]
   },
   {
@@ -542,7 +582,8 @@
     "track": "mystic",
     "studio": "marvel",
     "format": "live",
-    "dependsOn": []
+    "dependsOn": [],
+    "optional": true
   },
   {
     "id": "black-panther-wakanda-forever-2022",
@@ -556,6 +597,9 @@
     "format": "live",
     "dependsOn": [
       "avengers-endgame-2019"
+    ],
+    "dependsOnOptional": [
+      "black-panther-2018"
     ]
   },
   {
@@ -584,6 +628,9 @@
     "format": "live",
     "dependsOn": [
       "avengers-endgame-2019"
+    ],
+    "dependsOnOptional": [
+      "loki-s1-2021"
     ]
   },
   {
@@ -597,6 +644,9 @@
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
+      "guardians-of-the-galaxy-vol-2-2017"
+    ],
+    "dependsOnOptional": [
       "gotg-holiday-special-2022"
     ]
   },
@@ -612,6 +662,11 @@
     "format": "live",
     "dependsOn": [
       "avengers-endgame-2019"
+    ],
+    "optional": true,
+    "dependsOnOptional": [
+      "captain-marvel-2019",
+      "spider-man-far-from-home-2019"
     ]
   },
   {
@@ -640,6 +695,11 @@
     "format": "live",
     "dependsOn": [
       "ms-marvel-2022"
+    ],
+    "optional": true,
+    "dependsOnOptional": [
+      "captain-marvel-2019",
+      "x-men-first-class-2011"
     ]
   },
   {
@@ -654,7 +714,8 @@
     "format": "animated",
     "dependsOn": [
       "what-if-s1-2021"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "echo-2024",
@@ -668,6 +729,10 @@
     "format": "live",
     "dependsOn": [
       "hawkeye-2021"
+    ],
+    "optional": true,
+    "dependsOnOptional": [
+      "daredevil-s3-2018"
     ]
   },
   {
@@ -686,6 +751,16 @@
       "logan-2017",
       "loki-s2-2023",
       "fantastic-four-rise-of-the-silver-surfer-2007"
+    ],
+    "dependsOnOptional": [
+      "blade-1998",
+      "elektra-2005",
+      "x-men-2000",
+      "x2-2003",
+      "x-men-last-stand-2006",
+      "x-men-first-class-2011",
+      "x-men-apocalypse-2016",
+      "the-punisher-2004"
     ]
   },
   {
@@ -700,6 +775,10 @@
     "format": "live",
     "dependsOn": [
       "wandavision-2021"
+    ],
+    "optional": true,
+    "dependsOnOptional": [
+      "doctor-strange-mom-2022"
     ]
   },
   {
@@ -714,7 +793,8 @@
     "format": "animated",
     "dependsOn": [
       "what-if-s2-2023"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "captain-america-brave-new-world-2025",
@@ -728,6 +808,9 @@
     "format": "live",
     "dependsOn": [
       "falcon-winter-soldier-2021"
+    ],
+    "dependsOnOptional": [
+      "the-incredible-hulk-2008"
     ]
   },
   {
@@ -742,8 +825,13 @@
     "format": "live",
     "dependsOn": [
       "hawkeye-2021",
-      "daredevil-s3-2018",
-      "the-punisher-s2-2019"
+      "daredevil-s3-2018"
+    ],
+    "dependsOnOptional": [
+      "the-punisher-s2-2019",
+      "she-hulk-2022",
+      "echo-2024",
+      "daredevil-2003"
     ]
   },
   {
@@ -759,6 +847,9 @@
     "dependsOn": [
       "black-widow-2021",
       "captain-america-brave-new-world-2025"
+    ],
+    "dependsOnOptional": [
+      "ant-man-quantumania-2023"
     ]
   },
   {
@@ -773,6 +864,10 @@
     "format": "live",
     "dependsOn": [
       "black-panther-wakanda-forever-2022"
+    ],
+    "optional": true,
+    "dependsOnOptional": [
+      "iron-man-3-2013"
     ]
   },
   {
@@ -799,7 +894,8 @@
     "format": "animated",
     "dependsOn": [
       "black-panther-2018"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "marvel-zombies-2025",
@@ -814,7 +910,8 @@
     "dependsOn": [
       "what-if-s1-2021",
       "ant-man-quantumania-2023"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "your-friendly-neighborhood-spiderman-s1-2025",
@@ -826,7 +923,8 @@
     "track": "animation",
     "studio": "marvel",
     "format": "animated",
-    "dependsOn": []
+    "dependsOn": [],
+    "optional": true
   },
   {
     "id": "wonder-man-2026",
@@ -840,6 +938,10 @@
     "format": "live",
     "dependsOn": [
       "avengers-endgame-2019"
+    ],
+    "optional": true,
+    "dependsOnOptional": [
+      "she-hulk-2022"
     ]
   },
   {
@@ -868,7 +970,8 @@
     "format": "live",
     "dependsOn": [
       "daredevil-born-again-s1-2025"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "spider-man-brand-new-day-2026",
@@ -881,7 +984,9 @@
     "studio": "marvel",
     "format": "live",
     "dependsOn": [
-      "spider-man-no-way-home-2021",
+      "spider-man-no-way-home-2021"
+    ],
+    "dependsOnOptional": [
       "punisher-one-last-kill-2026"
     ]
   },
@@ -897,6 +1002,11 @@
     "format": "live",
     "dependsOn": [
       "wandavision-2021"
+    ],
+    "optional": true,
+    "dependsOnOptional": [
+      "doctor-strange-mom-2022",
+      "agatha-all-along-2024"
     ]
   },
   {
@@ -1050,7 +1160,8 @@
     "format": "live",
     "dependsOn": [
       "x-men-days-of-future-past-2014"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "logan-2017",
@@ -1092,7 +1203,8 @@
     "format": "live",
     "dependsOn": [
       "x-men-apocalypse-2016"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "the-new-mutants-2020",
@@ -1104,7 +1216,8 @@
     "track": "xmen",
     "studio": "fox",
     "format": "live",
-    "dependsOn": []
+    "dependsOn": [],
+    "optional": true
   },
   {
     "id": "spider-man-2002",
@@ -1184,7 +1297,8 @@
     "format": "animated",
     "dependsOn": [
       "i-am-groot-2022"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "x-men-97-s1-2024",
@@ -1196,7 +1310,13 @@
     "track": "animation",
     "studio": "fox",
     "format": "animated",
-    "dependsOn": []
+    "dependsOn": [
+      "x-men-tas-s5-1996"
+    ],
+    "optional": true,
+    "dependsOnOptional": [
+      "x-men-2000"
+    ]
   },
   {
     "id": "x-men-97-s2-2026",
@@ -1210,7 +1330,8 @@
     "format": "animated",
     "dependsOn": [
       "x-men-97-s1-2024"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "venom-2018",
@@ -1222,7 +1343,8 @@
     "track": "venom",
     "studio": "sony",
     "format": "live",
-    "dependsOn": []
+    "dependsOn": [],
+    "optional": true
   },
   {
     "id": "venom-let-there-be-carnage-2021",
@@ -1236,7 +1358,8 @@
     "format": "live",
     "dependsOn": [
       "venom-2018"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "morbius-2022",
@@ -1248,7 +1371,12 @@
     "track": "spider-misc",
     "studio": "sony",
     "format": "live",
-    "dependsOn": []
+    "dependsOn": [],
+    "optional": true,
+    "dependsOnOptional": [
+      "venom-2018",
+      "spider-man-no-way-home-2021"
+    ]
   },
   {
     "id": "madame-web-2024",
@@ -1260,7 +1388,11 @@
     "track": "spider-misc",
     "studio": "sony",
     "format": "live",
-    "dependsOn": []
+    "dependsOn": [],
+    "optional": true,
+    "dependsOnOptional": [
+      "spider-man-no-way-home-2021"
+    ]
   },
   {
     "id": "venom-the-last-dance-2024",
@@ -1274,7 +1406,8 @@
     "format": "live",
     "dependsOn": [
       "venom-let-there-be-carnage-2021"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "kraven-the-hunter-2024",
@@ -1286,7 +1419,11 @@
     "track": "spider-misc",
     "studio": "sony",
     "format": "live",
-    "dependsOn": []
+    "dependsOn": [],
+    "optional": true,
+    "dependsOnOptional": [
+      "spider-man-no-way-home-2021"
+    ]
   },
   {
     "id": "spider-noir-2026",
@@ -1298,7 +1435,8 @@
     "track": "spider-misc",
     "studio": "sony",
     "format": "live",
-    "dependsOn": []
+    "dependsOn": [],
+    "optional": true
   },
   {
     "id": "daredevil-s1-2015",
@@ -1362,7 +1500,8 @@
     "track": "street",
     "studio": "netflix",
     "format": "live",
-    "dependsOn": []
+    "dependsOn": [],
+    "optional": true
   },
   {
     "id": "the-defenders-2017",
@@ -1377,7 +1516,9 @@
     "dependsOn": [
       "daredevil-s2-2016",
       "jessica-jones-s1-2015",
-      "luke-cage-s1-2016",
+      "luke-cage-s1-2016"
+    ],
+    "dependsOnOptional": [
       "iron-fist-s1-2017"
     ]
   },
@@ -1407,7 +1548,8 @@
     "format": "live",
     "dependsOn": [
       "the-defenders-2017"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "luke-cage-s2-2018",
@@ -1421,7 +1563,8 @@
     "format": "live",
     "dependsOn": [
       "the-defenders-2017"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "iron-fist-s2-2018",
@@ -1435,7 +1578,8 @@
     "format": "live",
     "dependsOn": [
       "the-defenders-2017"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "daredevil-s3-2018",
@@ -1477,7 +1621,8 @@
     "format": "live",
     "dependsOn": [
       "jessica-jones-s2-2018"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "spider-man-into-the-spider-verse-2018",
@@ -1489,7 +1634,8 @@
     "track": "spiderverse",
     "studio": "sony-animation",
     "format": "animated",
-    "dependsOn": []
+    "dependsOn": [],
+    "optional": true
   },
   {
     "id": "spider-man-across-the-spider-verse-2023",
@@ -1503,6 +1649,10 @@
     "format": "animated",
     "dependsOn": [
       "spider-man-into-the-spider-verse-2018"
+    ],
+    "optional": true,
+    "dependsOnOptional": [
+      "spider-man-no-way-home-2021"
     ]
   },
   {
@@ -1517,7 +1667,8 @@
     "format": "animated",
     "dependsOn": [
       "spider-man-across-the-spider-verse-2023"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "fantastic-four-2005",
@@ -1555,7 +1706,8 @@
     "track": "fantastic",
     "studio": "fox",
     "format": "live",
-    "dependsOn": []
+    "dependsOn": [],
+    "optional": true
   },
   {
     "id": "agents-of-shield-s1-2013",
@@ -1569,7 +1721,8 @@
     "format": "live",
     "dependsOn": [
       "the-avengers-2012"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "agents-of-shield-s2-2014",
@@ -1583,7 +1736,8 @@
     "format": "live",
     "dependsOn": [
       "agents-of-shield-s1-2013"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "agent-carter-s1-2015",
@@ -1597,6 +1751,10 @@
     "format": "live",
     "dependsOn": [
       "captain-america-the-first-avenger-2011"
+    ],
+    "optional": true,
+    "dependsOnOptional": [
+      "agent-carter-one-shot-2013"
     ]
   },
   {
@@ -1611,7 +1769,8 @@
     "format": "live",
     "dependsOn": [
       "agent-carter-s1-2015"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "agents-of-shield-s3-2015",
@@ -1625,7 +1784,8 @@
     "format": "live",
     "dependsOn": [
       "agents-of-shield-s2-2014"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "agents-of-shield-s4-2016",
@@ -1639,7 +1799,8 @@
     "format": "live",
     "dependsOn": [
       "agents-of-shield-s3-2015"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "agents-of-shield-s5-2017",
@@ -1653,7 +1814,8 @@
     "format": "live",
     "dependsOn": [
       "agents-of-shield-s4-2016"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "agents-of-shield-s6-2019",
@@ -1667,7 +1829,8 @@
     "format": "live",
     "dependsOn": [
       "agents-of-shield-s5-2017"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "agents-of-shield-s7-2020",
@@ -1681,7 +1844,8 @@
     "format": "live",
     "dependsOn": [
       "agents-of-shield-s6-2019"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "inhumans-2017",
@@ -1695,7 +1859,8 @@
     "format": "live",
     "dependsOn": [
       "agents-of-shield-s3-2015"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "cloak-and-dagger-s1-2018",
@@ -1707,7 +1872,8 @@
     "track": "young-heroes",
     "studio": "freeform",
     "format": "live",
-    "dependsOn": []
+    "dependsOn": [],
+    "optional": true
   },
   {
     "id": "cloak-and-dagger-s2-2019",
@@ -1721,7 +1887,8 @@
     "format": "live",
     "dependsOn": [
       "cloak-and-dagger-s1-2018"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "runaways-s1-2017",
@@ -1733,7 +1900,8 @@
     "track": "young-heroes",
     "studio": "hulu",
     "format": "live",
-    "dependsOn": []
+    "dependsOn": [],
+    "optional": true
   },
   {
     "id": "runaways-s2-2018",
@@ -1747,7 +1915,8 @@
     "format": "live",
     "dependsOn": [
       "runaways-s1-2017"
-    ]
+    ],
+    "optional": true
   },
   {
     "id": "runaways-s3-2019",
@@ -1762,6 +1931,418 @@
     "dependsOn": [
       "runaways-s2-2018",
       "cloak-and-dagger-s2-2019"
-    ]
+    ],
+    "optional": true
+  },
+  {
+    "id": "legion-s1-2017",
+    "title": "Legion (Saison 1)",
+    "type": "series",
+    "releaseDate": "2017-02-08",
+    "phase": "X-Men Saga",
+    "order": 129,
+    "track": "xmen",
+    "studio": "fox",
+    "format": "live",
+    "dependsOn": [],
+    "optional": true
+  },
+  {
+    "id": "legion-s2-2018",
+    "title": "Legion (Saison 2)",
+    "type": "series",
+    "releaseDate": "2018-04-03",
+    "phase": "X-Men Saga",
+    "order": 130,
+    "track": "xmen",
+    "studio": "fox",
+    "format": "live",
+    "dependsOn": [
+      "legion-s1-2017"
+    ],
+    "optional": true
+  },
+  {
+    "id": "legion-s3-2019",
+    "title": "Legion (Saison 3)",
+    "type": "series",
+    "releaseDate": "2019-06-24",
+    "phase": "X-Men Saga",
+    "order": 131,
+    "track": "xmen",
+    "studio": "fox",
+    "format": "live",
+    "dependsOn": [
+      "legion-s2-2018"
+    ],
+    "optional": true
+  },
+  {
+    "id": "the-gifted-s1-2017",
+    "title": "The Gifted (Saison 1)",
+    "type": "series",
+    "releaseDate": "2017-10-02",
+    "phase": "X-Men Saga",
+    "order": 132,
+    "track": "xmen",
+    "studio": "fox",
+    "format": "live",
+    "dependsOn": [],
+    "optional": true
+  },
+  {
+    "id": "the-gifted-s2-2018",
+    "title": "The Gifted (Saison 2)",
+    "type": "series",
+    "releaseDate": "2018-09-25",
+    "phase": "X-Men Saga",
+    "order": 133,
+    "track": "xmen",
+    "studio": "fox",
+    "format": "live",
+    "dependsOn": [
+      "the-gifted-s1-2017"
+    ],
+    "optional": true
+  },
+  {
+    "id": "blade-1998",
+    "title": "Blade",
+    "type": "movie",
+    "releaseDate": "1998-08-21",
+    "phase": "Blade Legacy",
+    "order": 134,
+    "track": "blade",
+    "studio": "new-line",
+    "format": "live",
+    "dependsOn": [],
+    "optional": true
+  },
+  {
+    "id": "blade-ii-2002",
+    "title": "Blade II",
+    "type": "movie",
+    "releaseDate": "2002-03-22",
+    "phase": "Blade Legacy",
+    "order": 135,
+    "track": "blade",
+    "studio": "new-line",
+    "format": "live",
+    "dependsOn": [
+      "blade-1998"
+    ],
+    "optional": true
+  },
+  {
+    "id": "blade-trinity-2004",
+    "title": "Blade: Trinity",
+    "type": "movie",
+    "releaseDate": "2004-12-08",
+    "phase": "Blade Legacy",
+    "order": 136,
+    "track": "blade",
+    "studio": "new-line",
+    "format": "live",
+    "dependsOn": [
+      "blade-ii-2002"
+    ],
+    "optional": true
+  },
+  {
+    "id": "daredevil-2003",
+    "title": "Daredevil (2003)",
+    "type": "movie",
+    "releaseDate": "2003-02-14",
+    "phase": "Street Legacy",
+    "order": 137,
+    "track": "street",
+    "studio": "fox",
+    "format": "live",
+    "dependsOn": [],
+    "optional": true
+  },
+  {
+    "id": "elektra-2005",
+    "title": "Elektra",
+    "type": "movie",
+    "releaseDate": "2005-01-14",
+    "phase": "Street Legacy",
+    "order": 138,
+    "track": "street",
+    "studio": "fox",
+    "format": "live",
+    "dependsOn": [
+      "daredevil-2003"
+    ],
+    "optional": true
+  },
+  {
+    "id": "ghost-rider-2007",
+    "title": "Ghost Rider",
+    "type": "movie",
+    "releaseDate": "2007-02-16",
+    "phase": "Ghost Rider Legacy",
+    "order": 139,
+    "track": "ghost-rider",
+    "studio": "sony",
+    "format": "live",
+    "dependsOn": [],
+    "optional": true
+  },
+  {
+    "id": "ghost-rider-spirit-of-vengeance-2012",
+    "title": "Ghost Rider: Spirit of Vengeance",
+    "type": "movie",
+    "releaseDate": "2012-02-17",
+    "phase": "Ghost Rider Legacy",
+    "order": 140,
+    "track": "ghost-rider",
+    "studio": "sony",
+    "format": "live",
+    "dependsOn": [
+      "ghost-rider-2007"
+    ],
+    "optional": true
+  },
+  {
+    "id": "hulk-2003",
+    "title": "Hulk (2003)",
+    "type": "movie",
+    "releaseDate": "2003-06-20",
+    "phase": "Hulk Legacy",
+    "order": 141,
+    "track": "hulk",
+    "studio": "universal",
+    "format": "live",
+    "dependsOn": [],
+    "optional": true
+  },
+  {
+    "id": "the-punisher-2004",
+    "title": "The Punisher (2004)",
+    "type": "movie",
+    "releaseDate": "2004-04-16",
+    "phase": "Street Legacy",
+    "order": 142,
+    "track": "street",
+    "studio": "lionsgate",
+    "format": "live",
+    "dependsOn": [],
+    "optional": true
+  },
+  {
+    "id": "helstrom-2020",
+    "title": "Helstrom",
+    "type": "series",
+    "releaseDate": "2020-10-16",
+    "phase": "Hulu",
+    "order": 143,
+    "track": "mystic",
+    "studio": "hulu",
+    "format": "live",
+    "dependsOn": [],
+    "optional": true
+  },
+  {
+    "id": "x-men-tas-s1-1992",
+    "title": "X-Men: The Animated Series (Saison 1)",
+    "type": "series",
+    "releaseDate": "1992-10-31",
+    "phase": "X-Men Saga",
+    "order": 144,
+    "track": "animation",
+    "studio": "fox",
+    "format": "animated",
+    "dependsOn": [],
+    "optional": true
+  },
+  {
+    "id": "x-men-tas-s2-1993",
+    "title": "X-Men: The Animated Series (Saison 2)",
+    "type": "series",
+    "releaseDate": "1993-10-23",
+    "phase": "X-Men Saga",
+    "order": 145,
+    "track": "animation",
+    "studio": "fox",
+    "format": "animated",
+    "dependsOn": [
+      "x-men-tas-s1-1992"
+    ],
+    "optional": true
+  },
+  {
+    "id": "x-men-tas-s3-1994",
+    "title": "X-Men: The Animated Series (Saison 3)",
+    "type": "series",
+    "releaseDate": "1994-07-29",
+    "phase": "X-Men Saga",
+    "order": 146,
+    "track": "animation",
+    "studio": "fox",
+    "format": "animated",
+    "dependsOn": [
+      "x-men-tas-s2-1993"
+    ],
+    "optional": true
+  },
+  {
+    "id": "x-men-tas-s4-1995",
+    "title": "X-Men: The Animated Series (Saison 4)",
+    "type": "series",
+    "releaseDate": "1995-09-09",
+    "phase": "X-Men Saga",
+    "order": 147,
+    "track": "animation",
+    "studio": "fox",
+    "format": "animated",
+    "dependsOn": [
+      "x-men-tas-s3-1994"
+    ],
+    "optional": true
+  },
+  {
+    "id": "x-men-tas-s5-1996",
+    "title": "X-Men: The Animated Series (Saison 5)",
+    "type": "series",
+    "releaseDate": "1996-09-07",
+    "phase": "X-Men Saga",
+    "order": 148,
+    "track": "animation",
+    "studio": "fox",
+    "format": "animated",
+    "dependsOn": [
+      "x-men-tas-s4-1995"
+    ],
+    "optional": true
+  },
+  {
+    "id": "the-consultant-2011",
+    "title": "The Consultant",
+    "type": "special",
+    "releaseDate": "2011-09-13",
+    "phase": "Phase One",
+    "order": 149,
+    "track": "shield",
+    "studio": "marvel",
+    "format": "live",
+    "dependsOn": [
+      "the-incredible-hulk-2008",
+      "iron-man-2-2010"
+    ],
+    "optional": true,
+    "runtimeMin": 4
+  },
+  {
+    "id": "a-funny-thing-happened-2011",
+    "title": "A Funny Thing Happened on the Way to Thor's Hammer",
+    "type": "special",
+    "releaseDate": "2011-10-25",
+    "phase": "Phase One",
+    "order": 150,
+    "track": "shield",
+    "studio": "marvel",
+    "format": "live",
+    "dependsOn": [
+      "iron-man-2-2010"
+    ],
+    "optional": true,
+    "runtimeMin": 4
+  },
+  {
+    "id": "item-47-2012",
+    "title": "Item 47",
+    "type": "special",
+    "releaseDate": "2012-09-25",
+    "phase": "Phase Two",
+    "order": 151,
+    "track": "shield",
+    "studio": "marvel",
+    "format": "live",
+    "dependsOn": [
+      "the-avengers-2012"
+    ],
+    "optional": true,
+    "runtimeMin": 12
+  },
+  {
+    "id": "agent-carter-one-shot-2013",
+    "title": "Agent Carter (One-Shot)",
+    "type": "special",
+    "releaseDate": "2013-09-03",
+    "phase": "Phase Two",
+    "order": 152,
+    "track": "agent-carter",
+    "studio": "marvel",
+    "format": "live",
+    "dependsOn": [
+      "captain-america-the-first-avenger-2011"
+    ],
+    "optional": true,
+    "runtimeMin": 15
+  },
+  {
+    "id": "all-hail-the-king-2014",
+    "title": "All Hail the King",
+    "type": "special",
+    "releaseDate": "2014-02-04",
+    "phase": "Phase Two",
+    "order": 153,
+    "track": "iron",
+    "studio": "marvel",
+    "format": "live",
+    "dependsOn": [
+      "iron-man-3-2013"
+    ],
+    "optional": true,
+    "runtimeMin": 14
+  },
+  {
+    "id": "team-thor-2016",
+    "title": "Team Thor",
+    "type": "special",
+    "releaseDate": "2016-08-28",
+    "phase": "Phase Three",
+    "order": 154,
+    "track": "thor",
+    "studio": "marvel",
+    "format": "live",
+    "dependsOn": [
+      "avengers-age-of-ultron-2015"
+    ],
+    "optional": true,
+    "runtimeMin": 4
+  },
+  {
+    "id": "team-thor-part-2-2017",
+    "title": "Team Thor: Part 2",
+    "type": "special",
+    "releaseDate": "2017-02-14",
+    "phase": "Phase Three",
+    "order": 155,
+    "track": "thor",
+    "studio": "marvel",
+    "format": "live",
+    "dependsOn": [
+      "team-thor-2016"
+    ],
+    "optional": true,
+    "runtimeMin": 5
+  },
+  {
+    "id": "team-darryl-2018",
+    "title": "Team Darryl",
+    "type": "special",
+    "releaseDate": "2018-02-20",
+    "phase": "Phase Three",
+    "order": 156,
+    "track": "thor",
+    "studio": "marvel",
+    "format": "live",
+    "dependsOn": [
+      "team-thor-part-2-2017"
+    ],
+    "optional": true,
+    "runtimeMin": 3
   }
 ]

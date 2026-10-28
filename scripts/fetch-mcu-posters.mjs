@@ -117,6 +117,15 @@ const MCU_PAGE_OVERRIDES = {
   "thunderbolts-2025": "Thunderbolts*",
   "fantastic-four-first-steps-2025": "The Fantastic Four: First Steps",
   "deadpool-wolverine-2024": "Deadpool & Wolverine",
+  "the-consultant-2011": "Marvel One-Shot: The Consultant",
+  "a-funny-thing-happened-2011":
+    "Marvel One-Shot: A Funny Thing Happened on the Way to Thor's Hammer",
+  "item-47-2012": "Marvel One-Shot: Item 47",
+  "agent-carter-one-shot-2013": "Marvel One-Shot: Agent Carter",
+  "all-hail-the-king-2014": "Marvel One-Shot: All Hail the King",
+  "team-thor-2016": "Marvel One-Shot: Team Thor: Part 1",
+  "team-thor-part-2-2017": "Marvel One-Shot: Team Thor: Part 2",
+  "team-darryl-2018": "Marvel One-Shot: Team Darryl",
 };
 
 /**
@@ -188,6 +197,26 @@ const MARVEL_DB_OVERRIDES = {
   "runaways-s1-2017": "Marvel's Runaways",
   "runaways-s2-2018": "Marvel's Runaways",
   "runaways-s3-2019": "Marvel's Runaways",
+  "legion-s1-2017": "Legion (TV series)",
+  "legion-s2-2018": "Legion (TV series)",
+  "legion-s3-2019": "Legion (TV series)",
+  "the-gifted-s1-2017": "The Gifted (TV series)",
+  "the-gifted-s2-2018": "The Gifted (TV series)",
+  "blade-1998": "Blade (film)",
+  "blade-ii-2002": "Blade II",
+  "blade-trinity-2004": "Blade: Trinity",
+  "daredevil-2003": "Daredevil (film)",
+  "elektra-2005": "Elektra (film)",
+  "ghost-rider-2007": "Ghost Rider (film)",
+  "ghost-rider-spirit-of-vengeance-2012": "Ghost Rider: Spirit of Vengeance",
+  "hulk-2003": "Hulk (film)",
+  "the-punisher-2004": "The Punisher (2004 film)",
+  "helstrom-2020": "Helstrom (TV series)",
+  "x-men-tas-s1-1992": "X-Men: The Animated Series",
+  "x-men-tas-s2-1993": "X-Men: The Animated Series",
+  "x-men-tas-s3-1994": "X-Men: The Animated Series",
+  "x-men-tas-s4-1995": "X-Men: The Animated Series",
+  "x-men-tas-s5-1996": "X-Men: The Animated Series",
 };
 
 function isOutsideMcu(item) {

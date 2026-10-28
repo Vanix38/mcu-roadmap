@@ -11,6 +11,7 @@ export function Legend() {
     { color: "var(--accent-gold)", label: "Chemin actif" },
     { color: "var(--edge)", label: "Lien au-dessus", thick: true },
     { color: "var(--edge)", label: "Lien en dessous", faint: true },
+    { color: "var(--edge)", label: "Lien optionnel", dashed: true },
     { color: "var(--track-spidey)", label: "Couleur = piste" },
   ];
 
@@ -29,6 +30,8 @@ export function Legend() {
               <span className="legend-line legend-line--over" aria-hidden="true" />
             ) : item.faint ? (
               <span className="legend-line legend-line--under" aria-hidden="true" />
+            ) : item.dashed ? (
+              <span className="legend-line legend-line--optional" aria-hidden="true" />
             ) : (
               <span
                 className={["legend-dot", item.ring ? "legend-dot--ring" : ""]
@@ -41,6 +44,12 @@ export function Legend() {
             {item.label}
           </div>
         ))}
+        <div className="legend-item" role="listitem">
+          <span className="legend-opt" aria-hidden="true">
+            Opt.
+          </span>
+          Contenu optionnel
+        </div>
       </div>
 
       <div

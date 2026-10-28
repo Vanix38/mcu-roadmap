@@ -39,6 +39,8 @@
   --track-wolverine: #facc15;
   --track-deadpool: #dc2626;
   --track-fantastic: #38bdf8;
+  --track-blade: #991b1b;
+  --track-ghost-rider: #ea580c;
   --track-shield: #64748b;
   --track-agent-carter: #f472b6;
   --track-street: #fb923c;
@@ -54,6 +56,9 @@
   --studio-abc: #a8b4c8;
   --studio-freeform: #f472b6;
   --studio-hulu: #1ce783;
+  --studio-new-line: #f59e0b;
+  --studio-universal: #38bdf8;
+  --studio-lionsgate: #a78bfa;
   --background: var(--bg);
 }
 
@@ -172,6 +177,8 @@ body::before {
 .graph-line--track-wolverine { stroke: var(--track-wolverine); opacity: 0.75; }
 .graph-line--track-deadpool { stroke: var(--track-deadpool); opacity: 0.75; }
 .graph-line--track-fantastic { stroke: var(--track-fantastic); opacity: 0.75; }
+.graph-line--track-blade { stroke: var(--track-blade); opacity: 0.75; }
+.graph-line--track-ghost-rider { stroke: var(--track-ghost-rider); opacity: 0.75; }
 .graph-line--track-shield { stroke: var(--track-shield); opacity: 0.75; }
 .graph-line--track-agent-carter { stroke: var(--track-agent-carter); opacity: 0.75; }
 .graph-line--track-street { stroke: var(--track-street); opacity: 0.75; }
@@ -195,6 +202,11 @@ body::before {
 .graph-line--done {
   stroke: var(--edge-done) !important;
   opacity: 0.65 !important;
+}
+
+.graph-line--optional {
+  stroke-dasharray: 6 5;
+  opacity: 0.55;
 }
 
 .edge-tooltip {
@@ -510,6 +522,24 @@ body::before {
   pointer-events: none;
 }
 
+.node-optional {
+  position: absolute;
+  left: -0.35rem;
+  bottom: -0.35rem;
+  z-index: 2;
+  border-radius: 0.35rem;
+  border: 1px solid color-mix(in srgb, var(--muted) 55%, transparent);
+  background: color-mix(in srgb, var(--bg-elevated) 85%, var(--muted));
+  padding: 0.12rem 0.35rem;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  color: var(--muted);
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
 .node-portal {
   position: absolute;
   right: -0.4rem;
@@ -716,6 +746,9 @@ body::before {
 .node-studio--abc { --studio-color: var(--studio-abc); }
 .node-studio--freeform { --studio-color: var(--studio-freeform); }
 .node-studio--hulu { --studio-color: var(--studio-hulu); }
+.node-studio--new-line { --studio-color: var(--studio-new-line); }
+.node-studio--universal { --studio-color: var(--studio-universal); }
+.node-studio--lionsgate { --studio-color: var(--studio-lionsgate); }
 
 .node-studio--logo {
   width: 32px;
@@ -1055,6 +1088,28 @@ body::before {
 .legend-line--under {
   border-top-width: 2px;
   opacity: 0.45;
+}
+
+.legend-line--optional {
+  border-top-style: dashed;
+  opacity: 0.7;
+}
+
+.legend-opt {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.1rem;
+  padding: 0 0.3rem;
+  border-radius: 0.3rem;
+  border: 1px solid color-mix(in srgb, var(--muted) 50%, transparent);
+  background: color-mix(in srgb, var(--bg-elevated) 80%, var(--muted));
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  line-height: 1;
 }
 
 .filter-input {

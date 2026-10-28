@@ -94,8 +94,9 @@ export function GraphMinimap({
                     : "var(--edge)"
                 }
                 strokeWidth={edge.id === hoveredEdgeId ? 2 : 1}
+                strokeDasharray={edge.optional ? "4 3" : undefined}
                 fill="none"
-                opacity={edge.id === hoveredEdgeId ? 1 : 0.5}
+                opacity={edge.id === hoveredEdgeId ? 1 : edge.optional ? 0.35 : 0.5}
               />
             ))}
 

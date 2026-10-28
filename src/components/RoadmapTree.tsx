@@ -77,6 +77,7 @@ function edgeClassName(
   hoveredNodeId: string | null,
 ) {
   const classes = ["graph-line", `graph-line--${edge.zLayer}`];
+  if (edge.optional) classes.push("graph-line--optional");
 
   if (hoveredEdgeId && !hoveredNodeId) {
     if (edge.id === hoveredEdgeId) classes.push("graph-line--edge-hover");

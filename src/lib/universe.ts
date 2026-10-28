@@ -1,6 +1,6 @@
 import type { McuItem, McuStudio } from "./mcu";
 
-export const UNIVERSES = ["mcu", "fox", "sony", "tv", "all"] as const;
+export const UNIVERSES = ["mcu", "fox", "sony", "tv", "legacy", "all"] as const;
 
 export type UniverseId = (typeof UNIVERSES)[number];
 
@@ -13,6 +13,7 @@ export const UNIVERSE_LABELS: Record<UniverseId, string> = {
   fox: "Fox",
   sony: "Sony",
   tv: "TV",
+  legacy: "Legacy",
   all: "Tout",
 };
 
@@ -25,6 +26,9 @@ const STUDIO_TO_UNIVERSE: Record<McuStudio, ConcreteUniverseId> = {
   abc: "tv",
   freeform: "tv",
   hulu: "tv",
+  "new-line": "legacy",
+  universal: "legacy",
+  lionsgate: "legacy",
 };
 
 export function isUniverseId(value: unknown): value is UniverseId {

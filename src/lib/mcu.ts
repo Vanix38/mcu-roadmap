@@ -24,6 +24,8 @@ export const MCU_TRACKS = [
   "wolverine",
   "deadpool",
   "fantastic",
+  "blade",
+  "ghost-rider",
   "shield",
   "agent-carter",
   "street",
@@ -60,6 +62,8 @@ export const TRACK_EDGE_COLORS: Record<McuTrack, string> = {
   wolverine: "var(--track-wolverine)",
   deadpool: "var(--track-deadpool)",
   fantastic: "var(--track-fantastic)",
+  blade: "var(--track-blade)",
+  "ghost-rider": "var(--track-ghost-rider)",
   shield: "var(--track-shield)",
   "agent-carter": "var(--track-agent-carter)",
   street: "var(--track-street)",
@@ -93,6 +97,8 @@ export const TRACK_LABELS: Record<McuTrack, string> = {
   wolverine: "Wolverine",
   deadpool: "Deadpool",
   fantastic: "4 Fantastiques",
+  blade: "Blade",
+  "ghost-rider": "Ghost Rider",
   shield: "S.H.I.E.L.D.",
   "agent-carter": "Agent Carter",
   street: "Street level",
@@ -111,6 +117,9 @@ export const MCU_STUDIOS = [
   "abc",
   "freeform",
   "hulu",
+  "new-line",
+  "universal",
+  "lionsgate",
 ] as const;
 
 export type McuStudio = (typeof MCU_STUDIOS)[number];
@@ -125,6 +134,9 @@ export const STUDIO_BADGE: Record<McuStudio, string> = {
   abc: "ABC",
   freeform: "FRM",
   hulu: "HLU",
+  "new-line": "NL",
+  universal: "UNI",
+  lionsgate: "LG",
 };
 
 export const STUDIO_LABELS: Record<McuStudio, string> = {
@@ -136,6 +148,9 @@ export const STUDIO_LABELS: Record<McuStudio, string> = {
   abc: "ABC",
   freeform: "Freeform",
   hulu: "Hulu",
+  "new-line": "New Line",
+  universal: "Universal",
+  lionsgate: "Lionsgate",
 };
 
 export const STUDIO_COLORS: Record<McuStudio, string> = {
@@ -147,6 +162,9 @@ export const STUDIO_COLORS: Record<McuStudio, string> = {
   abc: "var(--studio-abc)",
   freeform: "var(--studio-freeform)",
   hulu: "var(--studio-hulu)",
+  "new-line": "var(--studio-new-line)",
+  universal: "var(--studio-universal)",
+  lionsgate: "var(--studio-lionsgate)",
 };
 
 export const MCU_FORMATS = ["live", "animated"] as const;
@@ -170,6 +188,10 @@ export const MOVIE_CHAIN_WHITELIST: readonly (readonly string[])[] = [
     "spider-man-beyond-the-spider-verse-2027",
   ],
   ["x-men-2000", "x2-2003", "x-men-last-stand-2006"],
+  ["blade-1998", "blade-ii-2002", "blade-trinity-2004"],
+  ["ghost-rider-2007", "ghost-rider-spirit-of-vengeance-2012"],
+  ["daredevil-2003", "elektra-2005"],
+  ["team-thor-2016", "team-thor-part-2-2017", "team-darryl-2018"],
 ];
 
 /** Films pivots — affichés plus grands dans le graphe */
@@ -218,6 +240,10 @@ export const McuItemSchema = z.object({
   studio: z.enum(MCU_STUDIOS),
   format: z.enum(MCU_FORMATS),
   dependsOn: z.array(z.string()).default([]),
+  /** Prérequis soft : visibles (trait pointillé) mais ne bloquent pas le déblocage */
+  dependsOnOptional: z.array(z.string()).default([]),
+  /** Contenu satellite (badge Opt. sur la carte) */
+  optional: z.boolean().default(false),
   runtimeMin: z.number().int().positive().optional(),
 });
 
@@ -257,6 +283,28 @@ export const McuDataSchema = z
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: `Self dependency for ${item.id}`,
+          });
+        }
+      }
+
+      const hardDeps = new Set(item.dependsOn);
+      for (const dependencyId of item.dependsOnOptional) {
+        if (!ids.has(dependencyId)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: `Unknown optional dependency "${dependencyId}" for ${item.id}`,
+          });
+        }
+        if (dependencyId === item.id) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: `Self optional dependency for ${item.id}`,
+          });
+        }
+        if (hardDeps.has(dependencyId)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: `Dependency "${dependencyId}" cannot be both required and optional for ${item.id}`,
           });
         }
       }

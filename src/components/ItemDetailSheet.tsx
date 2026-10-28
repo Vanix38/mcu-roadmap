@@ -41,6 +41,11 @@ export function ItemDetailSheet({
     return allItems.filter((i) => i.dependsOn.includes(item.id));
   }, [allItems, item]);
 
+  const unlocksOptional = useMemo(() => {
+    if (!item) return [];
+    return allItems.filter((i) => i.dependsOnOptional.includes(item.id));
+  }, [allItems, item]);
+
   const descendantCount = useMemo(() => {
     if (!item || !checked.has(item.id)) return 0;
     return getDescendantIds(allItems, item.id).size;
@@ -82,6 +87,10 @@ export function ItemDetailSheet({
         </div>
       </div>
 
+      {item.optional ? (
+        <p className="detail-hint">Contenu optionnel — ne bloque aucun parcours.</p>
+      ) : null}
+
       {item.dependsOn.length > 0 ? (
         <section className="detail-section">
           <h4 className="detail-section-title">Prérequis</h4>
@@ -109,10 +118,60 @@ export function ItemDetailSheet({
         </section>
       ) : null}
 
+      {item.dependsOnOptional.length > 0 ? (
+        <section className="detail-section">
+          <h4 className="detail-section-title">Prérequis optionnels</h4>
+          {item.dependsOnOptional.map((id) => {
+            const dep = byId.get(id);
+            if (!dep) return null;
+            const done = checked.has(id);
+            return (
+              <button
+                key={id}
+                type="button"
+                className="detail-link"
+                onClick={() => onSelect(dep)}
+              >
+                <span
+                  className={["detail-dot", done ? "detail-dot--done" : ""].join(
+                    " ",
+                  )}
+                  aria-hidden="true"
+                />
+                {dep.title}
+              </button>
+            );
+          })}
+        </section>
+      ) : null}
+
       {unlocks.length > 0 ? (
         <section className="detail-section">
           <h4 className="detail-section-title">Débloque</h4>
           {unlocks.map((child) => (
+            <button
+              key={child.id}
+              type="button"
+              className="detail-link"
+              onClick={() => onSelect(child)}
+            >
+              <span
+                className={[
+                  "detail-dot",
+                  checked.has(child.id) ? "detail-dot--done" : "",
+                ].join(" ")}
+                aria-hidden="true"
+              />
+              {child.title}
+            </button>
+          ))}
+        </section>
+      ) : null}
+
+      {unlocksOptional.length > 0 ? (
+        <section className="detail-section">
+          <h4 className="detail-section-title">Recommandé pour</h4>
+          {unlocksOptional.map((child) => (
             <button
               key={child.id}
               type="button"
