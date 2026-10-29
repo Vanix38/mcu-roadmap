@@ -525,7 +525,8 @@ body::before {
 .node-optional {
   position: absolute;
   left: -0.35rem;
-  bottom: -0.35rem;
+  /* Au-dessus du logo studio (bas-gauche) */
+  bottom: 1.85rem;
   z-index: 2;
   border-radius: 0.35rem;
   border: 1px solid color-mix(in srgb, var(--muted) 55%, transparent);

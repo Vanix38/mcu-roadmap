@@ -11,12 +11,27 @@ export function getMcuPosterSrc(id: string, extension: (typeof MCU_POSTER_EXTENS
   return withBasePath(`/images/mcu-wiki/${id}.${extension}`);
 }
 
-/** Logos studio — déposer dans `public/images/studios/{studio}.(svg|webp|png)` */
+/** Logos studio — déposer dans `public/images/studios/{file}.(svg|webp|png)` */
 export const STUDIO_LOGO_EXTENSIONS = ["svg", "webp", "png"] as const;
+
+/**
+ * Nom de fichier (sans extension) quand il diffère de l'id `studio`.
+ * Ex. Marvel Studios → logo Disney ; ids kebab → fichiers underscore.
+ */
+export const STUDIO_LOGO_FILE: Record<string, string> = {
+  marvel: "disney",
+  "sony-animation": "sony_animation",
+  "new-line": "new_line",
+};
+
+export function getStudioLogoFileBase(studio: string) {
+  return STUDIO_LOGO_FILE[studio] ?? studio;
+}
 
 export function getStudioLogoSrc(
   studio: string,
   extension: (typeof STUDIO_LOGO_EXTENSIONS)[number],
 ) {
-  return withBasePath(`/images/studios/${studio}.${extension}`);
+  const file = getStudioLogoFileBase(studio);
+  return withBasePath(`/images/studios/${file}.${extension}`);
 }
