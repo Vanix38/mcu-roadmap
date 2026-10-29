@@ -1,380 +1,173 @@
 /**
- * Optimise TRACK_ROW_ORDER + sous-lignes street pour minimiser les croisements.
- * Usage: npx tsx scripts/optimize-track-order.ts
+ * Cherche un ordre vertical des pistes (et des sous-lignes Street) qui minimise
+ * les croisements pondérés (nécessaire × nécessaire ≫ avec un optionnel), plus
+ * une petite pénalité sur la longueur verticale des liens.
+ *
+ * Usage:
+ *   npm run layout:optimize
+ *   npm run layout:optimize -- --kicks=20 --seed=7
  */
-import itemsJson from "../src/data/mcu.json" with { type: "json" };
+
+import data from "../src/data/mcu.json" assert { type: "json" };
+import { McuDataSchema, MCU_TRACKS, type McuTrack } from "../src/lib/mcu";
 import { buildCollapsedLayout } from "../src/lib/collapsed-layout";
-import {
-  TRACK_EXCLUSIVE_LANES,
-  TRACK_ROW_ORDER,
-} from "../src/lib/layout-solver";
-import type { McuItem, McuTrack } from "../src/lib/mcu";
+import { measureCrossings, type CrossingStats } from "../src/lib/crossing-cost";
+import { TRACK_EXCLUSIVE_LANES, TRACK_ROW_ORDER } from "../src/lib/layout-solver";
+import { filterByUniverse, type UniverseId } from "../src/lib/universe";
 
-const items = itemsJson as McuItem[];
+const items = McuDataSchema.parse(data);
 
-function countCrossings(
-  trackOrder: readonly McuTrack[],
-  exclusiveLanes: Partial<Record<McuTrack, readonly string[]>>,
-) {
-  const layout = buildCollapsedLayout(items, {
-    compact: false,
-    collapseMovies: true,
-    collapseSeries: true,
-    trackOrder,
-    exclusiveLanes,
-  });
-  let crossings = 0;
-  for (const edge of layout.edges) crossings += edge.crossings.length;
-  return { crossings, edges: layout.edges.length };
+function readNumberArg(name: string, fallback: number) {
+  const arg = process.argv.find((a) => a.startsWith(`--${name}=`));
+  const value = arg ? Number(arg.split("=")[1]) : NaN;
+  return Number.isFinite(value) ? value : fallback;
 }
 
-function shuffleInPlace<T>(arr: T[], rand: () => number) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(rand() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
+const KICKS = readNumberArg("kicks", 12);
+let seed = readNumberArg("seed", 42);
+
+function random() {
+  seed = (seed * 1664525 + 1013904223) % 4294967296;
+  return seed / 4294967296;
 }
 
-/** xorshift32 */
-function makeRng(seed: number) {
-  let s = seed >>> 0 || 1;
-  return () => {
-    s ^= s << 13;
-    s ^= s >>> 17;
-    s ^= s << 5;
-    return (s >>> 0) / 4294967296;
-  };
-}
-
-function swap<T>(arr: T[], i: number, j: number) {
-  const next = arr.slice();
-  [next[i], next[j]] = [next[j], next[i]];
-  return next;
-}
-
-function moveIndex<T>(arr: T[], from: number, to: number) {
-  const next = arr.slice();
-  const [item] = next.splice(from, 1);
-  next.splice(to, 0, item);
-  return next;
-}
-
-function reverseRange<T>(arr: T[], i: number, j: number) {
-  const next = arr.slice();
-  const lo = Math.min(i, j);
-  const hi = Math.max(i, j);
-  for (let a = lo, b = hi; a < b; a++, b--) {
-    [next[a], next[b]] = [next[b], next[a]];
-  }
-  return next;
-}
-
-/** Blocs à garder contigus (réordonnables entre eux et en interne) */
-const SOFT_BLOCKS: readonly (readonly McuTrack[])[] = [
-  ["iron", "hulk", "thor", "cap", "falcon", "agent-carter", "guardians", "antman"],
-  ["animation", "wakanda", "series-misc"],
-  ["merge"],
-  ["cosmic", "mystic", "magic", "misc"],
-  ["spidey", "shield"],
-  ["raimi", "amazing", "loki", "venom", "spider-misc", "spiderverse"],
-  ["deadpool", "wolverine", "xmen", "fantastic"],
-  ["street", "young-heroes"],
-];
-
-function orderToBlocks(order: readonly McuTrack[]): McuTrack[][] {
-  const remaining = new Set(order);
-  const blocks: McuTrack[][] = [];
-  for (const block of SOFT_BLOCKS) {
-    const present = block.filter((t) => remaining.has(t));
-    if (present.length === 0) continue;
-    // garder l'ordre relatif actuel des membres du bloc
-    const sorted = order.filter((t) => present.includes(t));
-    for (const t of sorted) remaining.delete(t);
-    blocks.push(sorted);
-  }
-  for (const t of order) {
-    if (!remaining.has(t)) continue;
-    remaining.delete(t);
-    blocks.push([t]);
-  }
-  return blocks;
-}
-
-function flattenBlocks(blocks: readonly (readonly McuTrack[])[]): McuTrack[] {
-  return blocks.flatMap((b) => [...b]);
-}
-
-function annealTracks(
-  initial: readonly McuTrack[],
-  exclusiveLanes: Partial<Record<McuTrack, readonly string[]>>,
-  opts: {
-    seed: number;
-    iterations: number;
-    keepBlocks: boolean;
-    label: string;
-  },
-) {
-  const rand = makeRng(opts.seed);
-  let current = [...initial];
-  let currentScore = countCrossings(current, exclusiveLanes).crossings;
-  let best = current;
-  let bestScore = currentScore;
-  const t0 = 8;
-  const t1 = 0.05;
-
-  for (let i = 0; i < opts.iterations; i++) {
-    const t = t0 * Math.pow(t1 / t0, i / opts.iterations);
-    let next: McuTrack[];
-
-    if (opts.keepBlocks) {
-      const blocks = orderToBlocks(current);
-      const r = rand();
-      if (r < 0.45 && blocks.length >= 2) {
-        const a = Math.floor(rand() * blocks.length);
-        let b = Math.floor(rand() * blocks.length);
-        if (b === a) b = (b + 1) % blocks.length;
-        next = flattenBlocks(swap(blocks, a, b));
-      } else if (r < 0.75) {
-        const bi = Math.floor(rand() * blocks.length);
-        const block = blocks[bi];
-        if (block.length < 2) {
-          const a = Math.floor(rand() * blocks.length);
-          let b = Math.floor(rand() * blocks.length);
-          if (b === a) b = (b + 1) % blocks.length;
-          next = flattenBlocks(swap(blocks, a, b));
-        } else {
-          const a = Math.floor(rand() * block.length);
-          let b = Math.floor(rand() * block.length);
-          if (b === a) b = (b + 1) % block.length;
-          const nb = [...blocks];
-          nb[bi] = swap(block, a, b);
-          next = flattenBlocks(nb);
-        }
-      } else {
-        const a = Math.floor(rand() * blocks.length);
-        let b = Math.floor(rand() * blocks.length);
-        if (b === a) b = (b + 1) % blocks.length;
-        next = flattenBlocks(moveIndex(blocks, a, b));
-      }
-    } else {
-      const r = rand();
-      if (r < 0.55) {
-        const a = Math.floor(rand() * current.length);
-        let b = Math.floor(rand() * current.length);
-        if (b === a) b = (b + 1) % current.length;
-        next = swap(current, a, b);
-      } else if (r < 0.85) {
-        const a = Math.floor(rand() * current.length);
-        let b = Math.floor(rand() * current.length);
-        if (b === a) b = (b + 1) % current.length;
-        next = moveIndex(current, a, b);
-      } else {
-        const a = Math.floor(rand() * current.length);
-        let b = Math.floor(rand() * current.length);
-        if (b === a) b = (b + 1) % current.length;
-        next = reverseRange(current, a, b);
-      }
-    }
-
-    const score = countCrossings(next, exclusiveLanes).crossings;
-    const accept =
-      score <= currentScore || rand() < Math.exp((currentScore - score) / t);
-    if (accept) {
-      current = next;
-      currentScore = score;
-      if (score < bestScore) {
-        best = next;
-        bestScore = score;
-      }
-    }
-  }
-
-  console.log(
-    `${opts.label}: best=${bestScore} (start seed run ended ${currentScore})`,
-  );
-  return { order: best, crossings: bestScore };
-}
-
-function annealStreetLanes(
-  trackOrder: readonly McuTrack[],
-  baseLanes: Partial<Record<McuTrack, readonly string[]>>,
-  seed: number,
-  iterations: number,
-) {
-  const street = [...(baseLanes.street ?? TRACK_EXCLUSIVE_LANES.street!)];
-  const rand = makeRng(seed);
-  let current = street;
-  let lanes = { ...baseLanes, street: current };
-  let currentScore = countCrossings(trackOrder, lanes).crossings;
-  let best = current;
-  let bestScore = currentScore;
-  const t0 = 5;
-  const t1 = 0.05;
-
-  for (let i = 0; i < iterations; i++) {
-    const t = t0 * Math.pow(t1 / t0, i / iterations);
-    const a = Math.floor(rand() * current.length);
-    let b = Math.floor(rand() * current.length);
-    if (b === a) b = (b + 1) % current.length;
-    const r = rand();
-    const next =
-      r < 0.7 ? swap(current, a, b) : moveIndex(current, a, b);
-    const nextLanes = { ...baseLanes, street: next };
-    const score = countCrossings(trackOrder, nextLanes).crossings;
-    if (
-      score <= currentScore ||
-      rand() < Math.exp((currentScore - score) / t)
-    ) {
-      current = next;
-      currentScore = score;
-      lanes = nextLanes;
-      if (score < bestScore) {
-        best = next;
-        bestScore = score;
-      }
-    }
-  }
-
-  console.log(`street lanes: best=${bestScore}`);
-  return { street: best, crossings: bestScore };
-}
-
-/** Heuristique barycentre : ordre des pistes par médiane des voisins */
-function barycenterOrder(
-  initial: readonly McuTrack[],
-  exclusiveLanes: Partial<Record<McuTrack, readonly string[]>>,
-  rounds: number,
-) {
-  const layout = buildCollapsedLayout(items, {
-    compact: false,
-    collapseMovies: true,
-    collapseSeries: true,
-    trackOrder: initial,
-    exclusiveLanes,
-  });
-
-  const trackOf = new Map<string, McuTrack>();
-  const yOf = new Map<string, number>();
-  for (const node of layout.nodes) {
-    trackOf.set(node.item.id, node.item.track);
-    yOf.set(node.item.id, node.y);
-  }
-
-  // poids d'arêtes inter-pistes
-  const neighbors = new Map<McuTrack, McuTrack[]>();
-  for (const edge of layout.edges) {
-    const a = trackOf.get(edge.from);
-    const b = trackOf.get(edge.to);
-    if (!a || !b || a === b) continue;
-    const la = neighbors.get(a) ?? [];
-    la.push(b);
-    neighbors.set(a, la);
-    const lb = neighbors.get(b) ?? [];
-    lb.push(a);
-    neighbors.set(b, lb);
-  }
-
-  let order = [...initial];
-  for (let round = 0; round < rounds; round++) {
-    const index = new Map(order.map((t, i) => [t, i]));
-    const scored = order.map((track) => {
-      const nbrs = neighbors.get(track) ?? [];
-      if (nbrs.length === 0) return { track, key: index.get(track)! };
-      const positions = nbrs
-        .map((n) => index.get(n))
-        .filter((v): v is number => v !== undefined)
-        .sort((a, b) => a - b);
-      const mid = positions[Math.floor(positions.length / 2)] ?? index.get(track)!;
-      return { track, key: mid };
-    });
-    scored.sort((a, b) => a.key - b.key || index.get(a.track)! - index.get(b.track)!);
-    order = scored.map((s) => s.track);
-  }
-
-  return order;
-}
-
-const baselineLanes = { ...TRACK_EXCLUSIVE_LANES };
-const baseline = countCrossings(TRACK_ROW_ORDER, baselineLanes);
-console.log("baseline", baseline);
-
-const bary = barycenterOrder(TRACK_ROW_ORDER, baselineLanes, 8);
-const baryScore = countCrossings(bary, baselineLanes);
-console.log("barycenter", baryScore.crossings, bary.join(","));
-
-const seeds = [1, 2, 3, 7, 11, 42, 99, 123, 404, 777];
-let bestBlocks = { order: [...TRACK_ROW_ORDER] as McuTrack[], crossings: baseline.crossings };
-let bestFree = { order: [...TRACK_ROW_ORDER] as McuTrack[], crossings: baseline.crossings };
-
-for (const seed of seeds) {
-  const start = seed % 2 === 0 ? [...TRACK_ROW_ORDER] : [...bary];
-  shuffleInPlace(start, makeRng(seed * 17));
-  // half start from baseline/bary without full shuffle
-  const init =
-    seed % 3 === 0
-      ? [...TRACK_ROW_ORDER]
-      : seed % 3 === 1
-        ? [...bary]
-        : start;
-
-  const withBlocks = annealTracks(init, baselineLanes, {
-    seed: seed * 101,
-    iterations: 2500,
-    keepBlocks: true,
-    label: `blocks#${seed}`,
-  });
-  if (withBlocks.crossings < bestBlocks.crossings) bestBlocks = withBlocks;
-
-  const free = annealTracks(init, baselineLanes, {
-    seed: seed * 203,
-    iterations: 2500,
-    keepBlocks: false,
-    label: `free#${seed}`,
-  });
-  if (free.crossings < bestFree.crossings) bestFree = free;
-}
-
-console.log("\nBEST blocks", bestBlocks.crossings);
-console.log(bestBlocks.order.join(","));
-console.log("\nBEST free", bestFree.crossings);
-console.log(bestFree.order.join(","));
-
-const chosen = bestBlocks.crossings <= bestFree.crossings + 8
-  ? bestBlocks
-  : bestFree;
-console.log("\nchosen for street refine", chosen.crossings);
-
-const streetOpt = annealStreetLanes(
-  chosen.order,
-  baselineLanes,
-  55,
-  2000,
-);
-
-// also try flipping young-heroes
-const yh = [...(baselineLanes["young-heroes"] ?? [])].reverse();
-const yhLanes = {
-  ...baselineLanes,
-  street: streetOpt.street,
-  "young-heroes": yh,
+/** Poids par univers (MCU = vue par défaut) */
+const UNIVERSE_WEIGHTS: Partial<Record<UniverseId, number>> = {
+  mcu: 3,
+  all: 3,
+  tv: 1,
+  fox: 1,
+  sony: 1,
+  legacy: 0.5,
 };
-const yhScore = countCrossings(chosen.order, yhLanes);
-console.log("young-heroes flipped", yhScore.crossings);
 
-const finalLanes =
-  yhScore.crossings < streetOpt.crossings
-    ? yhLanes
-    : { ...baselineLanes, street: streetOpt.street };
-const finalScore = countCrossings(chosen.order, finalLanes);
-
-console.log("\n=== FINAL ===");
-console.log({
-  crossings: finalScore.crossings,
-  delta: finalScore.crossings - baseline.crossings,
+const scenarios = Object.entries(UNIVERSE_WEIGHTS).map(([universe, weight]) => {
+  const id = universe as UniverseId;
+  return {
+    universe: id,
+    weight: weight ?? 0,
+    items: filterByUniverse(items, id),
+    collapseMovies: id !== "fox" && id !== "sony",
+    collapseSeries: id !== "tv",
+  };
 });
-console.log("TRACK_ROW_ORDER:");
-console.log(JSON.stringify(chosen.order, null, 2));
-console.log("street lanes:");
-console.log(JSON.stringify(finalLanes.street, null, 2));
-console.log("young-heroes:");
-console.log(JSON.stringify(finalLanes["young-heroes"], null, 2));
+
+type State = { tracks: McuTrack[]; street: string[] };
+type Score = { total: number; perUniverse: Record<string, CrossingStats> };
+
+function evaluate(state: State): Score {
+  let total = 0;
+  const perUniverse: Record<string, CrossingStats> = {};
+  for (const scenario of scenarios) {
+    const layout = buildCollapsedLayout(scenario.items, {
+      trackOrder: state.tracks,
+      exclusiveLanes: { ...TRACK_EXCLUSIVE_LANES, street: state.street },
+      collapseMovies: scenario.collapseMovies,
+      collapseSeries: scenario.collapseSeries,
+    });
+    const stats = measureCrossings(layout);
+    perUniverse[scenario.universe] = stats;
+    total += stats.cost * scenario.weight;
+  }
+  return { total, perUniverse };
+}
+
+function move<T>(list: readonly T[], from: number, to: number) {
+  const next = [...list];
+  const [value] = next.splice(from, 1);
+  next.splice(to, 0, value);
+  return next;
+}
+
+/** Déplace le bloc contigu [from, from + size) pour qu'il commence à `to` */
+function moveBlock<T>(list: readonly T[], from: number, size: number, to: number) {
+  const next = [...list];
+  const block = next.splice(from, size);
+  next.splice(to, 0, ...block);
+  return next;
+}
+
+const MAX_BLOCK_SIZE = 4;
+
+function localSearch(start: State, startScore: Score) {
+  let state = start;
+  let score = startScore;
+  let improved = true;
+
+  while (improved) {
+    improved = false;
+    for (const key of ["tracks", "street"] as const) {
+      const maxSize = key === "tracks" ? MAX_BLOCK_SIZE : 1;
+      for (let size = 1; size <= maxSize; size += 1) {
+        const list = state[key] as readonly string[];
+        for (let from = 0; from + size <= list.length; from += 1) {
+          for (let to = 0; to + size <= list.length; to += 1) {
+            if (from === to) continue;
+            const current = state[key] as readonly string[];
+            const candidate = {
+              ...state,
+              [key]: size === 1 ? move(current, from, to) : moveBlock(current, from, size, to),
+            } as State;
+            const candidateScore = evaluate(candidate);
+            if (candidateScore.total < score.total - 1e-6) {
+              state = candidate;
+              score = candidateScore;
+              improved = true;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return { state, score };
+}
+
+function kick(state: State): State {
+  let tracks = [...state.tracks];
+  const moves = 2 + Math.floor(random() * 3);
+  for (let i = 0; i < moves; i += 1) {
+    const from = Math.floor(random() * tracks.length);
+    const to = Math.floor(random() * tracks.length);
+    tracks = move(tracks, from, to);
+  }
+  return { ...state, tracks };
+}
+
+function format(score: Score) {
+  return Object.entries(score.perUniverse)
+    .map(
+      ([universe, s]) =>
+        `${universe}: req ${s.required} / mixte ${s.mixed} / opt ${s.optional} — rangées req ${s.requiredSpan.toFixed(0)} / opt ${s.optionalSpan.toFixed(0)}`,
+    )
+    .join("\n  ");
+}
+
+const missing = MCU_TRACKS.filter((track) => !TRACK_ROW_ORDER.includes(track));
+const initial: State = {
+  tracks: [...TRACK_ROW_ORDER, ...missing],
+  street: [...(TRACK_EXCLUSIVE_LANES.street ?? [])],
+};
+const initialScore = evaluate(initial);
+console.log(`Départ: coût ${initialScore.total.toFixed(1)}\n  ${format(initialScore)}`);
+
+const started = Date.now();
+let best = localSearch(initial, initialScore);
+console.log(`Recherche locale: ${best.score.total.toFixed(1)}`);
+
+for (let i = 1; i <= KICKS; i += 1) {
+  const kicked = kick(best.state);
+  const result = localSearch(kicked, evaluate(kicked));
+  const better = result.score.total < best.score.total - 1e-6;
+  if (better) best = result;
+  console.log(
+    `Kick ${i}/${KICKS}: ${result.score.total.toFixed(1)}${better ? " ★" : ""} (${((Date.now() - started) / 1000).toFixed(0)} s)`,
+  );
+}
+
+console.log(`\nFinal: coût ${best.score.total.toFixed(1)}\n  ${format(best.score)}`);
+console.log("\nexport const TRACK_ROW_ORDER: readonly McuTrack[] = [");
+for (const track of best.state.tracks) console.log(`  "${track}",`);
+console.log("];\n\nstreet: [");
+for (const family of best.state.street) console.log(`  "${family}",`);
+console.log("],");

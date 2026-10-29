@@ -188,7 +188,7 @@ export function chainToLayoutItem(chain: CollapsedChain): McuItem {
     order: first.order,
     dependsOn: externalDeps,
     dependsOnOptional: externalOptional,
-    optional: false,
+    optional: chain.members.every((member) => member.optional),
     // Keep last release for timeline median bias toward span end when needed
     runtimeMin: first.runtimeMin,
   };

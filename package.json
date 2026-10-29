@@ -16,7 +16,8 @@
     "images:optimize": "node scripts/optimize-posters.mjs",
     "images:optimize:force": "node scripts/optimize-posters.mjs --force",
     "layout:generate": "npx tsx scripts/generate-grid-layout.ts",
-    "layout:validate": "npx tsx scripts/validate-layout.ts"
+    "layout:validate": "npx tsx scripts/validate-layout.ts",
+    "layout:optimize": "npx tsx scripts/optimize-track-order.ts"
   },
   "dependencies": {
     "next": "16.2.10",

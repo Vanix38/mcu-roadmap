@@ -1,7 +1,10 @@
 import data from "../src/data/mcu.json" assert { type: "json" };
 import { McuDataSchema } from "../src/lib/mcu";
 import { buildDependencyLayout } from "../src/lib/dependencies";
+import { buildCollapsedLayout } from "../src/lib/collapsed-layout";
+import { measureCrossings } from "../src/lib/crossing-cost";
 import { getGridPositions } from "../src/lib/layout-solver";
+import { filterByUniverse } from "../src/lib/universe";
 
 const items = McuDataSchema.parse(data);
 const gridPositions = getGridPositions(items);
@@ -56,6 +59,14 @@ console.log("Positions:", Object.keys(gridPositions).length, "/", items.length);
 console.log("Arêtes avec croisements:", crossingEdges.length, "/", layout.edges.length);
 console.log("Nœuds colonne 9 (Endgame):", col9);
 console.log("Canvas:", layout.width, "x", layout.height);
+for (const universe of ["mcu", "all"] as const) {
+  const stats = measureCrossings(
+    buildCollapsedLayout(filterByUniverse(items, universe)),
+  );
+  console.log(
+    `Croisements vue graphe (${universe}): nécessaires ${stats.required} / mixtes ${stats.mixed} / optionnels ${stats.optional} — rangées verticales nécessaires ${stats.requiredSpan.toFixed(0)} / optionnelles ${stats.optionalSpan.toFixed(0)} — coût ${stats.cost.toFixed(1)}`,
+  );
+}
 console.log("Erreurs:", errors.length);
 console.log("Warnings:", warnings.length);
 for (const e of errors.slice(0, 20)) console.log("  ERROR:", e);

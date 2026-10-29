@@ -4,57 +4,48 @@ import { MOVIE_CHAIN_WHITELIST, seriesBaseTitle } from "./mcu";
 export type GridPos = { row: number; col: number };
 
 /** Incrémenter quand la logique de grille change — force recentrage du graphe */
-export const LAYOUT_REVISION = "2026-09-30-track-order-crossings-v2";
+export const LAYOUT_REVISION = "2026-10-29-weighted-crossings-span-v2";
 
 /** Première année de la grille : col 1 = 2000 */
 export const GRID_BASE_YEAR = 2000;
 
 /**
- * Ordre vertical des pistes (haut → bas).
- * Optimisé (blocs narratifs) pour ~64 croisements vs ~96 avant :
- * héros → branches → merge → TV SHIELD → post → Spider/Sony → Fox → street.
+ * Ordre vertical des pistes (haut → bas), généré par `npm run layout:optimize`
+ * (croisements pondérés : nécessaire × nécessaire ≫ croisement avec un optionnel,
+ * plus une petite pénalité sur la longueur verticale des liens).
  */
 export const TRACK_ROW_ORDER: readonly McuTrack[] = [
-  // Héros Phase 1–3
-  "iron",
-  "falcon",
-  "guardians",
-  "antman",
-  "cap",
-  "thor",
-  "hulk",
-  // Branches avant convergence
+  "young-heroes",
+  "ghost-rider",
+  "spiderverse",
   "animation",
-  "wakanda",
-  "series-misc",
-  // Convergence
-  "merge",
-  // TV reliée aux films (Carter / AoS)
-  "agent-carter",
+  "hulk",
   "shield",
-  // Post-Endgame
+  "guardians",
+  "iron",
+  "antman",
+  "thor",
+  "wakanda",
   "cosmic",
+  "merge",
+  "series-misc",
   "mystic",
+  "falcon",
   "misc",
   "magic",
-  // Spider-Man MCU + Loki + Sony
   "spidey",
-  "loki",
+  "cap",
+  "agent-carter",
   "raimi",
+  "amazing",
   "venom",
   "spider-misc",
-  "amazing",
-  "spiderverse",
-  // Fox
+  "loki",
+  "xmen",
+  "wolverine",
   "deadpool",
   "fantastic",
-  "wolverine",
-  "xmen",
-  // Legacy cinéma
   "blade",
-  "ghost-rider",
-  // Street / jeunes
-  "young-heroes",
   "street",
 ];
 
@@ -84,14 +75,14 @@ export const TRACK_EXCLUSIVE_LANES: Partial<
   Record<McuTrack, readonly string[]>
 > = {
   street: [
-    "series:The Punisher",
-    "series:Daredevil",
+    "series:Echo",
+    "series:Hawkeye",
     "series:Daredevil: Born Again",
+    "series:Daredevil",
     "series:Jessica Jones",
     "series:Luke Cage",
     "series:Iron Fist",
-    "series:Hawkeye",
-    "series:Echo",
+    "series:The Punisher",
   ],
   "young-heroes": ["series:Cloak & Dagger", "series:Runaways"],
 };
