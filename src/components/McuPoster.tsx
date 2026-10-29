@@ -1,20 +1,54 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { McuItem } from "@/lib/mcu";
-import { getMcuPosterSrc, MCU_POSTER_EXTENSIONS } from "@/lib/media";
+import { resolveMcuPosterSrc } from "@/lib/media";
 
 type Props = {
   item: McuItem;
   className?: string;
   milestone?: boolean;
+  /** LCP / hero — chargement immédiat */
+  priority?: boolean;
+  /** `thumb` (défaut) pour listes/graphe ; `full` pour fiche détail */
+  quality?: "thumb" | "full";
 };
 
-export function McuPoster({ item, className, milestone = false }: Props) {
-  const [extIndex, setExtIndex] = useState(0);
-  const hasPoster = extIndex < MCU_POSTER_EXTENSIONS.length;
+export function McuPoster({
+  item,
+  className,
+  milestone = false,
+  priority = false,
+  quality = "thumb",
+}: Props) {
+  const preferred = resolveMcuPosterSrc(item.id, quality);
+  const [src, setSrc] = useState<string | null>(preferred);
+  const [failed, setFailed] = useState(false);
 
-  if (!hasPoster) {
+  useEffect(() => {
+    setSrc(resolveMcuPosterSrc(item.id, quality));
+    setFailed(false);
+  }, [item.id, quality]);
+
+  useEffect(() => {
+    if (!priority || !src || typeof document === "undefined") return;
+    const existing = document.head.querySelector(
+      `link[data-poster-preload="${item.id}"]`,
+    );
+    if (existing) return;
+
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = src;
+    link.dataset.posterPreload = item.id;
+    document.head.appendChild(link);
+    return () => {
+      link.remove();
+    };
+  }, [priority, src, item.id]);
+
+  if (!src || failed) {
     return (
       <div
         className={[
@@ -30,15 +64,17 @@ export function McuPoster({ item, className, milestone = false }: Props) {
     );
   }
 
-  const extension = MCU_POSTER_EXTENSIONS[extIndex];
-  const src = getMcuPosterSrc(item.id, extension);
-
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={src}
       alt={item.title}
       title={item.title}
+      width={160}
+      height={240}
+      decoding="async"
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : "low"}
       className={[
         "title-img",
         milestone ? "title-img--milestone" : "",
@@ -46,7 +82,16 @@ export function McuPoster({ item, className, milestone = false }: Props) {
       ]
         .filter(Boolean)
         .join(" ")}
-      onError={() => setExtIndex((current) => current + 1)}
+      onError={() => {
+        if (quality === "thumb") {
+          const full = resolveMcuPosterSrc(item.id, "full");
+          if (full && full !== src) {
+            setSrc(full);
+            return;
+          }
+        }
+        setFailed(true);
+      }}
     />
   );
 }

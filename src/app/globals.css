@@ -851,12 +851,14 @@ body::before {
   display: block;
   height: 12rem;
   width: 8rem;
+  aspect-ratio: 2 / 3;
   border-radius: 0.5rem;
   border: 1px solid var(--edge);
   background: rgba(7, 11, 20, 0.6);
   padding: 0;
   object-fit: cover;
   object-position: center;
+  content-visibility: auto;
 }
 
 .title-img--milestone,

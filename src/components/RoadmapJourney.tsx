@@ -44,7 +44,7 @@ function JourneyCard({
         onClick={() => onSelect(item)}
         aria-label={`Détails de ${item.title}`}
       >
-        <McuPoster item={item} />
+        <McuPoster item={item} quality="thumb" />
       </button>
       <div className="journey-card-body">
         <button
@@ -188,7 +188,7 @@ export function RoadmapJourney({
               onClick={() => onSelect(journey.next!)}
               aria-label={`Détails de ${journey.next.title}`}
             >
-              <McuPoster item={journey.next} />
+              <McuPoster item={journey.next} priority quality="thumb" />
             </button>
             <div className="journey-hero-info">
               <h2 id="journey-next-title" className="journey-hero-title">

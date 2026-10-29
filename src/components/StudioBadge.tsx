@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { McuStudio } from "@/lib/mcu";
 import { STUDIO_BADGE, STUDIO_LABELS } from "@/lib/mcu";
-import { getStudioLogoSrc, STUDIO_LOGO_EXTENSIONS } from "@/lib/media";
+import { resolveStudioLogoSrc } from "@/lib/media";
 
 type Props = {
   studio: McuStudio;
@@ -13,9 +13,13 @@ type Props = {
 };
 
 export function StudioBadge({ studio, compact = false, className }: Props) {
-  const [extIndex, setExtIndex] = useState(0);
   const label = STUDIO_LABELS[studio];
-  const hasLogo = extIndex < STUDIO_LOGO_EXTENSIONS.length;
+  const [failed, setFailed] = useState(false);
+  useEffect(() => {
+    setFailed(false);
+  }, [studio]);
+  const src = failed ? null : resolveStudioLogoSrc(studio);
+  const hasLogo = Boolean(src);
 
   const shellClass = [
     compact ? "legend-studio" : "node-studio",
@@ -34,19 +38,18 @@ export function StudioBadge({ studio, compact = false, className }: Props) {
     );
   }
 
-  const extension = STUDIO_LOGO_EXTENSIONS[extIndex];
-  const src = getStudioLogoSrc(studio, extension);
-
   return (
     <span className={shellClass} title={label} aria-label={label}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={src}
+        src={src!}
         alt=""
         width={compact ? 20 : 24}
         height={compact ? 20 : 24}
+        decoding="async"
+        loading="lazy"
         className="node-studio-logo"
-        onError={() => setExtIndex((current) => current + 1)}
+        onError={() => setFailed(true)}
       />
     </span>
   );

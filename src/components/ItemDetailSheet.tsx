@@ -72,7 +72,7 @@ export function ItemDetailSheet({
     <BottomSheet open={Boolean(item)} onClose={onClose} title="Détail" size="half">
       <div className="detail-hero">
         <div className="detail-poster">
-          <McuPoster item={item} />
+          <McuPoster item={item} priority quality="full" />
         </div>
         <div className="detail-info">
           <h3 className="detail-title">{item.title}</h3>

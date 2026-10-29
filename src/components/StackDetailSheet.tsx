@@ -53,7 +53,7 @@ export function StackDetailSheet({
     >
       <div className="detail-hero">
         <div className="detail-poster">
-          <McuPoster item={display} />
+          <McuPoster item={display} priority quality="full" />
         </div>
         <div className="detail-info">
           <h3 className="detail-title">{chain.title}</h3>

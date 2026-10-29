@@ -720,6 +720,11 @@ async function main() {
   if (!apply && results.skip.length) {
     console.log("\nDry-run. Relancer avec --apply pour télécharger.");
   }
+  if (apply && results.ok.length) {
+    console.log(
+      "\nPuis : npm run images:optimize  (vignettes + manifeste)",
+    );
+  }
 
   void KEEP;
 }

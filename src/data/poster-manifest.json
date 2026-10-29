@@ -1,0 +1,626 @@
+{
+  "iron-man-2008": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "the-incredible-hulk-2008": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "iron-man-2-2010": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "thor-2011": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "captain-america-the-first-avenger-2011": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "the-avengers-2012": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "iron-man-3-2013": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "thor-the-dark-world-2013": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "captain-america-the-winter-soldier-2014": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "guardians-of-the-galaxy-2014": {
+    "ext": "avif",
+    "thumb": true
+  },
+  "avengers-age-of-ultron-2015": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "ant-man-2015": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "captain-america-civil-war-2016": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "doctor-strange-2016": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "guardians-of-the-galaxy-vol-2-2017": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "spider-man-homecoming-2017": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "thor-ragnarok-2017": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "black-panther-2018": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "avengers-infinity-war-2018": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "ant-man-and-the-wasp-2018": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "captain-marvel-2019": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "avengers-endgame-2019": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "spider-man-far-from-home-2019": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "wandavision-2021": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "falcon-winter-soldier-2021": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "loki-s1-2021": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "black-widow-2021": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "what-if-s1-2021": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "shang-chi-2021": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "eternals-2021": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "hawkeye-2021": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "spider-man-no-way-home-2021": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "moon-knight-2022": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "doctor-strange-mom-2022": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "ms-marvel-2022": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "thor-love-and-thunder-2022": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "i-am-groot-2022": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "she-hulk-2022": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "werewolf-by-night-2022": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "black-panther-wakanda-forever-2022": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "gotg-holiday-special-2022": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "ant-man-quantumania-2023": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "guardians-of-the-galaxy-vol-3-2023": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "secret-invasion-2023": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "loki-s2-2023": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "the-marvels-2023": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "what-if-s2-2023": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "echo-2024": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "deadpool-wolverine-2024": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "agatha-all-along-2024": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "what-if-s3-2024": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "captain-america-brave-new-world-2025": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "daredevil-born-again-s1-2025": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "thunderbolts-2025": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "ironheart-2025": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "fantastic-four-first-steps-2025": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "eyes-of-wakanda-2025": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "marvel-zombies-2025": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "your-friendly-neighborhood-spiderman-s1-2025": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "wonder-man-2026": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "daredevil-born-again-s2-2026": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "punisher-one-last-kill-2026": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "spider-man-brand-new-day-2026": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "vision-quest-2026": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "avengers-doomsday-2026": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "avengers-secret-wars-2027": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "x-men-2000": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "x2-2003": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "x-men-last-stand-2006": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "x-men-origins-wolverine-2009": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "x-men-first-class-2011": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "the-wolverine-2013": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "x-men-days-of-future-past-2014": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "deadpool-2016": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "x-men-apocalypse-2016": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "logan-2017": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "deadpool-2-2018": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "x-men-dark-phoenix-2019": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "the-new-mutants-2020": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "spider-man-2002": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "spider-man-2-2004": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "spider-man-3-2007": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "the-amazing-spider-man-2012": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "the-amazing-spider-man-2-2014": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "i-am-groot-s2-2023": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "x-men-97-s1-2024": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "x-men-97-s2-2026": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "venom-2018": {
+    "ext": "png",
+    "thumb": true
+  },
+  "venom-let-there-be-carnage-2021": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "morbius-2022": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "madame-web-2024": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "venom-the-last-dance-2024": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "kraven-the-hunter-2024": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "spider-noir-2026": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "daredevil-s1-2015": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "jessica-jones-s1-2015": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "daredevil-s2-2016": {
+    "ext": "png",
+    "thumb": true
+  },
+  "luke-cage-s1-2016": {
+    "ext": "avif",
+    "thumb": true
+  },
+  "iron-fist-s1-2017": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "the-defenders-2017": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "the-punisher-s1-2017": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "jessica-jones-s2-2018": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "luke-cage-s2-2018": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "iron-fist-s2-2018": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "daredevil-s3-2018": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "the-punisher-s2-2019": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "jessica-jones-s3-2019": {
+    "ext": "avif",
+    "thumb": true
+  },
+  "spider-man-into-the-spider-verse-2018": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "spider-man-across-the-spider-verse-2023": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "spider-man-beyond-the-spider-verse-2027": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "fantastic-four-2005": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "fantastic-four-rise-of-the-silver-surfer-2007": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "fant4stic-2015": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "agents-of-shield-s1-2013": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "agents-of-shield-s2-2014": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "agent-carter-s1-2015": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "agent-carter-s2-2016": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "agents-of-shield-s3-2015": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "agents-of-shield-s4-2016": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "agents-of-shield-s5-2017": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "agents-of-shield-s6-2019": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "agents-of-shield-s7-2020": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "inhumans-2017": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "cloak-and-dagger-s1-2018": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "cloak-and-dagger-s2-2019": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "runaways-s1-2017": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "runaways-s2-2018": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "runaways-s3-2019": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "legion-s1-2017": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "legion-s2-2018": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "legion-s3-2019": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "the-gifted-s1-2017": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "the-gifted-s2-2018": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "blade-1998": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "blade-ii-2002": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "blade-trinity-2004": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "daredevil-2003": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "elektra-2005": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "ghost-rider-2007": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "ghost-rider-spirit-of-vengeance-2012": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "hulk-2003": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "the-punisher-2004": {
+    "ext": "png",
+    "thumb": true
+  },
+  "helstrom-2020": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "x-men-tas-s1-1992": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "x-men-tas-s2-1993": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "x-men-tas-s3-1994": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "x-men-tas-s4-1995": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "x-men-tas-s5-1996": {
+    "ext": "jpg",
+    "thumb": true
+  },
+  "the-consultant-2011": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "a-funny-thing-happened-2011": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "item-47-2012": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "agent-carter-one-shot-2013": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "all-hail-the-king-2014": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "team-thor-2016": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "team-thor-part-2-2017": {
+    "ext": "webp",
+    "thumb": true
+  },
+  "team-darryl-2018": {
+    "ext": "webp",
+    "thumb": true
+  }
+}
